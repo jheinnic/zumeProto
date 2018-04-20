@@ -1,0 +1,32 @@
+package name.jchein.portfolio.micros.resolution.registry.command
+
+i
+import "http://org.eclipse.viatra/model/cps"
+import "http://org.eclipse.viatra/model/deployment"
+import "http://org.eclipse.viatra/model/cps-traceability"
+
+pattern hostInstance(hostInstance : HostInstance) {
+	HostInstance(hostInstance);
+}
+
+pattern applicationInstance(
+	appType : ApplicationType,
+	appInstance : ApplicationInstance
+) {
+	HostInstance.applications(_, appInstance);
+	ApplicationType.instances(appType, appInstance);
+}
+
+/**
+	* Traceability link access
+	*/
+pattern cps2depTrace(
+	cps2dep : CPSToDeployment,
+	trace : CPS2DeploymentTrace,
+	cpsElement : Identifiable,
+	depElement : DeploymentElement
+) {
+	CPSToDeployment.traces(cps2dep, trace);
+	CPS2DeploymentTrace.cpsElements(trace, cpsElement);
+	CPS2DeploymentTrace.deploymentElements(trace, depElement);
+}

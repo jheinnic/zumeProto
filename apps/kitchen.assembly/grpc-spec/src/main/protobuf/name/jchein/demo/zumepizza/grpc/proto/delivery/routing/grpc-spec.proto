@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "DeliveryRoutingProto";
+option java_package = "name.jchein.demo.zumepizza.grpc.proto.delivery.routing";
+// option objc_class_prefix = "RSRG";
+
+import "name/jchein/portfolio/common/grpc/action/actions.proto";
+//import "google/protobuf/descriptor.proto";
+//import "google/protobuf/any.proto";
+//import "google/instrumentation/census.proto";
+
+
+// Delivery Routing service definition.
+service DeliveryRouting {
+	rpc addFitPaintPolicy (AddFitPaintPolicyRequest) returns (BasicReply) {
+	}
+	rpc addFillPaintPolicy (AddFillPaintPolicyRequest) returns (BasicReply) {
+	}
+	rpc addSquarePaintPolicy (AddSquarePaintPolicyRequest) returns (BasicReply) {
+	}
+	rpc renamePaintPolicy (RenamePaintPolicyRequest) returns (BasicReply) {
+	}
+	rpc rejectPaintPolicy (RejectPaintPolicyRequest) returns (BasicReply) {
+	}
+	rpc acceptPaintPolicy (AcceptPaintPolicyRequest) returns (BasicReply) {
+	}
+	rpc deprecatePaintPolicy (DeprecatePaintPolicyRequest) returns (BasicReply) {
+	}
+}
+
+// Request messages contain command properties.
+message AddFitPaintPolicyRequest {
+	string id = 1;
+	string displayName = 2;
+	int32 paintHeight = 3;
+	int32 paintWidth = 4;
+	double modelCenterX = 5;
+	double modelCenterY = 6;
+	double modelScale = 7;
+}
+
+message AddFillPaintPolicyRequest {
+	string id = 1;
+	string displayName = 2;
+	int32 paintHeight = 3;
+	int32 paintWidth = 4;
+	double modelCenterX = 5;
+	double modelCenterY = 6;
+	double modelScale = 7;
+}
+
+message AddSquarePaintPolicyRequest {
+	string id = 1;
+	string displayName = 2;
+	int32 paintLength = 3;
+	double modelCenterX = 5;
+	double modelCenterY = 6;
+	double modelScale = 7;
+}
+
+message AcceptPaintPolicyRequest {
+	string id = 1;
+}
+
+message RejectPaintPolicyRequest {
+	string id = 1;
+	string comment = 2;
+}
+
+message RenamePaintPolicyRequest {
+	string id = 1;
+	string newName = 2;
+}
+
+message DeprecatePaintPolicyRequest {
+	string id = 1;
+	string comment = 2;
+}

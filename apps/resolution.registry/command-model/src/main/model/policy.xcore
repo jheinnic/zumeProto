@@ -1,0 +1,60 @@
+@GenModel(
+    bundleManifest="false",
+    modelDirectory="resolution.registry-command-model/target/generated/xcore-gen/main/java",
+    complianceLevel="8.0",
+    operationReflection="false"
+, creationIcons="false", generateModelWizard="false", multipleEditorPages="false", contentTypeIdentifier="", dataTypeConverters="true", publicConstructors="true", codeFormatting="true", commentFormatting="true")
+package name.jchein.portfolio.micros.resolution.registry.command
+
+import name.jchein.portfolio.micros.resolution.registry.command.PaintPolicyCommand
+
+annotation "http://www.eclipse.org/emf/2002/GenModel" as GenModel
+
+interface ResolutionPolicyCommand wraps PaintPolicyCommand { }
+
+enum PointMapShape {
+	SQUARE,
+	FIT,
+	FILL
+}
+
+class RequestPaintPolicy extends ResolutionPolicyCommand {
+    	String uuid
+
+	String displayName
+
+	int paintHeight
+
+	int paintWidth
+
+    double modelCenterX
+    
+    double modelCenterY
+    
+    // TODO: Needs to be non-negative.  0 is not an inclusive lower-bound!
+	double modelScale
+	
+	PointMapShape shape
+}
+
+class AcceptPaintPolicy extends ResolutionPolicyCommand {
+    	String uuid
+}
+
+class DeprecatePaintPolicy extends ResolutionPolicyCommand {
+    	String uuid
+
+	String comment
+}
+
+class RejectPaintPolicy extends ResolutionPolicyCommand {
+    	String uuid
+
+	String comment
+}
+
+class RenamePaintPolicy extends ResolutionPolicyCommand {
+    	String uuid
+
+	String newName
+}

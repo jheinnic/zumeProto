@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "DeliveryRoutingProto";
+option java_package = "name.jchein.demo.zumepizza.grpc.proto.delivery.routing";
+// option objc_class_prefix = "RSRG";
+
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+import "google/type/date.proto";
+//import "google/protobuf/descriptor.proto";
+//import "google/protobuf/any.proto";
+//import "google/instrumentation/census.proto";
+
+
+// Delivery Routing service definition.
+service DeliveryRouting {
+	rpc createServiceDay (CreateServiceDayRequest) returns (google.rpc.Status) {
+	}
+	rpc schedulePilot (SchedulePilotRequest) returns (google.rpc.Status) {
+	}
+	rpc clockInPilot (ClockInPilotRequest) returns (google.rpc.Status) {
+	}
+	rpc clockInPilot (ClockInPilotRequest) returns (google.rpc.Status) {
+	}
+	rpc clockOutPilot (ClockInPilotRequest) returns (google.rpc.Status) {
+	}
+	rpc renamePaintPolicy (RenamePaintPolicyRequest) returns (google.rpc.Status) {
+	}
+	rpc rejectPaintPolicy (RejectPaintPolicyRequest) returns (google.rpc.Status) {
+	}
+	rpc acceptPaintPolicy (AcceptPaintPolicyRequest) returns (google.rpc.Status) {
+	}
+	rpc deprecatePaintPolicy (DeprecatePaintPolicyRequest) returns (google.rpc.Status) {
+	}
+}
+
+// Request messages contain command properties.
+message CreateServiceDayRequest {
+	string id = 1;
+	google.type.Date serviceDate = 2;
+}
+
+message SchedulePilotRequest {
+	string id = 1;
+	string pilotId = 2;
+	int32 supplyPennies = 3;
+	int32 deliverPennies = 4;
+	int32 shuttlePennies = 5;
+	google.protobuf.Timestamp scheduledClockIn = 6;
+	google.protobuf.Timestamp scheduledClockOut = 7;
+	string scheduledStation = 8;
+}
+
+message ClockInPilotRequest {
+	string id = 1;
+	string pilotId = 2;
+	google.protobuf.Timestamp clockInTime = 3;
+	string clockInStation = 4;
+}
+
+message ClockOutPilotRequest {
+	string id = 1;
+	string pilotId = 2;
+	google.protobuf.Timestamp clockInTime = 3;
+	string clockOutStation = 4;
+}
+
+message RegisterAvailableVehicle {
+	string id = 1;
+	string vehicleId = 2;
+	string parkedStation = 3;
+}
+
+message AddFillPaintPolicyRequest {
+	string id = 1;
+	string displayName = 2;
+	int32 paintHeight = 3;
+	int32 paintWidth = 4;
+	double modelCenterX = 5;
+	double modelCenterY = 6;
+	double modelScale = 7;
+}
+
+message AddSquarePaintPolicyRequest {
+	string id = 1;
+	string displayName = 2;
+	int32 paintLength = 3;
+	double modelCenterX = 5;
+	double modelCenterY = 6;
+	double modelScale = 7;
+}
+
+message AcceptPaintPolicyRequest {
+	string id = 1;
+}
+
+message RejectPaintPolicyRequest {
+	string id = 1;
+	string comment = 2;
+}
+
+message RenamePaintPolicyRequest {
+	string id = 1;
+	string newName = 2;
+}
+
+message DeprecatePaintPolicyRequest {
+	string id = 1;
+	string comment = 2;
+}

@@ -1,0 +1,4 @@
+schemaPath: graphql/stt/player/schema.graphql
+extensions:
+  endpoints:
+    dev: 'http://portfolio.dev.jchein.name:3000'

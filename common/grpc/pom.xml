@@ -1,0 +1,118 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.0.1-bootstrap-SNAPSHOT</version>
+		<relativePath>../../parent</relativePath>
+	</parent>
+	<artifactId>common-grpc</artifactId>
+	<name>gRPC Commons</name>
+	<description>Spring configuration, reusable beans, and property templates for use with gRPC.  Mostly consists of reusable interceptors and @Configuration annotated lasses that inject them into an application's context.</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.xolstice.maven.plugins</groupId>
+				<artifactId>protobuf-maven-plugin</artifactId>
+				<!-- <configuration> <pluginId>grpc-java</pluginId> <pluginArtifact>io.grpc:protoc-gen-grpc-java:${io-grpc.version}:exe:${os.detected.classifier}</pluginArtifact> 
+					<protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact> 
+					<protoSourceRoot>${project.basedir}/src/main/protobuf</protoSourceRoot> <protoTestSourceRoot>${project.basedir}/src/test/protobuf</protoTestSourceRoot> 
+					<writeDescriptorSet>true</writeDescriptorSet> <attachDescriptorSet>true</attachDescriptorSet> 
+					<attachProtoSources>true</attachProtoSources> <clearOutputDirectory>true</clearOutputDirectory> 
+					<descriptorSetClassifier>api-spec</descriptorSetClassifier> <includeDependenciesInDescriptorSet>true</includeDependenciesInDescriptorSet> 
+					<includeSourceInfoInDescriptorSet>true</includeSourceInfoInDescriptorSet> 
+					<temporaryProtoFileDirectory>${project.build.directory}/protoc-dependencies</temporaryProtoFileDirectory> 
+					<additionalProtoPathElements>${project.build.directory}/protoc-dependencies</additionalProtoPathElements> 
+					<detail>true</detail> </configuration> <extensions>true</extensions> <executions> 
+					<execution> <goals> <goal>compile</goal> <goal>compile-custom</goal> </goals> 
+					</execution> </executions> <dependencies> <dependency> <groupId>com.google.api.grpc</groupId> 
+					<artifactId>grpc-google-common-protos</artifactId> <version>${google-grpc-common.version}</version> 
+					</dependency> </dependencies> -->
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-generated-source</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${generated-sources-path}/protobuf/java</source>
+								<source>${generated-sources-path}/protobuf/grpc-java</source>
+								<!-- <source>${project.basedir}/src/main/protobuf</source> -->
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<!-- Spring GRPC -->
+		<dependency>
+			<groupId>net.devh</groupId>
+			<artifactId>grpc-client-spring-boot-starter</artifactId>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>net.devh</groupId>
+			<artifactId>grpc-server-spring-boot-starter</artifactId>
+			<type>pom</type>
+		</dependency>
+
+		<!-- Google gRPC Commons -->
+		<dependency>
+			<groupId>com.google.api.grpc</groupId>
+			<artifactId>grpc-google-common-protos</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.api.grpc</groupId>
+			<artifactId>proto-google-common-protos</artifactId>
+		</dependency>
+
+		<!-- gRPC Runtime -->
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-stub</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-auth</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-protobuf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-netty</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-auth</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.11</version>
+		</dependency>
+	</dependencies>
+</project>

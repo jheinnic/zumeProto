@@ -1,0 +1,39 @@
+// package name.jchein.portfolio.micros.resolution.registry.aggregate
+// 
+// import io.eventuate.CommandProcessingAggregate
+// import org.eclipse.emf.ecore.impl.EObjectImpl
+// import io.eventuate.Event
+// import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+// import org.eclipse.viatra.query.runtime.emf.EMFScope
+// import org.eclipse.emf.ecore.resource.ResourceSet
+// import org.eclipse.emf.ecore.resource.Resource
+// import org.eclipse.emf.common.util.URI
+// import java.util.HashMap
+// 
+// class ModeledCommandProcessingAggregate<T, CT> extends EObjectImpl implements CommandProcessingAggregate<T, CT> {
+// 	
+// 	private val ResourceSetImpl resourceSet
+// 	
+// 	protected new() {
+// 		this.resourceSet = new ResourceSetImpl();
+// 		this.res
+// 	}
+// 	
+// 	private def EMFScope initializeModelScope() throws IOException, ViatraQueryException {
+// 	
+// 	val rs = new ResourceSetImpl();
+// 	val res = rs.createResource(URI.createPlatformPluginURI("org.eclipse.viatra.examples.cps.queries/example.cyberphysicalsystem", false));
+// 	res.load(new HashMap<>());
+// 	return new EMFScope(rs);
+// }
+// 	
+// 	abstract def String getCommandTransform
+// 	override processCommand(CT cmd) {
+// 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+// 	}
+// 	
+// 	override applyEvent(Event event) {
+// 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+// 	}
+// 	
+// }

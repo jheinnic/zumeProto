@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>name.jchein.demo.zumepizza.microservices</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.1-bootstrap-SNAPSHOT</version>
+    <relativePath>../../parent</relativePath>
+  </parent>
+  <artifactId>common-event-sourced</artifactId>
+  <name>common-event-sourced</name>
+  <description>Configuration Properties Template and Utility Extension for Event Store access</description>
+
+  <dependencies>
+  	<dependency>
+  		<groupId>${project.groupId}</groupId>
+  		<artifactId>common-utils</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+    <dependency>
+      <groupId>io.eventuate.client.java</groupId>
+      <artifactId>eventuate-client-java-spring</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.eventuate.local.java</groupId>
+      <artifactId>eventuate-local-java-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+  </dependencies>
+</project>

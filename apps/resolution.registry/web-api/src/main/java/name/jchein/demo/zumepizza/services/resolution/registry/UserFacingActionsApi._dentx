@@ -1,0 +1,42 @@
+package name.jchein.portfolio.micros.resolution.registry.service
+
+import javax.validation.constraints.NotNull
+import javax.validation.executable.ExecutableType
+import javax.validation.executable.ValidateOnExecution
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.stereotype.Component
+import org.springframework.util.concurrent.CompletableToListenableFutureAdapter
+import name.jchein.demo.bstocksolutions.manifest.ingest.task.api.UserFacingActionsApiDelegate
+import name.jchein.portfolio.micros.resolution.registry.service.ManifestActivityService
+import javax.ws.rs.BadRequestException
+import java.util.UUID
+import name.jchein.demo.bstocksolutions.manifest.ingest.task.dto.Identity
+
+@Component
+@ValidateOnExecution(type=ExecutableType.ALL)
+class UserFacingActionsApi implements UserFacingActionsApiDelegate {
+	val ManifestActivityService manifestTaskService
+
+	new(@NotNull ManifestActivityService manifestTaskService) {
+		this.manifestTaskService = manifestTaskService
+	}
+
+	def override createManifestIngestTask(@NotNull UUID marketId, @NotNull String location) {
+		val retVal = this.manifestTaskService.beginImportActivity(
+			marketId,
+			"email",
+			location,
+			marketId.toString()
+		)
+
+		val retVal2 = retVal.thenApply [
+			if (it.entityId != "id") {
+				throw new BadRequestException("Wrong Entity ID")
+			}
+			return new ResponseEntity<Identity>(new Identity().id(null), HttpStatus.CREATED)
+		]
+		
+		return new CompletableToListenableFutureAdapter<ResponseEntity<Identity>>(retVal2)
+	}
+}

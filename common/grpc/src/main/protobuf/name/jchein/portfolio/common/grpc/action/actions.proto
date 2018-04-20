@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "CommonProto";
+option java_package = "name.jchein.portfolio.common.grpc.action";
+
+// Standard response message for action services that only need to acknowledge having received an RPC call and
+// invoked any Commands it implied.  Status codes address pre-evaluation communication scenarios that may occur,
+// but are not intended to convey anything about the semantics of a command itself.  Any semantically relevant
+// responses are instead conveyed by Events emitted from target aggregate.
+message BasicReply {
+	StatusCode status = 1;
+	string message = 2;
+}
+
+enum StatusCode {
+	OK = 0;
+	NOT_AUTHORIZED = 1;
+	MALFORMED_REQUEST = 2;
+	DUPLICATE_REQUEST = 3;
+	INVALID_REQUEST = 4;
+	STALE_REQUEST = 5;
+	INTERNAL_ERROR = 6;
+}

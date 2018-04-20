@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Registry-command-model
+Bundle-SymbolicName: resolution.registry-command-model
+Bundle-Version: 1.0.0.qualifier
+Export-Package: name.jchein.portfolio.micros.resolution.registry.command.impl,
+ name.jchein.portfolio.micros.resolution.registry.command.util

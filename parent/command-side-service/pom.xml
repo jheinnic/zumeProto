@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>name.jchein.portfolio.microservices</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>parent.command-side-service</artifactId>
+	<packaging>pom</packaging>
+	<name>B-Stock Java Event Sourcing Demo Project API Server Module Parent POM</name>
+	<description>Manifest Storage Command-Side Module for Java-based Event Sourcing Demo</description>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>3.0.1</version>
+					<executions>
+						<execution>
+							<id>unpack-dependencies</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>unpack-dependencies</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}/swagger-sources</outputDirectory>
+								<includes>**/api.yaml</includes>
+								<excludeTransitive>true</excludeTransitive>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-codegen-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>generate-swagger-java-server</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+							<configuration>
+								<language>spring</language>
+								<library>spring-mvc</library>
+								<modelPackage>${swagger.namespace}.model</modelPackage>
+								<apiPackage>${swagger.namespace}.api</apiPackage>
+								<invokerPackage>${swagger.namespace}.invoker</invokerPackage>
+								<configPackage>${swagger.namespace}.spring</configPackage>
+								<basePackage>${swagger.namespace}</basePackage>
+								<configOptions>
+									<basePackage>${swagger.namespace}</basePackage>
+									<configPackage>${swagger.namespace}.spring</configPackage>
+									<serializableModel>true</serializableModel>
+									<!-- <responseWrapper>CompletableFuture</responseWrapper> <responseWrapper>HystrixCommand</responseWrapper> 
+										<responseWrapper>ListenableFuture</responseWrapper> <responseWrapper>DeferredResult</responseWrapper> 
+										<responseWrapper>RxObservable</responseWrapper> <responseWrapper>RxSingle</responseWrapper> -->
+									<interfaceOnly>false</interfaceOnly>
+									<implicitHeaders>false</implicitHeaders>
+									<singleContentType>true</singleContentType>
+									<useBeanValidation>true</useBeanValidation>
+									<useOptional>true</useOptional>
+									<useTags>true</useTags>
+									<jackson>true</jackson>
+									<java8>true</java8>
+									<async>true</async>
+								</configOptions>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>name.jchein.portfolio.microservices</groupId>
+			<artifactId>common-utils</artifactId>
+		</dependency>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- SpringFox Swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
+	</dependencies>
+</project>

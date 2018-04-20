@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>name.jchein.demo.zumepizza.microservices</groupId>
+  <artifactId>io.grpc</artifactId>
+  <version>0.0.1-bootstrap-SNAPSHOT</version>
+  <name>Staged io.grpc examples partial build modules list</name>
+  <description>This POM enumerates modules needed to build staged io.grpc example modules, but is not itself a project aritfact.  It exists only to enable selective partial builds.</description>
+  <packaging>pom</packaging>
+  
+  <modules>
+	<module>../../parent</module>
+	<module>../../common/utils</module>
+	<module>../../common/event-sourced</module>
+	<module>../../common/oauth2</module>
+	<module>../../common/grpc</module>
+	<module>../../common/web</module>
+	<module>../../common/websocket</module>
+	<module>parent</module>
+  	<module>grpc-spec</module>
+  </modules>
+</project>

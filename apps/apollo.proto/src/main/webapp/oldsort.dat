@@ -1,0 +1,1121 @@
+                      "kind": "ENUM",
+                      "kind": "OBJECT",
+                      "kind": "OBJECT",
+                      "kind": "OBJECT",
+                      "kind": "OBJECT",
+                      "kind": "SCALAR",
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "name": "String",
+                      "name": "__Directive",
+                      "name": "__DirectiveLocation",
+                      "name": "__InputValue",
+                      "name": "__InputValue",
+                      "name": "__Type",
+                      "ofType": null
+                      "ofType": null
+                      "ofType": null
+                      "ofType": null
+                      "ofType": null
+                      "ofType": null
+                      "ofType": null
+                    "kind": "NON_NULL",
+                    "kind": "NON_NULL",
+                    "kind": "NON_NULL",
+                    "kind": "NON_NULL",
+                    "kind": "NON_NULL",
+                    "kind": "NON_NULL",
+                    "kind": "NON_NULL",
+                    "kind": "OBJECT",
+                    "kind": "OBJECT",
+                    "kind": "OBJECT",
+                    "kind": "OBJECT",
+                    "kind": "OBJECT",
+                    "kind": "SCALAR",
+                    "kind": "SCALAR",
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "name": "Boolean",
+                    "name": "String",
+                    "name": "__EnumValue",
+                    "name": "__Field",
+                    "name": "__InputValue",
+                    "name": "__Type",
+                    "name": "__Type",
+                    "name": null,
+                    "name": null,
+                    "name": null,
+                    "name": null,
+                    "name": null,
+                    "name": null,
+                    "name": null,
+                    "ofType": null
+                    "ofType": null
+                    "ofType": null
+                    "ofType": null
+                    "ofType": null
+                    "ofType": null
+                    "ofType": null
+                    "ofType": null
+                    "ofType": {
+                    "ofType": {
+                    "ofType": {
+                    "ofType": {
+                    "ofType": {
+                    "ofType": {
+                    "ofType": {
+                    }
+                    }
+                    }
+                    }
+                    }
+                    }
+                    }
+                  "defaultValue": "false"
+                  "defaultValue": "false"
+                  "defaultValue": null
+                  "defaultValue": null
+                  "defaultValue": null
+                  "description": "",
+                  "description": "",
+                  "description": "",
+                  "description": null,
+                  "description": null,
+                  "kind": "ENUM",
+                  "kind": "LIST",
+                  "kind": "LIST",
+                  "kind": "LIST",
+                  "kind": "LIST",
+                  "kind": "LIST",
+                  "kind": "NON_NULL",
+                  "kind": "NON_NULL",
+                  "kind": "NON_NULL",
+                  "kind": "NON_NULL",
+                  "kind": "NON_NULL",
+                  "kind": "OBJECT",
+                  "kind": "OBJECT",
+                  "kind": "OBJECT",
+                  "kind": "OBJECT",
+                  "kind": "OBJECT",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "name": "Boolean",
+                  "name": "Boolean",
+                  "name": "Boolean",
+                  "name": "Boolean",
+                  "name": "Boolean",
+                  "name": "Boolean",
+                  "name": "Email",
+                  "name": "String",
+                  "name": "String",
+                  "name": "String",
+                  "name": "String",
+                  "name": "User",
+                  "name": "__Type",
+                  "name": "__Type",
+                  "name": "__Type",
+                  "name": "__TypeKind",
+                  "name": "firstName",
+                  "name": "includeDeprecated",
+                  "name": "includeDeprecated",
+                  "name": "lastName",
+                  "name": "name",
+                  "name": null,
+                  "name": null,
+                  "name": null,
+                  "name": null,
+                  "name": null,
+                  "name": null,
+                  "name": null,
+                  "name": null,
+                  "name": null,
+                  "name": null,
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": null
+                  "ofType": {
+                  "ofType": {
+                  "ofType": {
+                  "ofType": {
+                  "ofType": {
+                  "ofType": {
+                  "ofType": {
+                  "ofType": {
+                  "ofType": {
+                  "ofType": {
+                  "type": {
+                  "type": {
+                  "type": {
+                  "type": {
+                  "type": {
+                  }
+                  }
+                  }
+                  }
+                  }
+                  }
+                  }
+                  }
+                  }
+                  }
+                  },
+                  },
+                  },
+                  },
+                  },
+                "kind": "LIST",
+                "kind": "LIST",
+                "kind": "LIST",
+                "kind": "LIST",
+                "kind": "LIST",
+                "kind": "LIST",
+                "kind": "LIST",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "NON_NULL",
+                "kind": "OBJECT",
+                "kind": "OBJECT",
+                "kind": "OBJECT",
+                "kind": "OBJECT",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "String",
+                "name": "User",
+                "name": "__Type",
+                "name": "__Type",
+                "name": "__Type",
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "name": null,
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": null
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                "ofType": {
+                {
+                {
+                {
+                {
+                {
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                }
+                },
+              "args": [
+              "args": [
+              "args": [
+              "args": [
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "args": [],
+              "defaultValue": "\"No longer supported\""
+              "defaultValue": null
+              "defaultValue": null
+              "deprecationReason": "Use `locations`."
+              "deprecationReason": "Use `locations`."
+              "deprecationReason": "Use `locations`."
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "deprecationReason": null
+              "description": "",
+              "description": "",
+              "description": "",
+              "description": "",
+              "description": "",
+              "description": "",
+              "description": "",
+              "description": "A GraphQL-formatted string representing the default value for this input value.",
+              "description": "A list of all directives supported by this server.",
+              "description": "A list of all types supported by this server.",
+              "description": "Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted in [Markdown](https://daringfireball.net/projects/markdown/).",
+              "description": "If this server support subscription, the type that subscription operations will be rooted at.",
+              "description": "If this server supports mutation, the type that mutation operations will be rooted at.",
+              "description": "Included when true.",
+              "description": "Indicates this type is a list. `ofType` is a valid field.",
+              "description": "Indicates this type is a non-null. `ofType` is a valid field.",
+              "description": "Indicates this type is a scalar.",
+              "description": "Indicates this type is a union. `possibleTypes` is a valid field.",
+              "description": "Indicates this type is an enum. `enumValues` is a valid field.",
+              "description": "Indicates this type is an input object. `inputFields` is a valid field.",
+              "description": "Indicates this type is an interface. `fields` and `possibleTypes` are valid fields.",
+              "description": "Indicates this type is an object. `fields` and `interfaces` are valid fields.",
+              "description": "Location adjacent to a field definition.",
+              "description": "Location adjacent to a field.",
+              "description": "Location adjacent to a fragment definition.",
+              "description": "Location adjacent to a fragment spread.",
+              "description": "Location adjacent to a mutation operation.",
+              "description": "Location adjacent to a query operation.",
+              "description": "Location adjacent to a scalar definition.",
+              "description": "Location adjacent to a schema definition.",
+              "description": "Location adjacent to a subscription operation.",
+              "description": "Location adjacent to a union definition.",
+              "description": "Location adjacent to an argument definition.",
+              "description": "Location adjacent to an enum definition.",
+              "description": "Location adjacent to an enum value definition.",
+              "description": "Location adjacent to an inline fragment.",
+              "description": "Location adjacent to an input object field definition.",
+              "description": "Location adjacent to an input object type definition.",
+              "description": "Location adjacent to an interface definition.",
+              "description": "Location adjacent to an object type definition.",
+              "description": "Skipped when true.",
+              "description": "The type that query operations will be rooted at.",
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "description": null,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": false,
+              "isDeprecated": true,
+              "isDeprecated": true,
+              "isDeprecated": true,
+              "name": "ARGUMENT_DEFINITION",
+              "name": "ENUM",
+              "name": "ENUM",
+              "name": "ENUM_VALUE",
+              "name": "FIELD",
+              "name": "FIELD_DEFINITION",
+              "name": "FRAGMENT_DEFINITION",
+              "name": "FRAGMENT_SPREAD",
+              "name": "INLINE_FRAGMENT",
+              "name": "INPUT_FIELD_DEFINITION",
+              "name": "INPUT_OBJECT",
+              "name": "INPUT_OBJECT",
+              "name": "INTERFACE",
+              "name": "INTERFACE",
+              "name": "LIST",
+              "name": "MUTATION",
+              "name": "NON_NULL",
+              "name": "OBJECT",
+              "name": "OBJECT",
+              "name": "QUERY",
+              "name": "SCALAR",
+              "name": "SCALAR",
+              "name": "SCHEMA",
+              "name": "SUBSCRIPTION",
+              "name": "UNION",
+              "name": "UNION",
+              "name": "addUser",
+              "name": "address",
+              "name": "args",
+              "name": "args",
+              "name": "defaultValue",
+              "name": "deprecationReason",
+              "name": "deprecationReason",
+              "name": "description",
+              "name": "description",
+              "name": "description",
+              "name": "description",
+              "name": "description",
+              "name": "directives",
+              "name": "emails",
+              "name": "enumValues",
+              "name": "fields",
+              "name": "firstName",
+              "name": "if",
+              "name": "if",
+              "name": "inputFields",
+              "name": "interfaces",
+              "name": "isDeprecated",
+              "name": "isDeprecated",
+              "name": "kind",
+              "name": "lastName",
+              "name": "locations",
+              "name": "mutationType",
+              "name": "name",
+              "name": "name",
+              "name": "name",
+              "name": "name",
+              "name": "name",
+              "name": "ofType",
+              "name": "onField",
+              "name": "onFragment",
+              "name": "onOperation",
+              "name": "possibleTypes",
+              "name": "queryType",
+              "name": "reason",
+              "name": "subscriptionType",
+              "name": "type",
+              "name": "type",
+              "name": "types",
+              "name": "users",
+              "name": "verified",
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              "type": {
+              ],
+              ],
+              ],
+              ],
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+              },
+            "ENUM_VALUE"
+            "FIELD",
+            "FIELD",
+            "FIELD_DEFINITION",
+            "FRAGMENT_SPREAD",
+            "FRAGMENT_SPREAD",
+            "INLINE_FRAGMENT"
+            "INLINE_FRAGMENT"
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            {
+            }
+            }
+            }
+            }
+            }
+            }
+            }
+            }
+            }
+            }
+            }
+            }
+            }
+            }
+            }
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+            },
+          "args": [
+          "args": [
+          "args": [
+          "description": "",
+          "description": "",
+          "description": "",
+          "description": "",
+          "description": "A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.",
+          "description": "A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\n\nIn some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
+          "description": "A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.",
+          "description": "An enum describing what kind of type a given `__Type` is.",
+          "description": "Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.",
+          "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
+          "description": "Directs the executor to skip this field or fragment when the `if` argument is true.",
+          "description": "Marks an element of a GraphQL schema as no longer supported.",
+          "description": "Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.",
+          "description": "One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.",
+          "description": "The `Boolean` scalar type represents `true` or `false`.",
+          "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
+          "description": "The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.\n\nDepending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name and description, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.",
+          "enumValues": [
+          "enumValues": [
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "enumValues": null,
+          "fields": [
+          "fields": [
+          "fields": [
+          "fields": [
+          "fields": [
+          "fields": [
+          "fields": [
+          "fields": [
+          "fields": [
+          "fields": [
+          "fields": null,
+          "fields": null,
+          "fields": null,
+          "fields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "inputFields": null,
+          "interfaces": [],
+          "interfaces": [],
+          "interfaces": [],
+          "interfaces": [],
+          "interfaces": [],
+          "interfaces": [],
+          "interfaces": [],
+          "interfaces": [],
+          "interfaces": [],
+          "interfaces": [],
+          "interfaces": null,
+          "interfaces": null,
+          "interfaces": null,
+          "interfaces": null,
+          "kind": "ENUM",
+          "kind": "ENUM",
+          "kind": "OBJECT",
+          "kind": "OBJECT",
+          "kind": "OBJECT",
+          "kind": "OBJECT",
+          "kind": "OBJECT",
+          "kind": "OBJECT",
+          "kind": "OBJECT",
+          "kind": "OBJECT",
+          "kind": "OBJECT",
+          "kind": "OBJECT",
+          "kind": "SCALAR",
+          "kind": "SCALAR",
+          "locations": [
+          "locations": [
+          "locations": [
+          "name": "Boolean",
+          "name": "Email",
+          "name": "Mutation",
+          "name": "Query",
+          "name": "String",
+          "name": "User",
+          "name": "__Directive",
+          "name": "__DirectiveLocation",
+          "name": "__EnumValue",
+          "name": "__Field",
+          "name": "__InputValue",
+          "name": "__Schema",
+          "name": "__Type",
+          "name": "__TypeKind",
+          "name": "deprecated",
+          "name": "include",
+          "name": "skip",
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          "possibleTypes": null
+          ]
+          ]
+          ]
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+          ],
+        "name": "Mutation"
+        "name": "Query"
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        {
+        }
+        }
+        },
+        },
+        },
+        },
+        },
+        },
+        },
+        },
+        },
+        },
+        },
+        },
+        },
+        },
+        },
+      "directives": [
+      "mutationType": {
+      "queryType": {
+      "subscriptionType": null,
+      "types": [
+      ]
+      ],
+      },
+      },
+    "__schema": {
+    }
+  "data": {
+  }
+{
+}

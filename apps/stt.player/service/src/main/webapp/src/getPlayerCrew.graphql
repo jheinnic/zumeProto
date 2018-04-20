@@ -1,0 +1,54 @@
+query getPlayerCharacter($id: ID) {
+  playerById(id: $id) {
+    id
+    displayName
+    level
+  }
+}
+
+query getPlayerCrew($id: ID) {
+  playerById(id: $id) {
+    crew {
+      id
+      symbol
+      name
+      shortName
+      archetypeId
+      rarity
+      maxRarity
+      traits[]
+      skills {
+        commandSkill {
+          core
+          rangeMin
+          rangeMax
+        }
+        diplomacySkill {
+          core
+          rangeMin
+          rangeMax
+        }
+        engineeringSkill {
+          core
+          rangeMin
+          rangeMax
+        }
+        securitySkill {
+          core
+          rangeMin
+          rangeMax
+        }
+        medicalSkill {
+          core
+          rangeMin
+          rangeMax
+        }
+        scienceSkill {
+          core
+          rangeMin
+          rangeMax
+        }
+      }
+    }
+  }
+}

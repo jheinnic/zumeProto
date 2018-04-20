@@ -1,0 +1,3 @@
+@EnableConfigServer
+class StartIt {
+}

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mongoose": "^4.13.7",
+    "sequelize": "^4.28.6"
+  }
+}

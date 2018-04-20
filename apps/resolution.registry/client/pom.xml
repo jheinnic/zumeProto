@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+		<artifactId>resolution.registry-parent</artifactId>
+		<version>0.0.1-bootstrap-SNAPSHOT</version>
+		<relativePath>../parent</relativePath>
+	</parent>
+	<artifactId>resolution.registry-client</artifactId>
+	<name>Resolution Registry Client Library</name>
+	<description>Generated client implementation for Resolution Registry's microservice's API specification</description>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<!-- Guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-core</artifactId>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "allowJs": true,
+    "sourceMap": true,
+    "declaration": false,
+    "importHelpers": true,
+    "outDir": "./dist/out-tsc",
+    "lib": [ "es5", "es6", "esnext", "dom" ],
+    "typeRoots": [ "node_modules/@types" ],
+    "rootDirs": [ "./src", "../../../target/graphql-dependencies" ],
+    "moduleResolution": "node",
+    "alwaysStrict": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noErrorTruncation": true,
+    "preserveConstEnums": true,
+    "allowUnreachableCode": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "exclude": ["dist/**", "ngrx_docs/**", "config/**", "temp/**"],
+  "compileOnSave": true,
+  "buildOnSave": true
+}

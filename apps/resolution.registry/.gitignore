@@ -1,0 +1,4 @@
+plugin.xml
+plugin.properties
+build.properties
+*/src/main/xtend-gen/**/*

@@ -1,0 +1,13 @@
+type Movie {
+    title: String!
+    released: Int
+    tagline: String
+    actors: [Person]
+}
+
+type Person {
+    name: String!
+    born: Int
+    movies: [Movie]
+}
+

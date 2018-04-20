@@ -1,0 +1,144 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "DeliveryRoutingProto";
+option java_package = "name.jchein.demo.zumepizza.grpc.proto.delivery.routing";
+// option objc_class_prefix = "RSRG";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+import "google/type/date.proto";
+import "google/type/money.proto";
+//import "google/protobuf/descriptor.proto";
+//import "google/protobuf/any.proto";
+//import "google/instrumentation/census.proto";
+
+
+// Delivery Routing service definition.
+service DeliveryRouting {
+	rpc enrollPilot (EnrollPilotRequest) returns (google.rpc.Status) {
+	}
+	rpc schedulePilot (SchedulePilotRequest) returns (google.rpc.Status) {
+	}
+	rpc clockInPilot (ClockInPilotRequest) returns (google.rpc.Status) {
+	}
+	rpc clockOutPilot (ClockOutPilotRequest) returns (google.rpc.Status) {
+	}
+}
+
+// Request messages contain command properties.
+message CreatePilotTimecardRequest {
+	string id = 1;
+	string firstName = 3;
+	string middleName = 4;
+	string lastName = 5;
+	string suffix = 6;
+	repeated ContractTerms contractTerms = 7;
+}
+
+message ContractTerms {
+	oneof termItem {
+		BasePay basePayTerm = 1;
+		OnCallPay onCallTerm = 2;
+		google.type.Money supplyPennies = 3;
+		google.type.Money deliverPennies = 4;
+		google.type.Money shuttlePennies = 5;
+		google.type.Money minHoursPerWeek = 6;
+		google.type.Money maxHoursPerWeek = 7;
+	};
+}
+
+message OnCallPay {
+	int32 responseTimeMinutes = 1;
+	google.type.Money hourlyPay = 2;
+}
+
+message BasePay {
+	google.type.Money hourlyPay = 2;
+}
+
+message DrivePay {
+	google.type.Money hourlyPay = 2;
+}
+
+message DelieryDrivePay {
+	google.type.Money hourlyPay = 2;
+}
+
+message SupplyDrivePay {
+	google.type.Money hourlyPay = 2;
+}
+
+// This is not an RPC message
+message SchedulePilotRequest {
+	string id = 1;
+	google.protobuf.Timestamp scheduledClockIn = 6;
+	google.protobuf.Timestamp scheduledClockOut = 7;
+	string scheduledStation = 8;
+}
+
+message ClockInPilotRequest {
+	string id = 1;
+	google.protobuf.Timestamp clockInTime = 3;
+	string clockInLocation = 4;
+}
+
+message ClockOutPilotRequest {
+	string id = 1;
+	google.protobuf.Timestamp clockOutTime = 3;
+	string clockOutLocation = 4;
+}
+
+message BeginBreakRequest {
+	string id = 1;
+	google.protobuf.Timestamp clockOutTime = 2;
+	google.type.Duration breakDuration = 3;
+}
+
+message EndBreakRequest {
+	string id = 1;
+	google.protobuf.Timestamp clockOutTime = 2;
+}
+
+message RegisterAvailableVehicle {
+	string id = 1;
+	string vehicleId = 2;
+	string parkedStation = 3;
+}
+
+message AddFillPaintPolicyRequest {
+	string id = 1;
+	string displayName = 2;
+	int32 paintHeight = 3;
+	int32 paintWidth = 4;
+	double modelCenterX = 5;
+	double modelCenterY = 6;
+	double modelScale = 7;
+}
+
+message AddSquarePaintPolicyRequest {
+	string id = 1;
+	string displayName = 2;
+	int32 paintLength = 3;
+	double modelCenterX = 5;
+	double modelCenterY = 6;
+	double modelScale = 7;
+}
+
+message AcceptPaintPolicyRequest {
+	string id = 1;
+}
+
+message RejectPaintPolicyRequest {
+	string id = 1;
+	string comment = 2;
+}
+
+message RenamePaintPolicyRequest {
+	string id = 1;
+	string newName = 2;
+}
+
+message DeprecatePaintPolicyRequest {
+	string id = 1;
+	string comment = 2;
+}

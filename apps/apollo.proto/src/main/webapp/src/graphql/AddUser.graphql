@@ -1,0 +1,19 @@
+mutation addUser(
+  $id: String!
+  $firstName: String!
+  $lastName: String!
+) {
+  addUser(
+    id: $id
+    firstName: $firstName
+    lastName: $lastName
+  ) {
+    firstName
+    lastName
+    emails {
+      id: $id
+      address
+      verified
+    }
+  }
+}

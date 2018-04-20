@@ -1,0 +1,806 @@
+schema {
+  query: QueryObject
+}
+
+type Ability {
+  condition: Int
+  type: Int
+  amount: Int
+}
+
+type AcceptedMission {
+  id: ID!
+  symbol: String
+  description: String
+  episode: Int
+  episodeTitle: String
+  episodePortrait: Icon
+  marker: [Int]
+  markerIcon: Icon
+  excludeFromTimeline: String
+  starsEarned: Int
+  totalStars: Int
+  accepted: Boolean
+  state: Int
+  mainStory: Boolean
+}
+
+type Action {
+  bonusAmount: Int
+  name: String
+  symbol: String
+  cooldown: Int
+  initialCooldown: Int
+  duration: Int
+  bonusType: Int
+  crew: String
+  icon: Icon
+  ability: Ability
+  penalty: Penalty
+}
+
+type BattleStation {
+  skill: String
+}
+
+type Bonus {
+  value: Int
+  probability: Int
+}
+
+type BoostWindow {
+  window: [Int]
+  reward: Reward
+}
+
+type CadetSchedule {
+  day: Int
+  schedule: [Schedule]
+  missions: [Mission]
+  current: Int
+  endsIn: Int
+  next: Int
+  nextStartsIn: Int
+}
+
+type CapAchiever {
+  name: String
+  date: Int
+}
+
+type Character {
+  id: ID!
+  displayName: String
+  usingDefaultName: Boolean
+  level: Int
+  maxLevel: Int
+  xp: Int
+  xpForCurrentLevel: Int
+  xpForNextLevel: Int
+  location: Location
+  destination: Destination
+  navmap: Navmap
+  acceptedMissions: [AcceptedMission]
+  activeConflict: String
+  shuttleBays: Int
+  nextShuttleBayCost: String
+  canPurchaseShuttleBay: Boolean
+  crewAvatar: CrewAvatar
+  storedImmortals: [StoredImmortal]
+  secondsToScanCooldown: Int
+  scanSpeedupsToday: Int
+  replayEnergyMax: Int
+  replayEnergyRate: Int
+  secondsFromReplayEnergyBasis: Int
+  replayEnergyOverflow: Int
+  boostWindows: [BoostWindow]
+  secondsFromLastBoostClaim: Int
+  videoAdChronitonBoostReward: ChronitonBoostReward
+  cadetTickets: TicketCounter
+  pvpTickets: TicketCounter
+  eventTickets: TicketCounter
+  cadetSchedule: CadetSchedule
+  pvpDivisions: [PvpDivision]
+  pvpTimer: PvpTimer
+  crew: [Crew]
+  items: [Item]
+  crewBorrows: [String]
+  crewShares: [String]
+  crewLimit: Int
+  crewLimitIncreasePerPurchase: Int
+  nextCrewLimitIncreaseCost: Cost
+  canPurchaseCrewLimitIncrease: Boolean
+  itemLimit: Int
+  ships: [Ship]
+  currentShipId: ID
+  shuttleAdventures: [ShuttleAdventure]
+  factions: [Faction]
+  disputes: [Dispute]
+  tngTheGameLevel: Int
+  openPacks: [String]
+  dailyActivities: [DailyActivity]
+  nextDailyActivityReset: Int
+  nextStarbaseDonationReset: Int
+  fleetActivities: [FleetActivities]
+  nextFleetActivityReset: Int
+  freestandingQuests: [String]
+  dailyRewardsState: DailyRewardsState
+  events: [Event]
+  disputeHistories: [DisputeHistory]
+  stimpack: String
+  tutorials: [Tutorial]
+  locationChannelPrefix: String
+  honorRewardByRarity: [Int]
+  voyageDescriptions: [VoyageDescription]
+  voyage: [String]
+  voyageSummaries: VoyageSummary
+  rerollDescriptions: [RerollDescription]
+}
+
+type ClientAsset {
+  system: String
+  place: String
+}
+
+type Content {
+  contentType: String
+  shuttles: [Shuttle]
+}
+
+type Cost {
+  currency: Int
+  amount: Int
+}
+
+type Crew {
+  id: ID!
+  symbol: String
+  name: String
+  shortName: String
+  flavor: String
+  archetypeId: ID
+  xp: Int
+  xpForCurrentLevel: Int
+  xpForNextLevel: Int
+  maxXp: Int
+  favorite: Boolean
+  level: Int
+  inBuyBackState: Boolean
+  maxLevel: Int
+  rarity: Int
+  maxRarity: Int
+  equipmentRank: Int
+  maxEquipmentRank: Int
+  equipmentSlots: [EquipmentSlot]
+  equipment: [String]
+  icon: Icon
+  portrait: Icon
+  fullBody: FullBody
+  voiceOver: String
+  expiresIn: String
+  activeStatus: Int
+  activeId: String
+  activeIndex: Int
+  passiveStatus: Int
+  passiveId: String
+  passiveIndex: Int
+  traits: [String]
+  traitsHidden: [String]
+  skills: Skills
+  shipBattle: ShipBattle
+  action: Action
+  defaultAvatar: Boolean
+  crossFuseTargets: [String]
+  capAchiever: CapAchiever
+}
+
+type CrewAvatar {
+  id: ID!
+  symbol: String
+  name: String
+  shortName: String
+  maxRarity: Int
+  icon: Icon
+  portrait: Icon
+  fullBody: FullBody
+  defaultAvatar: Boolean
+  hideFromCryo: Boolean
+}
+
+type CrewBonus {
+  crewTag: String
+  value: Int
+}
+
+type CrewSlot {
+  symbol: String
+  name: String
+  skill: String
+  trait: String
+}
+
+type DailyActivity {
+  id: ID!
+  name: String
+  description: String
+  icon: Icon
+  area: String
+  weight: Int
+  category: Int
+  lifetime: Int
+  rewards: [String]
+  goal: Int
+  minLevel: Int
+  rarity: Int
+  progress: Int
+  status: String
+}
+
+type DailyRewardsState {
+  secondsUntilNextReward: Int
+  todayRewardDayIndex: Int
+  rewardDays: [RewardDay]
+}
+
+type Destination {
+  system: String
+  place: String
+  setup: String
+  x: Int
+  y: Int
+}
+
+type Dispute {
+  id: ID!
+  symbol: String
+  descId: ID
+  name: String
+  description: String
+  episode: Int
+  systems: [String]
+  marker: [Int]
+  markerIcon: Icon
+  pointsIcon: Icon
+  brandIcon: Icon
+  minPoints: Int
+  expiresIn: String
+  firstMission: Int
+  intro: Intro
+  factions: [Faction]
+  milestones: [Milestone]
+  rewards: [Reward]
+  started: Boolean
+  milestoneText: String
+}
+
+type DisputeHistory {
+  id: ID!
+  symbol: String
+  name: String
+  episode: Int
+  marker: [Int]
+  completed: Boolean
+  missionIds: [Int]
+  starsEarned: Int
+  totalStars: Int
+  excludeFromTimeline: Boolean
+  factionId: ID
+}
+
+type EquipmentSlot {
+  level: Int
+  archetype: Int
+}
+
+type Event {
+  type: String
+  questId: ID
+  id: ID!
+  name: String
+  description: String
+  rules: String
+  bonusText: String
+  rewardsTeaser: String
+  shopLayout: String
+  featuredCrew: [FeaturedCrew]
+  thresholdRewards: [ThresholdReward]
+  rankedBrackets: [RankedBracket]
+  squadronRankedBrackets: [SquadronRankedBracket]
+  content: Content
+  instanceId: ID
+  status: Int
+  secondsToStart: Int
+  secondsToEnd: Int
+  phases: [Phase]
+  opened: Boolean
+  openedPhase: Int
+  victoryPoints: Int
+  bonusVictoryPoints: Int
+  claimedThresholdRewardPoints: Int
+  unclaimedThresholdRewards: [UnclaimedThresholdReward]
+  lastThresholdPoints: Int
+  nextThresholdPoints: Int
+  nextThresholdRewards: [NextThresholdReward]
+}
+
+type Faction {
+  id: ID!
+  name: String
+  reputation: Int
+  discovered: Int
+  completedShuttleAdventures: Int
+  icon: Icon
+  representativeIcon: Icon
+  representativeFullBody: Icon
+  reputationIcon: Icon
+  reputationItemIcon: Icon
+  homeSystem: String
+  shopLayout: String
+  shuttleTokenId: ID
+  shuttleTokenPreviewItem: ShuttleTokenPreviewItem
+  eventWinnerRewards: [String]
+  symbol: String
+  points: Int
+  portrait: Icon
+  shuttleToken: Int
+  resolutionMissionId: ID
+  reward: Reward
+}
+
+type FeaturedCrew {
+  type: Int
+  id: ID!
+  symbol: String
+  name: String
+  fullName: String
+  flavor: String
+  icon: Icon
+  portrait: Icon
+  rarity: Int
+  fullBody: FullBody
+  skills: Skills
+  traits: [String]
+  action: Action
+  quantity: Int
+}
+
+type FleetActivities {
+  id: ID!
+  name: String
+  description: String
+  icon: Icon
+  area: String
+  category: String
+  totalPoints: Int
+  currentPoints: Int
+  milestones: [Milestone]
+  claimsAvailableCount: Int
+}
+
+type FullBody {
+  file: String
+}
+
+type Goal {
+  id: ID!
+  factionId: ID
+  flavor: String
+  rewards: [String]
+  winnerRewards: WinnerReward
+  victoryPoints: Int
+  claimedRewardPoints: Int
+}
+
+type Icon {
+  file: String!
+  atlasInfo: String
+}
+
+type Image {
+  file: String
+  url: String
+  version: String
+}
+
+type Intro {
+  text: String
+  portrait: Icon
+  speakerName: String
+  response: String
+}
+
+type Item {
+  id: ID!
+  type: Int
+  symbol: String
+  name: String
+  flavor: String
+  archetypeId: ID
+  quantity: Int
+  icon: Icon
+  rarity: Int
+  expiresIn: String
+  shortName: String
+  bonuses: Bonus
+  timeModifier: Int
+  crModifier: Int
+  rewardModifier: Int
+  craftingBonuses: [Bonus]
+}
+
+type Location {
+  system: String
+  place: String
+  setup: String
+  x: Int
+  y: Int
+}
+
+type Milestone {
+  text: String
+  speakerName: String
+  portrait: Icon
+  event: Event
+  goal: Int
+  rewards: [Reward]
+  claimed: Boolean
+  claimable: Boolean
+}
+
+type Mission {
+  id: ID!
+  title: String
+  speaker: String
+  description: String
+  portrait: Icon
+  image: Image
+  imageSmall: Icon
+  requirement: String
+}
+
+type Navmap {
+  places: [Place]
+  systems: [System]
+}
+
+type NextThresholdReward {
+  type: Int
+  id: ID!
+  symbol: String
+  itemType: Int
+  name: String
+  fullName: String
+  flavor: String
+  icon: Icon
+  quantity: Int
+  rarity: Int
+}
+
+type Penalty {
+  type: Int
+  amount: Int
+}
+
+type Phase {
+  splashImage: SplashImage
+  goals: [Goal]
+  id: ID!
+  secondsToEnd: Int
+}
+
+type Place {
+  id: ID!
+  symbol: String
+  system: String
+  clientAsset: ClientAsset
+  displayName: String
+  visited: Boolean
+}
+
+type PotentialReward {
+  type: Int
+  icon: Icon
+  rarity: Int
+  id: ID!
+  symbol: String
+  itemType: Int
+  name: String
+  fullName: String
+  flavor: String
+  bonuses: Bonus
+  potentialRewards: [PotentialReward]
+  quantity: Int
+}
+
+type PvpDivision {
+  id: ID!
+  tier: Int
+  name: String
+  description: String
+  minShipRarity: Int
+  maxShipRarity: Int
+  maxCrewRarity: Int
+  setup: Setup
+}
+
+type PvpTimer {
+  supportsRewarding: Boolean
+  pvpAllowed: Boolean
+  changesIn: Int
+}
+
+interface Query {
+  playerById(id: String): Character
+}
+
+type RankedBracket {
+  first: Int
+  last: Int
+  rewards: [Reward]
+  quantity: Int
+}
+
+type RerollDescription {
+  id: ID!
+  jackpot: Int
+  crewRequired: Int
+}
+
+type Reward {
+  type: Int
+  id: ID!
+  symbol: String
+  name: String
+  fullName: String
+  flavor: String
+  icon: Icon
+  quantity: Int
+  rarity: Int
+  potentialRewards: [PotentialReward]
+  portrait: Icon
+  fullBody: FullBody
+  skills: Skills
+  traits: [String]
+  action: Action
+  itemType: Int
+}
+
+type RewardDay {
+  id: ID!
+  symbol: String
+  rewards: [Reward]
+  doubleAtVip: Int
+}
+
+type Schedule {
+  day: Int
+  mission: Int
+}
+
+type Setup {
+  shipId: ID
+  slots: [Int]
+}
+
+type Ship {
+  archetypeId: ID
+  symbol: String
+  name: String
+  rarity: Int
+  icon: Icon
+  flavor: String
+  maxLevel: Int
+  actions: [Action]
+  shields: Int
+  hull: Int
+  attack: Int
+  evasion: Int
+  accuracy: Int
+  critChance: Int
+  critBonus: Int
+  attacksPerSecond: Int
+  shieldRegen: Int
+  traits: [String]
+  traitsHidden: [String]
+  antimatter: Int
+  id: ID!
+  level: Int
+  model: String
+  schematicGainCostNextLevel: Int
+  schematicId: ID
+  schematicIcon: Icon
+  battleStations: [BattleStation]
+}
+
+type ShipBattle {
+  accuracy: Int
+  evasion: Int
+  critChance: Int
+  critBonus: Int
+}
+
+type Shuttle {
+  id: ID!
+  name: String
+  description: String
+  state: Int
+  expiresIn: String
+  factionId: ID
+  slots: [Slot]
+  rewards: [Reward]
+  token: Int
+  allowBorrow: Boolean
+  crewBonuses: CrewBonus
+  shuttleMissionRewards: [ShuttleMissionReward]
+}
+
+type ShuttleAdventure {
+  id: ID!
+  symbol: String
+  name: String
+  factionId: ID
+  tokenArchetypeId: String
+  challengeRating: Int
+  shuttles: [Shuttle]
+  completesInSeconds: Int
+  x: Int
+  y: Int
+}
+
+type ShuttleMissionReward {
+  type: Int
+  icon: Icon
+  rarity: Int
+  potentialRewards: [PotentialReward]
+  quantity: Int
+  symbol: String
+  name: String
+  flavor: String
+  factionId: ID
+  id: ID!
+}
+
+type ShuttleTokenPreviewItem {
+  type: Int
+  id: ID!
+  symbol: String
+  itemType: Int
+  name: String
+  fullName: String
+  flavor: String
+  icon: Icon
+  quantity: Int
+  rarity: Int
+}
+
+type Skills {
+  scienceSkill: ValueRange
+  engineeringSkill: ValueRange
+  commandSkill: ValueRange
+  securitySkill: ValueRange
+  diplomacySkill: ValueRange
+  medicalSkill: ValueRange
+  primarySkill: String
+  secondarySkill: String
+}
+
+type Slot {
+  level: String
+  requiredTrait: String
+  skills: [String]
+  traitBonuses: Bonus
+}
+
+type SplashImage {
+  file: String
+}
+
+type SquadronRankedBracket {
+  first: Int
+  last: Int
+  rewards: [Reward]
+  quantity: Int
+}
+
+type StoredImmortal {
+  id: ID!
+  quantity: Int
+}
+
+type Summary {
+  name: String
+  min: Int
+  max: Int
+}
+
+type System {
+  id: ID!
+  symbol: String
+  x: Int
+  y: Int
+  defaultPlace: String
+  displayName: String
+  star: Int
+  decorator: Int
+  faction: String
+  scale: Int
+  active: Boolean
+}
+
+type ThresholdReward {
+  points: Int
+  rewards: [Reward]
+}
+
+type TicketCounter {
+  current: Int
+  max: Int
+  spendIn: String
+  resetIn: Int
+}
+
+type Tutorial {
+  id: ID!
+  symbol: String
+  state: String
+}
+
+type UnclaimedThresholdReward {
+  type: Int
+  id: ID!
+  symbol: String
+  itemType: Int
+  name: String
+  fullName: String
+  flavor: String
+  icon: Icon
+  quantity: Int
+  rarity: Int
+  bonuses: [Bonus]
+}
+
+type ValueRange {
+  core: Int
+  rangeMin: Int
+  rangeMax: Int
+}
+
+type ChronitonBoostReward {
+  type: Int
+  id: ID!
+  symbol: String
+  name: String
+  fullName: String
+  flavor: String
+  icon: Icon
+  quantity: Int
+}
+
+type VoyageDescription {
+  id: ID!
+  symbol: String
+  name: String
+  description: String
+  icon: String
+  skills: Skills
+  shipTrait: String
+  crewSlots: [CrewSlot]
+}
+
+type VoyageSummary {
+  summaries: [Summary]
+  flavorAmount: Int
+}
+
+type WinnerReward {
+  bonuses: Bonus
+  timeModifier: Int
+  crModifier: Int
+  rewardModifier: Int
+  rewards: [Reward]
+}
+
+type QueryObject {
+  playerById(id: ID!): Character
+}
+
