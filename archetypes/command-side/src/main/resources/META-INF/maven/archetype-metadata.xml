@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="${parentArtifactId}">
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <requiredProperties>
+    <requiredProperty key="serviceName" />
+    <requiredProperty key="schemaName" />
+    <requiredProperty key="servicePath" />
+  </requiredProperties>
+  <fileSets>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>.gitignore</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+  <modules>
+    <module id="${rootArtifactId}-parent" dir="parent" name="${rootArtifactId}-parent" />
+    <module id="${rootArtifactId}-grpc-spec" dir="grpc-spec" name="${rootArtifactId}-grpc-spec">
+      <fileSets>
+        <fileSet encoding="UTF-8">
+          <directory></directory>
+          <includes>
+            <include>.zumepizza-grpc/*</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8" filtered="true" packaged="true">
+          <directory>src/main/protobuf</directory>
+          <includes>
+            <include>grpc-spec.proto</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-event-model" dir="event-model" name="${rootArtifactId}-event-model">
+      <fileSets>
+        <fileSet encoding="UTF-8">
+          <directory></directory>
+          <includes>
+            <include>.zumepizza-event-model</include>
+            <include>.zumepizza-use-lombok</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8" packaged="true">
+          <directory>src/main/java</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8" packaged="true">
+          <directory>src/main/lombok</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8" packaged="true">
+          <directory>src/test/java</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8" packaged="true">
+          <directory>src/test/lombok</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src</directory>
+          <includes>
+            <include>**/*.xml</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
+          <directory>src</directory>
+          <includes>
+            <include>**/*.xsd</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-service" dir="service" name="${rootArtifactId}-service">
+      <fileSets>
+        <fileSet encoding="UTF-8">
+          <directory></directory>
+          <includes>
+            <include>.zumepizza-grpc/*</include>
+	    <include>.zumepizza-eventuate/*</include>
+	    <include>.zumepizza-testing/*</include>
+	    <include>.zumepizza-use-spring/*</include>
+            <include>.zumepizza-use-lombok</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8" packaged="true">
+          <directory>src/main/java</directory>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/main/resources</directory>
+          <includes>
+            <include>**/*.xml</include>
+            <include>**/*.yml</include>
+            <include>**/*.properties</include>
+          </includes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8" packaged="true">
+          <directory>src/test/java</directory>
+          <includes>
+            <include>**/*.java</include>
+            <include>**/*.properties</include>
+          </includes>
+	  <excludes>
+            <exclude>fixtures/**/*</exclude>
+	  </excludes>
+        </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/test/java</directory>
+	  <includes>
+            <include>fixtures/**/*.java</include>
+            <include>fixtures/**/*.properties</include>
+	  </includes>
+	</fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory>src/test/resources</directory>
+          <includes>
+            <include>**/*.xml</include>
+            <include>**/*.yml</include>
+            <include>**/*.properties</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
+          <directory>src</directory>
+          <includes>
+            <include>**/*.xsd</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-container-image" dir="container-image" name="${rootArtifactId}-container-image">
+      <fileSets>
+        <fileSet encoding="UTF-8" filtered="true">
+          <directory></directory>
+          <includes>
+            <include>Dockerfile</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+    </module>
+    <module id="${rootArtifactId}-ts-client" dir="ts-client" name="${rootArtifactId}-ts-client" />
+  </modules>
+</archetype-descriptor>

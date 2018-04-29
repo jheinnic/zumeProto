@@ -1,0 +1,42 @@
+<div fxLayout="column" fxLayoutAlign="start center">
+  <span fxFlex="0 10 24px"></span>
+  <mat-card fxFlex="0 1 auto">
+    <mat-card-title>
+      <h1>Hello World</h1>
+    </mat-card-title>
+    <mat-card-content fxLayout="row">
+      <mat-card fxFlex="2 1 50%">
+        <mat-card-title-group>
+          <mat-card-title>
+            <h2>Add new</h2>
+          </mat-card-title>
+        </mat-card-title-group>
+        <mat-card-content>
+          <input type="text" placeholder="Id" #id/>
+          <!--
+          <input type="text" placeholder="Last name" [(ngModel)]="lastName" />
+          -->
+        </mat-card-content>
+        <mat-card-actions>
+          <input type="submit" value="Add user" (click)="newUser(id.value)"/>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card fxFlex="3 1 50%">
+        <mat-card-title-group>
+          <mat-card-title>
+            <h2>Find</h2>
+          </mat-card-title>
+          <mat-card-subtitle>
+            <input type="search" placeholder="Type name..." [formControl]="idControl"/>
+          </mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content>
+          <ul>
+            <li>{{user | async}}</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+  <span fxFlex="1 0 0"></span>
+</div>

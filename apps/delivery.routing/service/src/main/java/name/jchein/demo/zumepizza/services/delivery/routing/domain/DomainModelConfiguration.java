@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 
 import io.eventuate.AggregateRepository;
 import io.eventuate.EventuateAggregateStore;
-import name.jchein.demo.zumepizza.services.delivery.routing.command.PaintPolicyCommand;
+import name.jchein.demo.zumepizza.services.delivery.routing.command.ServiceDayCommand;
 
 //import io.eventuate.javaclient.spring.EnableEventHandlers;
 
@@ -16,9 +16,9 @@ public class DomainModelConfiguration
 {
 	@Bean
 	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-	public AggregateRepository<PaintPolicy, PaintPolicyCommand> customerRepository(
+	public AggregateRepository<ServiceDay, ServiceDayCommand> customerRepository(
 		EventuateAggregateStore eventStore)
 	{
-		return new AggregateRepository<PaintPolicy, PaintPolicyCommand>(PaintPolicy.class, eventStore);
+		return new AggregateRepository<ServiceDay, ServiceDayCommand>(ServiceDay.class, eventStore);
 	}
 }

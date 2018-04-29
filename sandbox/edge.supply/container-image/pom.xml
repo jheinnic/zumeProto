@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+		<artifactId>edge.supply-parent</artifactId>
+		<version>0.0.1-bootstrap-SNAPSHOT</version>
+		<relativePath>../parent</relativePath>
+	</parent>
+	<artifactId>edge.supply-container-image</artifactId>
+	<name>Pilot Management Docker image</name>
+	<description>Container image for Pilot Management microservice</description>
+	<packaging>pom</packaging>
+
+</project>

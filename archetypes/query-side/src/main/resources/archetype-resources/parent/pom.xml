@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>${groupId}</groupId>
+		<artifactId>parent</artifactId>
+		<version>${version}</version>
+		<relativePath>../../../parent</relativePath>
+	</parent>
+	<artifactId>${artifactId}</artifactId>
+	<name>Pilot Management Parent POM</name>
+	<description>Parent POM for Pilot Management microservice modules</description>
+ 	<packaging>pom</packaging>
+
+	<properties>
+		<zumepizza.schema-name>${schemaName}</zumepizza.schema-name>
+		<zumepizza.service-name>${serviceName}</zumepizza.service-name>
+		<zumepizza.service-path>${servicePath}</zumepizza.service-path>
+	</properties>
+</project>

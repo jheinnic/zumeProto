@@ -7,7 +7,7 @@ import name.jchein.common.validation.constraints.UUIDString;
 
 @Value
 @Builder
-public class AcceptPaintPolicy implements PaintPolicyCommand {
+public class AcceptPaintPolicy implements ServiceDayCommand {
 	@NotNull
 	@UUIDString
 	String uuid;

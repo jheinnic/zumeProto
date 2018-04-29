@@ -1,0 +1,252 @@
+{
+  "allowRemoteResourceManagement": false,
+  "policyEnforcementMode": "ENFORCING",
+  "resources": [
+    {
+      "name": "Foodies",
+      "uri": "/foodies",
+      "type": "urn:portfolio-app:resources:foodies",
+      "scopes": [
+        {
+          "name": "what"
+        }
+      ]
+    },
+    {
+      "name": "Goodies",
+      "uri": "/goodies",
+      "type": "urn:portfolio-app:resources:goodies",
+      "scopes": [
+        {
+          "name": "what"
+        },
+        {
+          "name": "itis"
+        }
+      ]
+    },
+    {
+      "name": "Moodies",
+      "uri": "/moodies",
+      "type": "urn:portfolio-app:resources:moodies",
+      "scopes": [
+        {
+          "name": "itis"
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "uri": "/products",
+      "type": "urn:portfolio-app:resources:products"
+    },
+    {
+      "name": "SSO Login",
+      "uri": "/sso/login",
+      "type": "urn:portfolio-app:resources:sso-login"
+    },
+    {
+      "name": "SSO Logout",
+      "uri": "/logout",
+      "type": "urn:portfolio-app:resources:sso-logout"
+    },
+    {
+      "name": "Default Resource",
+      "uri": "/*",
+      "type": "urn:portfolio-app:resources:default"
+    },
+    {
+      "name": "PublicService",
+      "uri": "/service/public",
+      "type": "urn:portfolio:resources:public-service"
+    },
+    {
+      "name": "UserService",
+      "uri": "/service/user",
+      "type": "urn:portfolio:resources:user-service"
+    },
+    {
+      "name": "AdminService",
+      "uri": "/service/admin",
+      "type": "urn:portfolio:resources:admin-service"
+    }
+  ],
+  "policies": [
+    {
+      "name": "hasUserRealmRole",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"user\",\"required\":true}]"
+      }
+    },
+    {
+      "name": "hasBuyerRealmRole",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"buyer\",\"required\":true}]"
+      }
+    },
+    {
+      "name": "Allow All",
+      "description": "A policy that grants any associated permission",
+      "type": "js",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
+      }
+    },
+    {
+      "name": "lacksUserRealmRole",
+      "type": "role",
+      "logic": "NEGATIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"user\",\"required\":true}]"
+      }
+    },
+    {
+      "name": "isAlice",
+      "type": "user",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "users": "[\"alice\"]"
+      }
+    },
+    {
+      "name": "Deny All",
+      "description": "A policy that rejects any associated permission",
+      "type": "js",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "code": "// by default, grants any permission associated with this policy\n$evaluation.deny();\n"
+      }
+    },
+    {
+      "name": "Buyer Products",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"Products\"]",
+        "applyPolicies": "[\"hasUserRealmRole\",\"hasBuyerRealmRole\"]"
+      }
+    },
+    {
+      "name": "MayWhat",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"Foodies\"]",
+        "applyPolicies": "[\"hasUserRealmRole\"]"
+      }
+    },
+    {
+      "name": "WhatGood",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"Goodies\"]",
+        "applyPolicies": "[\"hasUserRealmRole\"]"
+      }
+    },
+    {
+      "name": "Permit Login",
+      "description": "Grants anyone access to SSO Login",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"SSO Login\"]",
+        "applyPolicies": "[\"Allow All\"]"
+      }
+    },
+    {
+      "name": "Users May Logout",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"SSO Logout\"]",
+        "applyPolicies": "[\"hasUserRealmRole\"]"
+      }
+    },
+    {
+      "name": "Izit",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"Moodies\"]",
+        "applyPolicies": "[\"isAlice\",\"hasUserRealmRole\"]"
+      }
+    },
+    {
+      "name": "Allow Default",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"Default Resource\"]",
+        "applyPolicies": "[\"Allow All\"]"
+      }
+    },
+    {
+      "name": "aScopy",
+      "type": "scope",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"Goodies\"]",
+        "scopes": "[\"what\"]",
+        "applyPolicies": "[\"hasUserRealmRole\"]"
+      }
+    },
+    {
+      "name": "AccessPublicService",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"PublicService\"]",
+        "applyPolicies": "[\"Allow All\"]"
+      }
+    },
+    {
+      "name": "AccessUserService",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"UserService\"]",
+        "applyPolicies": "[\"hasUserRealmRole\"]"
+      }
+    },
+    {
+      "name": "AccessAdminService",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "resources": "[\"AdminService\"]",
+        "applyPolicies": "[\"hasBuyerRealmRole\"]"
+      }
+    }
+  ],
+  "scopes": [
+    {
+      "name": "what"
+    },
+    {
+      "name": "itis"
+    }
+  ]
+}

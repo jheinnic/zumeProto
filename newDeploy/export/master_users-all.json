@@ -1,0 +1,21 @@
+[ {
+  "id" : "b1914bfc-f36b-4c5a-b133-45bb56a21327",
+  "createdTimestamp" : 1506461068355,
+  "username" : "admin",
+  "enabled" : true,
+  "totp" : false,
+  "emailVerified" : false,
+  "firstName" : "John",
+  "lastName" : "Heinnickel",
+  "email" : "jheinnic@gmail.com",
+  "disableableCredentialTypes" : [ "password" ],
+  "requiredActions" : [ ],
+  "notBefore" : 0,
+  "access" : {
+    "manageGroupMembership" : true,
+    "view" : true,
+    "mapRoles" : true,
+    "impersonate" : true,
+    "manage" : true
+  }
+} ]

@@ -7,11 +7,11 @@ import name.jchein.demo.zumepizza.grpc.proto.delivery.routing.AcceptPaintPolicyR
 import name.jchein.demo.zumepizza.grpc.proto.delivery.routing.AddFillPaintPolicyRequest;
 import name.jchein.demo.zumepizza.grpc.proto.delivery.routing.AddFitPaintPolicyRequest;
 import name.jchein.demo.zumepizza.grpc.proto.delivery.routing.AddSquarePaintPolicyRequest;
-import name.jchein.demo.zumepizza.grpc.proto.delivery.routing.DeliveryRoutingGrpc;
 import name.jchein.demo.zumepizza.grpc.proto.delivery.routing.DeprecatePaintPolicyRequest;
 import name.jchein.demo.zumepizza.grpc.proto.delivery.routing.RejectPaintPolicyRequest;
 import name.jchein.demo.zumepizza.grpc.proto.delivery.routing.RenamePaintPolicyRequest;
 import name.jchein.demo.zumepizza.services.delivery.routing.backend.IDeliveryRoutingDomainService;
+import name.jchein.demo.zumepizza.services.delivery.routing.grpc.proto.DeliveryRoutingGrpc;
 import name.jchein.portfolio.common.es.eventuate.IUUIDExtension;
 import name.jchein.portfolio.common.grpc.action.BasicReply;
 import name.jchein.portfolio.common.grpc.action.StatusCode;

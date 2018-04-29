@@ -1,0 +1,26 @@
+import * as Models from './core-control.models';
+import * as Actions from './core-control.actions';
+
+export type State = Models.State;
+
+export const initialState: State = {
+  showSidenav: false,
+};
+
+export function reducer(state = initialState, action: Actions.ActionType): State {
+  switch (action.type) {
+    case Actions.CLOSE_SIDENAV:
+      return {
+        showSidenav: false,
+      };
+
+    case Actions.OPEN_SIDENAV:
+      return {
+        showSidenav: true,
+      };
+
+    default:
+      return state;
+  }
+}
+

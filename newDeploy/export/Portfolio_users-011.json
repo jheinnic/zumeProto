@@ -1,0 +1,39 @@
+[ {
+  "id" : "ff1c3f64-f471-4458-ba1a-f3a32e50ce48",
+  "username" : "zutihezu",
+  "enabled" : true,
+  "totp" : false,
+  "emailVerified" : false,
+  "firstName" : "Tom",
+  "lastName" : "Washington",
+  "email" : "geva@nifod.tj",
+  "disableableCredentialTypes" : [ "password" ],
+  "requiredActions" : [ ],
+  "notBefore" : 0,
+  "access" : {
+    "manageGroupMembership" : true,
+    "view" : true,
+    "mapRoles" : true,
+    "impersonate" : true,
+    "manage" : true
+  }
+}, {
+  "id" : "edf21569-732a-47e5-89b1-3b78305d9c65",
+  "username" : "zuuturog",
+  "enabled" : true,
+  "totp" : false,
+  "emailVerified" : false,
+  "firstName" : "Phoebe",
+  "lastName" : "Bush",
+  "email" : "wedo@dotufat.tl",
+  "disableableCredentialTypes" : [ "password" ],
+  "requiredActions" : [ ],
+  "notBefore" : 0,
+  "access" : {
+    "manageGroupMembership" : true,
+    "view" : true,
+    "mapRoles" : true,
+    "impersonate" : true,
+    "manage" : true
+  }
+} ]

@@ -1,0 +1,30 @@
+version: "3.6"
+
+services:
+  zookeeper:
+    image: eventuateio/eventuateio-local-zookeeper:0.18.0.RELEASE
+    restart: unless-stopped
+    domainname: dev.jchein.name
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+    networks:
+      - portfolio
+  
+  kafka:
+    image: eventuateio/eventuateio-local-kafka:0.18.0.RELEASE
+    restart: unless-stopped
+    domainname: dev.jchein.name
+    hostname: kafka
+    links:
+      - zookeeper
+    ports:
+      - 9092:9092
+    networks:
+      - portfolio
+    environment:
+      - ADVERTISED_HOST_NAME=${DOCKER_HOST_IP}
+      - KAFKA_HEAP_OPTS=-Xmx512m -Xms512m
+      - ZOOKEEPER_SERVERS=zookeeper:2181

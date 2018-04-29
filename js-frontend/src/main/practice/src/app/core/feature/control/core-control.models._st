@@ -1,0 +1,23 @@
+// import Immutable = require('immutable');
+// import {Action} from "@ngrx/store/public_api";
+
+//
+//  Models
+//
+
+export interface MenuItemState {
+}
+
+export interface MenuState {
+}
+
+// export interface ActivityContext {
+//   readonly undoStack: Immutable.List<Reversible>
+//   readonly redoStack: Immutable.List<Reversible>
+//   readonly route: string;
+// }
+//
+// export interface Reversible {
+//   readonly action: Action;
+// }
+

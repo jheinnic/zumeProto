@@ -1,0 +1,8 @@
+{
+  "realm": "Portfolio",
+  "auth-server-url": "http://portfolio.dev.jchein.name:8080/auth",
+  "ssl-required": "external",
+  "resource": "portal-webapp",
+  "public-client": true,
+  "enable-cors": true
+}

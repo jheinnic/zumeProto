@@ -1,0 +1,1457 @@
+{
+  "Metadata" : {
+    "exportedOn" : "2017-10-23T13:05:17Z",
+    "apimanVersion" : "1.3.1.Final"
+  },
+  "Users" : [ {
+    "username" : "admin",
+    "fullName" : "Admin User",
+    "email" : "admin@example.org",
+    "joinedOn" : "2017-10-22T04:59:37Z",
+    "admin" : false
+  }, {
+    "username" : "jheinnic",
+    "fullName" : "John Heinnickel",
+    "email" : "jheinnic@gmail.com",
+    "joinedOn" : "2017-10-22T09:21:35Z",
+    "admin" : false
+  } ],
+  "Gateways" : [ {
+    "id" : "TheGateway",
+    "name" : "The Gateway",
+    "description" : "This is the gateway.",
+    "createdBy" : "admin",
+    "createdOn" : "2016-05-16T12:34:15Z",
+    "modifiedBy" : "admin",
+    "modifiedOn" : "2017-10-22T05:04:37Z",
+    "type" : "REST",
+    "configuration" : "{\"endpoint\":\"${apiman.gateway-endpoint:https://portfolio.dev.jchein.name:8243/apiman-gateway-api}\",\"username\":\"${apiman.gateway-endpoint.username:apimanager}\",\"password\":\"${apiman.gateway-endpoint.password:apiman123!}\"}"
+  } ],
+  "Plugins" : [ {
+    "id" : 999,
+    "groupId" : "io.apiman.plugins",
+    "artifactId" : "apiman-plugins-circuit-breaker-policy",
+    "version" : "1.3.1.Final",
+    "name" : "Circuit Breaker Policy Plugin",
+    "description" : "This plugin has policies for performing circuit breaker functionality.",
+    "createdBy" : "admin",
+    "createdOn" : "2017-10-22T05:00:04Z",
+    "deleted" : false
+  }, {
+    "id" : 1000,
+    "groupId" : "io.apiman.plugins",
+    "artifactId" : "apiman-plugins-keycloak-oauth-policy",
+    "version" : "1.3.1.Final",
+    "name" : "Keycloak OAuth Policy Plugin",
+    "description" : "This plugin offers an OAuth2 policy which leverages the Keycloak authentication platform as the identity and access provider.",
+    "createdBy" : "admin",
+    "createdOn" : "2017-10-22T05:00:33Z",
+    "deleted" : false
+  }, {
+    "id" : 1001,
+    "groupId" : "io.apiman.plugins",
+    "artifactId" : "apiman-plugins-log-policy",
+    "version" : "1.3.1.Final",
+    "name" : "Log Policy Plugin",
+    "description" : "This plugin has policies for logging HTTP headers.",
+    "createdBy" : "admin",
+    "createdOn" : "2017-10-22T05:01:22Z",
+    "deleted" : false
+  }, {
+    "id" : 1002,
+    "groupId" : "io.apiman.plugins",
+    "artifactId" : "apiman-plugins-cors-policy",
+    "version" : "1.3.1.Final",
+    "name" : "CORS Policy Plugin",
+    "description" : "This plugin implements CORS (Cross-origin resource sharing): A method of controlling access to resources outside of an originating domain.",
+    "createdBy" : "admin",
+    "createdOn" : "2017-10-22T05:01:36Z",
+    "deleted" : false
+  } ],
+  "Roles" : [ {
+    "id" : "APIDeveloper",
+    "name" : "API Developer",
+    "description" : "Users responsible for creating and managing APIs should be granted this role within an Organization.",
+    "createdBy" : "admin",
+    "createdOn" : "2016-05-16T12:34:14Z",
+    "autoGrant" : false,
+    "permissions" : [ "planEdit", "planView", "apiView", "apiAdmin", "planAdmin", "apiEdit" ]
+  }, {
+    "id" : "ClientAppDeveloper",
+    "name" : "Client App Developer",
+    "description" : "Users responsible for creating and managing client apps should be granted this role within an Organization.",
+    "createdBy" : "admin",
+    "createdOn" : "2016-05-16T12:34:14Z",
+    "autoGrant" : false,
+    "permissions" : [ "clientAdmin", "clientEdit", "clientView" ]
+  }, {
+    "id" : "OrganizationOwner",
+    "name" : "Organization Owner",
+    "description" : "Automatically granted to the user who creates an Organization.  Grants all privileges.",
+    "createdBy" : "admin",
+    "createdOn" : "2016-05-16T12:34:14Z",
+    "autoGrant" : true,
+    "permissions" : [ "orgEdit", "clientAdmin", "planEdit", "planView", "orgAdmin", "apiView", "apiAdmin", "orgView", "planAdmin", "clientEdit", "clientView", "apiEdit" ]
+  } ],
+  "PolicyDefinitions" : [ {
+    "id" : "AuthorizationPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.AuthorizationPolicy",
+    "name" : "Authorization Policy",
+    "description" : "Enables fine grained authorization to API resources based on authenticated user roles.",
+    "icon" : "users",
+    "templates" : [ {
+      "template" : "Appropriate authorization roles are required.  There are ${rules.size()} authorization rules defined."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "BASICAuthenticationPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.BasicAuthenticationPolicy",
+    "name" : "BASIC Authentication Policy",
+    "description" : "Enables HTTP BASIC Authentication on an API.  Some configuration required.",
+    "icon" : "lock",
+    "templates" : [ {
+      "template" : "Access to the API is protected by BASIC Authentication through the '${realm}' authentication realm.  @if{forwardIdentityHttpHeader != null}Successfully authenticated requests will forward the authenticated identity to the back end API via the '${forwardIdentityHttpHeader}' custom HTTP header.@end{}"
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "CachingPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.CachingPolicy",
+    "name" : "Caching Policy",
+    "description" : "Allows caching of API responses in the Gateway to reduce overall traffic to the back-end API.",
+    "icon" : "hdd-o",
+    "templates" : [ {
+      "template" : "API responses will be cached for ${ttl} seconds."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "IPBlacklistPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.IPBlacklistPolicy",
+    "name" : "IP Blacklist Policy",
+    "description" : "Requests that originate from a specified set of valid IP addresses will be denied access.",
+    "icon" : "thumbs-down",
+    "templates" : [ {
+      "template" : "Requests that originate from the set of ${ipList.size()} configured IP address(es) will be denied access to the managed API."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "IPWhitelistPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.IPWhitelistPolicy",
+    "name" : "IP Whitelist Policy",
+    "description" : "Only requests that originate from a specified set of valid IP addresses will be allowed through.",
+    "icon" : "filter",
+    "templates" : [ {
+      "template" : "Only requests that originate from the set of ${ipList.size()} configured IP address(es) will be allowed to invoke the managed API."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "IgnoredResourcesPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.IgnoredResourcesPolicy",
+    "name" : "Ignored Resources Policy",
+    "description" : "Requests satisfying the provided regular expression will be ignored.",
+    "icon" : "eye-slash",
+    "templates" : [ {
+      "template" : "Requests matching any of the ${rules.size()} regular expressions provided will receive a 404 error code."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "QuotaPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.QuotaPolicy",
+    "name" : "Quota Policy",
+    "description" : "Provides a way to limit the total number of requests that can be sent to an API.",
+    "icon" : "exchange",
+    "templates" : [ {
+      "template" : "Consumers cannot exceed their quota of ${limit} requests per ${granularity} per ${period}."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "RateLimitingPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.RateLimitingPolicy",
+    "name" : "Rate Limiting Policy",
+    "description" : "Enforces rate configurable request rate limits on an API.  This ensures that consumers can't overload an API with too many requests.",
+    "icon" : "sliders",
+    "templates" : [ {
+      "template" : "Consumers are limited to ${limit} requests per ${granularity} per ${period}."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "TimeRestrictedAccessPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.TimeRestrictedAccessPolicy",
+    "name" : "Time Restricted Access Policy",
+    "description" : "Requests matching the specified regular expression and made within the specified time period will be ignored.",
+    "icon" : "clock-o",
+    "templates" : [ {
+      "template" : "Requests matching the regular expression and made outside the specified time period will receive a 423 error code."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "TransferQuotaPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.TransferQuotaPolicy",
+    "name" : "Transfer Quota Policy",
+    "description" : "Provides a way to limit the total number of bytes that can be transferred from (or to) an API.",
+    "icon" : "download",
+    "templates" : [ {
+      "template" : "Consumers are limited to transferring ${limit} bytes per ${granularity} per ${period}."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "URLRewritingPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.URLRewritingPolicy",
+    "name" : "URL Rewriting Policy",
+    "description" : "Responses from the back-end API will be modified by fixing up any incorrect URLs found with modified ones.  This is useful because apiman works through an API Gateway.",
+    "icon" : "pencil-square",
+    "templates" : [ {
+      "template" : "Requests and/or responses will be modified by finding all text matching regular expression '${fromRegex}' with '${toReplacement}'."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "circuit-breaker-policy",
+    "policyImpl" : "plugin:io.apiman.plugins:apiman-plugins-circuit-breaker-policy:1.3.1.Final:war/io.apiman.plugins.circuit_breaker.CircuitBreakerPolicy",
+    "name" : "Circuit Breaker Policy",
+    "description" : "A policy that monitors access to the back-end API for errors.  When an error threshold is reached, the circuit is tripped and future requests to the API are intercepted and immediately failed.  The circuit is restored after a period of time and at least one successful request.",
+    "icon" : "circle-o-notch",
+    "templates" : [ ],
+    "pluginId" : 999,
+    "formType" : "JsonSchema",
+    "form" : "schemas/circuit-breaker-policyDef.schema",
+    "deleted" : false
+  }, {
+    "id" : "cors-policy",
+    "policyImpl" : "plugin:io.apiman.plugins:apiman-plugins-cors-policy:1.3.1.Final:war/io.apiman.plugins.cors_policy.CorsPolicy",
+    "name" : "CORS Policy",
+    "description" : "CORS regulates access resource requests from outside of an originating domain. Configuration required.",
+    "icon" : "gavel",
+    "templates" : [ {
+      "template" : "Cross-origin requests from @if{allowOrigin.contains(\"*\")} any @else{} @{allowOrigin.size()} @end{} origin(s) will be permitted upon satisfying method, header and credential constraints. @if{errorOnCorsFailure} Denied requests will be terminated. @end{} Preflight requests will be cached for @{maxAge} delta seconds."
+    } ],
+    "pluginId" : 1002,
+    "formType" : "JsonSchema",
+    "form" : "schemas/cors-policyDef.schema",
+    "deleted" : false
+  }, {
+    "id" : "keycloak-oauth-policy",
+    "policyImpl" : "plugin:io.apiman.plugins:apiman-plugins-keycloak-oauth-policy:1.3.1.Final:war/io.apiman.plugins.keycloak_oauth_policy.KeycloakOauthPolicy",
+    "name" : "Keycloak OAuth Policy",
+    "description" : "A Keycloak specific OAuth policy to regulate access to APIs. Configuration required.",
+    "icon" : "lock",
+    "templates" : [ {
+      "template" : "Keycloak OAuth2 is @if{requireOauth} required @else{} enabled @end{} and @if{requireTransportSecurity} requires @else{} does not require @end{} transport security."
+    } ],
+    "pluginId" : 1000,
+    "formType" : "JsonSchema",
+    "form" : "schemas/keycloak-oauth-policyDef.schema",
+    "deleted" : false
+  }, {
+    "id" : "log-headers-policy",
+    "policyImpl" : "plugin:io.apiman.plugins:apiman-plugins-log-policy:1.3.1.Final:war/io.apiman.plugins.log_policy.LogHeadersPolicy",
+    "name" : "Log Headers Policy",
+    "description" : "A policy that logs the headers to std out.  Useful to analyse inbound HTTP traffic to the gateway when added as the first policy in the chain or to analyse outbound HTTP traffic from the gateway when added as the last policy in the chain.",
+    "icon" : "fire",
+    "templates" : [ ],
+    "pluginId" : 1001,
+    "formType" : "JsonSchema",
+    "form" : "schemas/log-policyDef.schema",
+    "deleted" : false
+  } ],
+  "Orgs" : [ {
+    "OrganizationBean" : {
+      "id" : "JCH",
+      "name" : "JCH",
+      "description" : "My Self Organization",
+      "createdBy" : "jheinnic",
+      "createdOn" : "2017-10-22T09:21:58Z",
+      "modifiedBy" : "jheinnic",
+      "modifiedOn" : "2017-10-22T09:21:58Z"
+    },
+    "Memberships" : [ {
+      "id" : 1004,
+      "userId" : "jheinnic",
+      "roleId" : "OrganizationOwner",
+      "organizationId" : "JCH",
+      "createdOn" : "2017-10-22T09:21:58Z"
+    } ],
+    "Plans" : [ ],
+    "Apis" : [ {
+      "ApiBean" : {
+        "id" : "echo",
+        "name" : "echo",
+        "description" : "Echo Example",
+        "createdBy" : "jheinnic",
+        "createdOn" : "2017-10-22T09:24:34Z",
+        "numPublished" : 14
+      },
+      "Versions" : [ {
+        "ApiVersionBean" : {
+          "id" : 1006,
+          "status" : "Published",
+          "endpoint" : "https://portfolio.dev.jchein.name:8243/apiman-echo/echo",
+          "endpointType" : "rest",
+          "endpointContentType" : "json",
+          "endpointProperties" : { },
+          "gateways" : [ {
+            "gatewayId" : "TheGateway"
+          } ],
+          "publicAPI" : true,
+          "plans" : [ ],
+          "version" : "1.0",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T09:24:34Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T11:45:21Z",
+          "publishedOn" : "2017-10-22T11:45:23Z",
+          "parsePayload" : false
+        },
+        "Policies" : [ {
+          "id" : 1010,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.0",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"request\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T09:26:04Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T09:26:04Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        }, {
+          "id" : 1012,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.0",
+          "name" : "CORS Policy",
+          "configuration" : "{\"errorOnCorsFailure\":true,\"allowOrigin\":[\"http://portfolio.dev.jchein.name:8888\",\"*\"],\"allowCredentials\":true,\"exposeHeaders\":[],\"allowHeaders\":[\"authorization\"],\"allowMethods\":[\"GET\",\"POST\",\"OPTIONS\"],\"maxAge\":60}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T09:28:56Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T11:45:21Z",
+          "definition" : {
+            "id" : "cors-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 2
+        }, {
+          "id" : 1014,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.0",
+          "name" : "Keycloak OAuth Policy",
+          "configuration" : "{\"requireOauth\":true,\"requireTransportSecurity\":false,\"blacklistUnsafeTokens\":false,\"stripTokens\":false,\"realm\":\"https://mykeycloak.local/auth/realms/Portfolio\",\"realmCertificateString\":\"-----BEGIN CERTIFICATE-----\\nMIIEDDCCAvSgAwIBAgIBCDANBgkqhkiG9w0BAQsFADBOMR0wGwYDVQQDDBRKb2hu\\nIEhlaW5uaWNrZWwncyBDQTELMAkGA1UEBhMCVVMxIDAeBgkqhkiG9w0BCQEWEWpj\\naHByb2ZAZ21haWwuY29tMB4XDTE3MDkyNjEzNDExMloXDTE5MDkyNjEzNDExMlow\\ngbsxIjAgBgNVBAMMGXBvcnRmb2xpby5kZXYuamNoZWluLm5hbWUxGDAWBgNVBAoM\\nD0pvaG4gSGVpbm5pY2tlbDEhMB8GA1UECwwYRG9tYWluIENvbnRyb2wgVmFsaWRh\\ndGVkMRMwEQYDVQQIDApDYWxpZm9ybmlhMQswCQYDVQQGEwJVUzEUMBIGA1UEBwwL\\nU2FudGEgQ2xhcmExIDAeBgkqhkiG9w0BCQEWEWpjaHByb2ZAZ21haWwuY29tMIIB\\nIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqIuKM1LSGKaoEWj+BuLfHDbT\\nGrl2zZLhG8J8LcAVru4tzF1TjIVoL4G50ZSC9ThwGv3Gi/cThAOqQJ4VDpGRXh3f\\nBRcUpu2pL9O+k3BxNa8yJSZ50ofEZNd0S6NKSOskzdbyb2Pg1GjXXwQyk1EnVM92\\nlUSYqs36E8K2G8uhQtBYmURJCn5Q+Pmt2opd+l3km/o/JX834abVgh0ay8C/jcIH\\nNQAEtQGNrAYkhYg1UGbUMgq4gymx48u1hxw0QAQkvbxdyFHu81EJFhqVSGnNAaau\\no6YTQ332K6rKwgiMGY9EWAsOKU92tF127j+FxiTv64ZNsSqmoEFpxzkvpOHcBQID\\nAQABo4GGMIGDMA8GA1UdEwEB/wQFMAMBAQAwDgYDVR0PAQH/BAQDAgWgMCAGA1Ud\\nJQEB/wQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATA+BgNVHREBAf8ENDAyghlwb3J0\\nZm9saW8uZGV2LmpjaGVpbi5uYW1lghVwb3J0Zm9saW8uamNoZWluLm5hbWUwDQYJ\\nKoZIhvcNAQELBQADggEBAN/P89HIq5Q1/BFNVrWRBjnB7BRnSBwTOxwzWh36wSG2\\ns5UuFkvpbEyEZ4yMWvWjI0pBzyKtkQ7xbdVvhkgNC/T1XV4EB4vGeGr1PlLE6OcT\\nT2S7Ungr7x3GLRQiXJKP0trZKNDMF1d+r8Nxxib7gRX9Bbhe/fJM5BBnLqja7E8/\\nKN33ZW6iGNpjTP/7OvfRFDedkfHCDxUO3iva+/eYVUO8pqDZV7to6KsZlohPlnN3\\np//0KnrCx1b+omDhQ0msHmGvRghuBDZziWd2Hp3RrLQWfNyXb6OvY5r3Liv/InxV\\n/FdKK4a70BndaikW8SUQg8koarXrC4Bxzg+uGTU3DNY=\\n-----END CERTIFICATE-----\",\"forwardRoles\":{\"active\":true},\"delegateKerberosTicket\":false,\"forwardAuthInfo\":[{\"headers\":\"X-Issuer\",\"field\":\"iss\"},{\"headers\":\"X-Subject\",\"field\":\"sub\"},{\"headers\":\"X-Expires\",\"field\":\"exp\"},{\"headers\":\"X-Issued-At\",\"field\":\"iat\"}]}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T09:34:11Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T09:34:11Z",
+          "definition" : {
+            "id" : "keycloak-oauth-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 3
+        }, {
+          "id" : 1023,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.0",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"response\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T11:43:54Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T11:43:54Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 4
+        } ]
+      }, {
+        "ApiVersionBean" : {
+          "id" : 1028,
+          "status" : "Published",
+          "endpoint" : "https://portfolio.dev.jchein.name:8243/apiman-echo/echo",
+          "endpointType" : "rest",
+          "endpointContentType" : "json",
+          "endpointProperties" : { },
+          "gateways" : [ {
+            "gatewayId" : "TheGateway"
+          } ],
+          "publicAPI" : true,
+          "plans" : [ ],
+          "version" : "1.1",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T11:46:21Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:03:44Z",
+          "publishedOn" : "2017-10-22T12:03:53Z",
+          "parsePayload" : false
+        },
+        "Policies" : [ {
+          "id" : 1031,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.1",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"request\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T11:46:21Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T11:46:21Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        }, {
+          "id" : 1033,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.1",
+          "name" : "CORS Policy",
+          "configuration" : "{\"errorOnCorsFailure\":true,\"allowOrigin\":[\"http://portfolio.dev.jchein.name:8888\",\"*\"],\"allowCredentials\":true,\"exposeHeaders\":[\"Authorization\"],\"allowHeaders\":[\"Authorization\"],\"allowMethods\":[\"GET\",\"POST\",\"OPTIONS\"],\"maxAge\":0}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T11:46:21Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:03:44Z",
+          "definition" : {
+            "id" : "cors-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 2
+        }, {
+          "id" : 1035,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.1",
+          "name" : "Keycloak OAuth Policy",
+          "configuration" : "{\"requireOauth\":true,\"requireTransportSecurity\":false,\"blacklistUnsafeTokens\":false,\"stripTokens\":false,\"realm\":\"https://mykeycloak.local/auth/realms/Portfolio\",\"realmCertificateString\":\"-----BEGIN CERTIFICATE-----\\nMIIEDDCCAvSgAwIBAgIBCDANBgkqhkiG9w0BAQsFADBOMR0wGwYDVQQDDBRKb2hu\\nIEhlaW5uaWNrZWwncyBDQTELMAkGA1UEBhMCVVMxIDAeBgkqhkiG9w0BCQEWEWpj\\naHByb2ZAZ21haWwuY29tMB4XDTE3MDkyNjEzNDExMloXDTE5MDkyNjEzNDExMlow\\ngbsxIjAgBgNVBAMMGXBvcnRmb2xpby5kZXYuamNoZWluLm5hbWUxGDAWBgNVBAoM\\nD0pvaG4gSGVpbm5pY2tlbDEhMB8GA1UECwwYRG9tYWluIENvbnRyb2wgVmFsaWRh\\ndGVkMRMwEQYDVQQIDApDYWxpZm9ybmlhMQswCQYDVQQGEwJVUzEUMBIGA1UEBwwL\\nU2FudGEgQ2xhcmExIDAeBgkqhkiG9w0BCQEWEWpjaHByb2ZAZ21haWwuY29tMIIB\\nIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqIuKM1LSGKaoEWj+BuLfHDbT\\nGrl2zZLhG8J8LcAVru4tzF1TjIVoL4G50ZSC9ThwGv3Gi/cThAOqQJ4VDpGRXh3f\\nBRcUpu2pL9O+k3BxNa8yJSZ50ofEZNd0S6NKSOskzdbyb2Pg1GjXXwQyk1EnVM92\\nlUSYqs36E8K2G8uhQtBYmURJCn5Q+Pmt2opd+l3km/o/JX834abVgh0ay8C/jcIH\\nNQAEtQGNrAYkhYg1UGbUMgq4gymx48u1hxw0QAQkvbxdyFHu81EJFhqVSGnNAaau\\no6YTQ332K6rKwgiMGY9EWAsOKU92tF127j+FxiTv64ZNsSqmoEFpxzkvpOHcBQID\\nAQABo4GGMIGDMA8GA1UdEwEB/wQFMAMBAQAwDgYDVR0PAQH/BAQDAgWgMCAGA1Ud\\nJQEB/wQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATA+BgNVHREBAf8ENDAyghlwb3J0\\nZm9saW8uZGV2LmpjaGVpbi5uYW1lghVwb3J0Zm9saW8uamNoZWluLm5hbWUwDQYJ\\nKoZIhvcNAQELBQADggEBAN/P89HIq5Q1/BFNVrWRBjnB7BRnSBwTOxwzWh36wSG2\\ns5UuFkvpbEyEZ4yMWvWjI0pBzyKtkQ7xbdVvhkgNC/T1XV4EB4vGeGr1PlLE6OcT\\nT2S7Ungr7x3GLRQiXJKP0trZKNDMF1d+r8Nxxib7gRX9Bbhe/fJM5BBnLqja7E8/\\nKN33ZW6iGNpjTP/7OvfRFDedkfHCDxUO3iva+/eYVUO8pqDZV7to6KsZlohPlnN3\\np//0KnrCx1b+omDhQ0msHmGvRghuBDZziWd2Hp3RrLQWfNyXb6OvY5r3Liv/InxV\\n/FdKK4a70BndaikW8SUQg8koarXrC4Bxzg+uGTU3DNY=\\n-----END CERTIFICATE-----\",\"forwardRoles\":{\"active\":true},\"delegateKerberosTicket\":false,\"forwardAuthInfo\":[{\"headers\":\"X-Issuer\",\"field\":\"iss\"},{\"headers\":\"X-Subject\",\"field\":\"sub\"},{\"headers\":\"X-Expires\",\"field\":\"exp\"},{\"headers\":\"X-Issued-At\",\"field\":\"iat\"}]}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T11:46:21Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T11:46:21Z",
+          "definition" : {
+            "id" : "keycloak-oauth-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 3
+        }, {
+          "id" : 1037,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.1",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"response\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T11:46:21Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T11:46:21Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 4
+        } ]
+      }, {
+        "ApiVersionBean" : {
+          "id" : 1044,
+          "status" : "Published",
+          "endpoint" : "https://portfolio.dev.jchein.name:8243/apiman-echo/echo",
+          "endpointType" : "rest",
+          "endpointContentType" : "json",
+          "endpointProperties" : { },
+          "gateways" : [ {
+            "gatewayId" : "TheGateway"
+          } ],
+          "publicAPI" : true,
+          "plans" : [ ],
+          "version" : "1.2",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:04:46Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:04:46Z",
+          "publishedOn" : "2017-10-22T12:04:49Z",
+          "parsePayload" : false
+        },
+        "Policies" : [ {
+          "id" : 1047,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.2",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"request\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:04:46Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:04:46Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        }, {
+          "id" : 1049,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.2",
+          "name" : "CORS Policy",
+          "configuration" : "{\"errorOnCorsFailure\":true,\"allowOrigin\":[\"http://portfolio.dev.jchein.name:8888\",\"*\"],\"allowCredentials\":true,\"exposeHeaders\":[\"Authorization\"],\"allowHeaders\":[\"Authorization\"],\"allowMethods\":[\"GET\",\"POST\",\"OPTIONS\"],\"maxAge\":0}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:04:46Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:04:46Z",
+          "definition" : {
+            "id" : "cors-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 2
+        }, {
+          "id" : 1051,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.2",
+          "name" : "Keycloak OAuth Policy",
+          "configuration" : "{\"requireOauth\":true,\"requireTransportSecurity\":false,\"blacklistUnsafeTokens\":false,\"stripTokens\":false,\"realm\":\"https://mykeycloak.local/auth/realms/Portfolio\",\"realmCertificateString\":\"-----BEGIN CERTIFICATE-----\\nMIIEDDCCAvSgAwIBAgIBCDANBgkqhkiG9w0BAQsFADBOMR0wGwYDVQQDDBRKb2hu\\nIEhlaW5uaWNrZWwncyBDQTELMAkGA1UEBhMCVVMxIDAeBgkqhkiG9w0BCQEWEWpj\\naHByb2ZAZ21haWwuY29tMB4XDTE3MDkyNjEzNDExMloXDTE5MDkyNjEzNDExMlow\\ngbsxIjAgBgNVBAMMGXBvcnRmb2xpby5kZXYuamNoZWluLm5hbWUxGDAWBgNVBAoM\\nD0pvaG4gSGVpbm5pY2tlbDEhMB8GA1UECwwYRG9tYWluIENvbnRyb2wgVmFsaWRh\\ndGVkMRMwEQYDVQQIDApDYWxpZm9ybmlhMQswCQYDVQQGEwJVUzEUMBIGA1UEBwwL\\nU2FudGEgQ2xhcmExIDAeBgkqhkiG9w0BCQEWEWpjaHByb2ZAZ21haWwuY29tMIIB\\nIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqIuKM1LSGKaoEWj+BuLfHDbT\\nGrl2zZLhG8J8LcAVru4tzF1TjIVoL4G50ZSC9ThwGv3Gi/cThAOqQJ4VDpGRXh3f\\nBRcUpu2pL9O+k3BxNa8yJSZ50ofEZNd0S6NKSOskzdbyb2Pg1GjXXwQyk1EnVM92\\nlUSYqs36E8K2G8uhQtBYmURJCn5Q+Pmt2opd+l3km/o/JX834abVgh0ay8C/jcIH\\nNQAEtQGNrAYkhYg1UGbUMgq4gymx48u1hxw0QAQkvbxdyFHu81EJFhqVSGnNAaau\\no6YTQ332K6rKwgiMGY9EWAsOKU92tF127j+FxiTv64ZNsSqmoEFpxzkvpOHcBQID\\nAQABo4GGMIGDMA8GA1UdEwEB/wQFMAMBAQAwDgYDVR0PAQH/BAQDAgWgMCAGA1Ud\\nJQEB/wQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATA+BgNVHREBAf8ENDAyghlwb3J0\\nZm9saW8uZGV2LmpjaGVpbi5uYW1lghVwb3J0Zm9saW8uamNoZWluLm5hbWUwDQYJ\\nKoZIhvcNAQELBQADggEBAN/P89HIq5Q1/BFNVrWRBjnB7BRnSBwTOxwzWh36wSG2\\ns5UuFkvpbEyEZ4yMWvWjI0pBzyKtkQ7xbdVvhkgNC/T1XV4EB4vGeGr1PlLE6OcT\\nT2S7Ungr7x3GLRQiXJKP0trZKNDMF1d+r8Nxxib7gRX9Bbhe/fJM5BBnLqja7E8/\\nKN33ZW6iGNpjTP/7OvfRFDedkfHCDxUO3iva+/eYVUO8pqDZV7to6KsZlohPlnN3\\np//0KnrCx1b+omDhQ0msHmGvRghuBDZziWd2Hp3RrLQWfNyXb6OvY5r3Liv/InxV\\n/FdKK4a70BndaikW8SUQg8koarXrC4Bxzg+uGTU3DNY=\\n-----END CERTIFICATE-----\",\"forwardRoles\":{\"active\":true},\"delegateKerberosTicket\":false,\"forwardAuthInfo\":[{\"headers\":\"X-Issuer\",\"field\":\"iss\"},{\"headers\":\"X-Subject\",\"field\":\"sub\"},{\"headers\":\"X-Expires\",\"field\":\"exp\"},{\"headers\":\"X-Issued-At\",\"field\":\"iat\"}]}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:04:46Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:04:46Z",
+          "definition" : {
+            "id" : "keycloak-oauth-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 3
+        }, {
+          "id" : 1053,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.2",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"response\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:04:46Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:04:46Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 4
+        } ]
+      }, {
+        "ApiVersionBean" : {
+          "id" : 1056,
+          "status" : "Published",
+          "endpoint" : "https://portfolio.dev.jchein.name:8243/apiman-echo/echo",
+          "endpointType" : "rest",
+          "endpointContentType" : "json",
+          "endpointProperties" : { },
+          "gateways" : [ {
+            "gatewayId" : "TheGateway"
+          } ],
+          "publicAPI" : true,
+          "plans" : [ ],
+          "version" : "1.3",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:34:20Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:37:54Z",
+          "publishedOn" : "2017-10-22T12:37:57Z",
+          "parsePayload" : false
+        },
+        "Policies" : [ {
+          "id" : 1059,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.3",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"request\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:34:20Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:34:20Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        }, {
+          "id" : 1061,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.3",
+          "name" : "CORS Policy",
+          "configuration" : "{\"errorOnCorsFailure\":true,\"allowOrigin\":[\"http://portfolio.dev.jchein.name:8888\",\"*\"],\"allowCredentials\":true,\"exposeHeaders\":[\"Authorization\"],\"allowHeaders\":[\"Authorization\"],\"allowMethods\":[\"GET\",\"POST\",\"OPTIONS\"],\"maxAge\":0}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:34:20Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:34:20Z",
+          "definition" : {
+            "id" : "cors-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 2
+        }, {
+          "id" : 1063,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.3",
+          "name" : "Keycloak OAuth Policy",
+          "configuration" : "{\"requireOauth\":true,\"requireTransportSecurity\":false,\"blacklistUnsafeTokens\":false,\"stripTokens\":false,\"realm\":\"http://portfolio.dev.jchein.name:8080/auth/realms/Portfolio\",\"realmCertificateString\":\"MIICoTCCAYkCBgFewBPqQjANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDDAlQb3J0Zm9saW8wHhcNMTcwOTI2MjEyMzA0WhcNMjcwOTI2MjEyNDQ0WjAUMRIwEAYDVQQDDAlQb3J0Zm9saW8wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCYgF07mlPazlpDyBh2Z5IP4mGRr5E4sN4f0I4fHER5aZIyDieykCYYSvQkRNZB6W0tjN0ygVgV509UzaFqr+eUuGOFgpW8j1EGRykxW9Zk1RT5om5byYAYqTfUJ7PYq+3xkfajEVPYmsRqK8jwMcocLglceW8sD8lNXXzb8ibdpVH+TaF4cwtk4/u4l6bJPNj/D/FFUsMkHrBgZEk+gfUp6l0A5u7tN0ywrRQnkH2dh+JAf4w/2+aSmn9jEtu+E+WnDXbQdyy5VEP1Ep1uiOGlg7JlUxr2pCmetflWNJUF+L7bpM2BXmvJaL/u0Yk1GdjYq4Gx8mv+kNnau+eG9TKtAgMBAAEwDQYJKoZIhvcNAQELBQADggEBACnWynB04+4SxRMpInWzWbwuyb0lgdg9tn1qxEECb1s8XHD+shvGjG8+0LZPBrDgN9iwYN/PgdlR6QnrH2vfjVWMMHVvYwHqnlZXTkYCKVbA65KSMQApOKUjGezroxgcNic3181FkWEQx6aR0TvkxiOkepAEjnz7n0KYdyrWg3BvkK+msrUOCcEuZ6WmU+9kp6yr9ZVVdcXZGh0XnJ0ESJWpoZlbgrpU3jt7COBZtFjtR9HYkj2BObguwQdQ8DoggomY4Ya8sF3P7SiTvEsTtbrcmoWjFiPo0LVEx7a4z6IuAKRB6xnGCPfuikfzXUmN//z/bLkIWzjuEmGPz6aZQac=\",\"forwardRoles\":{\"active\":true},\"delegateKerberosTicket\":false,\"forwardAuthInfo\":[{\"headers\":\"X-Issuer\",\"field\":\"iss\"},{\"headers\":\"X-Subject\",\"field\":\"sub\"},{\"headers\":\"X-Expires\",\"field\":\"exp\"},{\"headers\":\"X-Issued-At\",\"field\":\"iat\"}]}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:34:20Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:37:54Z",
+          "definition" : {
+            "id" : "keycloak-oauth-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 3
+        }, {
+          "id" : 1065,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.3",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"response\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:34:20Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:34:20Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 4
+        } ]
+      }, {
+        "ApiVersionBean" : {
+          "id" : 1071,
+          "status" : "Published",
+          "endpoint" : "https://portfolio.dev.jchein.name:8243/apiman-echo/echo",
+          "endpointType" : "rest",
+          "endpointContentType" : "json",
+          "endpointProperties" : { },
+          "gateways" : [ {
+            "gatewayId" : "TheGateway"
+          } ],
+          "publicAPI" : true,
+          "plans" : [ ],
+          "version" : "1.4",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:38:31Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-23T11:56:07Z",
+          "publishedOn" : "2017-10-22T12:38:35Z",
+          "parsePayload" : false
+        },
+        "Policies" : [ {
+          "id" : 1074,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.4",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"request\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:38:31Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:38:31Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        }, {
+          "id" : 1076,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.4",
+          "name" : "CORS Policy",
+          "configuration" : "{\"errorOnCorsFailure\":true,\"allowOrigin\":[\"http://portfolio.dev.jchein.name:8888\",\"*\"],\"allowCredentials\":true,\"exposeHeaders\":[\"Authorization\"],\"allowHeaders\":[\"Authorization\"],\"allowMethods\":[\"GET\",\"POST\",\"OPTIONS\"],\"maxAge\":0}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:38:31Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:38:31Z",
+          "definition" : {
+            "id" : "cors-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 2
+        }, {
+          "id" : 1078,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.4",
+          "name" : "Keycloak OAuth Policy",
+          "configuration" : "{\"requireOauth\":true,\"requireTransportSecurity\":false,\"blacklistUnsafeTokens\":false,\"stripTokens\":false,\"realm\":\"http://portfolio.dev.jchein.name:8080/auth/realms/Portfolio\",\"realmCertificateString\":\"MIICoTCCAYkCBgFfR3OVbDANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDDAlQb3J0Zm9saW8wHhcNMTcxMDIzMDQxNjE4WhcNMjcxMDIzMDQxNzU4WjAUMRIwEAYDVQQDDAlQb3J0Zm9saW8wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCAlAKDSVji3q4xJKoSIBIJjf2Cq9V4U1i6NoiqlMklXRu4Ls6Ik7eMO2JB86aKQXiKdt+o3odAhpqwkz/Lwf4WBEv03HGxHG5nw16MKjIiIJf5jydvaTZ33ozdDXzmWaADZeLr8QS+Jscd0Zpu9bUIUm5rK4vLS+w95usIFhm5HS7jvG9ZLMj59JiSSyXYl+nZRIwFEPtm/kEFbtUlnXpMZDp3udkymLf7z9biAYIIza1KSjdyJrpXoiOC4gqLMd6caATmxopSXRrwoalQ5c7hDHAfFUrLCojglVVHgdOW3xuv3gKwh9U+UpKf2Jm/gLR+09uyfRcnCadNVQrun/5PAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAGJkYQfeFp3IV5RvTTQu4/CBrCgqfvYC1Hce8sfOtvNukATIqVKlGFIGMdc31MLJHEkZwTzHMSYGlZqWbMoBBt5fUIVBg2PYpkaIIJoc51Dgka6mnHv0OHK/UQPHUjt72+RqIK3Cbe9mQc2LFtoDoGWzodYgOXCDY+AkMyWZI9ZU/5CVwd4eRZdVxxj7TyBtvIUGw8tI1jxtriIH51tdOsX6EaAkZG9DwWjPI8dHxCDfkzcA42Om2OdTYtsiQnyAeL9DlANlGkV4d2a38EC5jsqJAmDkN+LW2Ujch8V00pbIfzr9Ml3T3i1OQ/kFQEqVsXZGHazAvS2wqjj2JtgG52c=\",\"forwardRoles\":{\"active\":true},\"delegateKerberosTicket\":false,\"forwardAuthInfo\":[{\"headers\":\"X-Issuer\",\"field\":\"iss\"},{\"headers\":\"X-Subject\",\"field\":\"sub\"},{\"headers\":\"X-Expires\",\"field\":\"exp\"},{\"headers\":\"X-Issued-At\",\"field\":\"iat\"}]}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:38:31Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-23T11:56:07Z",
+          "definition" : {
+            "id" : "keycloak-oauth-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 3
+        }, {
+          "id" : 1080,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.4",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"response\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-22T12:38:31Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-22T12:38:31Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 4
+        } ]
+      }, {
+        "ApiVersionBean" : {
+          "id" : 1084,
+          "status" : "Published",
+          "endpoint" : "https://portfolio.dev.jchein.name:8243/apiman-echo/echo",
+          "endpointType" : "rest",
+          "endpointContentType" : "json",
+          "endpointProperties" : { },
+          "gateways" : [ {
+            "gatewayId" : "TheGateway"
+          } ],
+          "publicAPI" : true,
+          "plans" : [ ],
+          "version" : "1.5",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-23T11:56:17Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-23T11:56:17Z",
+          "publishedOn" : "2017-10-23T11:56:20Z",
+          "parsePayload" : false
+        },
+        "Policies" : [ {
+          "id" : 1087,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.5",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"request\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-23T11:56:17Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-23T11:56:17Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        }, {
+          "id" : 1089,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.5",
+          "name" : "CORS Policy",
+          "configuration" : "{\"errorOnCorsFailure\":true,\"allowOrigin\":[\"http://portfolio.dev.jchein.name:8888\",\"*\"],\"allowCredentials\":true,\"exposeHeaders\":[\"Authorization\"],\"allowHeaders\":[\"Authorization\"],\"allowMethods\":[\"GET\",\"POST\",\"OPTIONS\"],\"maxAge\":0}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-23T11:56:17Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-23T11:56:17Z",
+          "definition" : {
+            "id" : "cors-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 2
+        }, {
+          "id" : 1091,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.5",
+          "name" : "Keycloak OAuth Policy",
+          "configuration" : "{\"requireOauth\":true,\"requireTransportSecurity\":false,\"blacklistUnsafeTokens\":false,\"stripTokens\":false,\"realm\":\"http://portfolio.dev.jchein.name:8080/auth/realms/Portfolio\",\"realmCertificateString\":\"MIICoTCCAYkCBgFfR3OVbDANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDDAlQb3J0Zm9saW8wHhcNMTcxMDIzMDQxNjE4WhcNMjcxMDIzMDQxNzU4WjAUMRIwEAYDVQQDDAlQb3J0Zm9saW8wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCAlAKDSVji3q4xJKoSIBIJjf2Cq9V4U1i6NoiqlMklXRu4Ls6Ik7eMO2JB86aKQXiKdt+o3odAhpqwkz/Lwf4WBEv03HGxHG5nw16MKjIiIJf5jydvaTZ33ozdDXzmWaADZeLr8QS+Jscd0Zpu9bUIUm5rK4vLS+w95usIFhm5HS7jvG9ZLMj59JiSSyXYl+nZRIwFEPtm/kEFbtUlnXpMZDp3udkymLf7z9biAYIIza1KSjdyJrpXoiOC4gqLMd6caATmxopSXRrwoalQ5c7hDHAfFUrLCojglVVHgdOW3xuv3gKwh9U+UpKf2Jm/gLR+09uyfRcnCadNVQrun/5PAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAGJkYQfeFp3IV5RvTTQu4/CBrCgqfvYC1Hce8sfOtvNukATIqVKlGFIGMdc31MLJHEkZwTzHMSYGlZqWbMoBBt5fUIVBg2PYpkaIIJoc51Dgka6mnHv0OHK/UQPHUjt72+RqIK3Cbe9mQc2LFtoDoGWzodYgOXCDY+AkMyWZI9ZU/5CVwd4eRZdVxxj7TyBtvIUGw8tI1jxtriIH51tdOsX6EaAkZG9DwWjPI8dHxCDfkzcA42Om2OdTYtsiQnyAeL9DlANlGkV4d2a38EC5jsqJAmDkN+LW2Ujch8V00pbIfzr9Ml3T3i1OQ/kFQEqVsXZGHazAvS2wqjj2JtgG52c=\",\"forwardRoles\":{\"active\":true},\"delegateKerberosTicket\":false,\"forwardAuthInfo\":[{\"headers\":\"X-Issuer\",\"field\":\"iss\"},{\"headers\":\"X-Subject\",\"field\":\"sub\"},{\"headers\":\"X-Expires\",\"field\":\"exp\"},{\"headers\":\"X-Issued-At\",\"field\":\"iat\"}]}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-23T11:56:17Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-23T11:56:17Z",
+          "definition" : {
+            "id" : "keycloak-oauth-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 3
+        }, {
+          "id" : 1093,
+          "type" : "Api",
+          "organizationId" : "JCH",
+          "entityId" : "echo",
+          "entityVersion" : "1.5",
+          "name" : "Log Headers Policy",
+          "configuration" : "{\"direction\":\"response\",\"logHeaders\":true,\"logStatusCode\":false}",
+          "createdBy" : "jheinnic",
+          "createdOn" : "2017-10-23T11:56:17Z",
+          "modifiedBy" : "jheinnic",
+          "modifiedOn" : "2017-10-23T11:56:17Z",
+          "definition" : {
+            "id" : "log-headers-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 4
+        } ]
+      } ]
+    } ],
+    "Clients" : [ ],
+    "Audits" : [ {
+      "id" : 1003,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Organization",
+      "createdOn" : "2017-10-22T09:21:58Z",
+      "what" : "Create"
+    }, {
+      "id" : 1005,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "createdOn" : "2017-10-22T09:24:34Z",
+      "what" : "Create"
+    }, {
+      "id" : 1007,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T09:24:34Z",
+      "what" : "Create"
+    }, {
+      "id" : 1008,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T09:25:20Z",
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"endpoint\",\"before\":null,\"after\":\"https://portfolio.dev.jchein.name:8243/apiman-echo/echo\"},{\"name\":\"endpointType\",\"before\":null,\"after\":\"rest\"},{\"name\":\"endpointContentType\",\"before\":null,\"after\":\"json\"}]}"
+    }, {
+      "id" : 1009,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T09:25:36Z",
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"publicAPI\",\"before\":\"false\",\"after\":\"true\"}]}"
+    }, {
+      "id" : 1011,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T09:26:04Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1013,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T09:28:56Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1015,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T09:34:11Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"keycloak-oauth-policy\"}"
+    }, {
+      "id" : 1016,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T09:34:15Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1017,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T09:35:30Z",
+      "what" : "UpdatePolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1018,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T09:35:32Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1019,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T11:41:50Z",
+      "what" : "UpdatePolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1020,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T11:41:52Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1021,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T11:43:24Z",
+      "what" : "UpdatePolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1022,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T11:43:28Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1024,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T11:43:54Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1025,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T11:44:00Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1026,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T11:45:21Z",
+      "what" : "UpdatePolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1027,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : "2017-10-22T11:45:23Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1029,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T11:46:21Z",
+      "what" : "Create"
+    }, {
+      "id" : 1030,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T11:46:21Z",
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"endpoint\",\"before\":null,\"after\":\"https://portfolio.dev.jchein.name:8243/apiman-echo/echo\"},{\"name\":\"endpointType\",\"before\":null,\"after\":\"rest\"},{\"name\":\"endpointContentType\",\"before\":null,\"after\":\"json\"},{\"name\":\"publicAPI\",\"before\":\"false\",\"after\":\"true\"}]}"
+    }, {
+      "id" : 1032,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T11:46:21Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1034,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T11:46:21Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1036,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T11:46:21Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"keycloak-oauth-policy\"}"
+    }, {
+      "id" : 1038,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T11:46:21Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1039,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T11:46:23Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1040,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T11:52:00Z",
+      "what" : "UpdatePolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1041,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T11:52:04Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1042,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T12:03:44Z",
+      "what" : "UpdatePolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1043,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.1",
+      "createdOn" : "2017-10-22T12:03:53Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1045,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.2",
+      "createdOn" : "2017-10-22T12:04:46Z",
+      "what" : "Create"
+    }, {
+      "id" : 1046,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.2",
+      "createdOn" : "2017-10-22T12:04:46Z",
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"endpoint\",\"before\":null,\"after\":\"https://portfolio.dev.jchein.name:8243/apiman-echo/echo\"},{\"name\":\"endpointType\",\"before\":null,\"after\":\"rest\"},{\"name\":\"endpointContentType\",\"before\":null,\"after\":\"json\"},{\"name\":\"publicAPI\",\"before\":\"false\",\"after\":\"true\"}]}"
+    }, {
+      "id" : 1048,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.2",
+      "createdOn" : "2017-10-22T12:04:46Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1050,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.2",
+      "createdOn" : "2017-10-22T12:04:46Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1052,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.2",
+      "createdOn" : "2017-10-22T12:04:46Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"keycloak-oauth-policy\"}"
+    }, {
+      "id" : 1054,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.2",
+      "createdOn" : "2017-10-22T12:04:46Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1055,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.2",
+      "createdOn" : "2017-10-22T12:04:49Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1057,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:34:20Z",
+      "what" : "Create"
+    }, {
+      "id" : 1058,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:34:20Z",
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"endpoint\",\"before\":null,\"after\":\"https://portfolio.dev.jchein.name:8243/apiman-echo/echo\"},{\"name\":\"endpointType\",\"before\":null,\"after\":\"rest\"},{\"name\":\"endpointContentType\",\"before\":null,\"after\":\"json\"},{\"name\":\"publicAPI\",\"before\":\"false\",\"after\":\"true\"}]}"
+    }, {
+      "id" : 1060,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:34:20Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1062,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:34:20Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1064,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:34:20Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"keycloak-oauth-policy\"}"
+    }, {
+      "id" : 1066,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:34:20Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1067,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:35:41Z",
+      "what" : "UpdatePolicy",
+      "data" : "{\"policyDefId\":\"keycloak-oauth-policy\"}"
+    }, {
+      "id" : 1068,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:36:00Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1069,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:37:54Z",
+      "what" : "UpdatePolicy",
+      "data" : "{\"policyDefId\":\"keycloak-oauth-policy\"}"
+    }, {
+      "id" : 1070,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.3",
+      "createdOn" : "2017-10-22T12:37:57Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1072,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.4",
+      "createdOn" : "2017-10-22T12:38:31Z",
+      "what" : "Create"
+    }, {
+      "id" : 1073,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.4",
+      "createdOn" : "2017-10-22T12:38:31Z",
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"endpoint\",\"before\":null,\"after\":\"https://portfolio.dev.jchein.name:8243/apiman-echo/echo\"},{\"name\":\"endpointType\",\"before\":null,\"after\":\"rest\"},{\"name\":\"endpointContentType\",\"before\":null,\"after\":\"json\"},{\"name\":\"publicAPI\",\"before\":\"false\",\"after\":\"true\"}]}"
+    }, {
+      "id" : 1075,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.4",
+      "createdOn" : "2017-10-22T12:38:31Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1077,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.4",
+      "createdOn" : "2017-10-22T12:38:31Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1079,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.4",
+      "createdOn" : "2017-10-22T12:38:31Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"keycloak-oauth-policy\"}"
+    }, {
+      "id" : 1081,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.4",
+      "createdOn" : "2017-10-22T12:38:31Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1082,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.4",
+      "createdOn" : "2017-10-22T12:38:35Z",
+      "what" : "Publish"
+    }, {
+      "id" : 1083,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.4",
+      "createdOn" : "2017-10-23T11:56:07Z",
+      "what" : "UpdatePolicy",
+      "data" : "{\"policyDefId\":\"keycloak-oauth-policy\"}"
+    }, {
+      "id" : 1085,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.5",
+      "createdOn" : "2017-10-23T11:56:17Z",
+      "what" : "Create"
+    }, {
+      "id" : 1086,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.5",
+      "createdOn" : "2017-10-23T11:56:17Z",
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"endpoint\",\"before\":null,\"after\":\"https://portfolio.dev.jchein.name:8243/apiman-echo/echo\"},{\"name\":\"endpointType\",\"before\":null,\"after\":\"rest\"},{\"name\":\"endpointContentType\",\"before\":null,\"after\":\"json\"},{\"name\":\"publicAPI\",\"before\":\"false\",\"after\":\"true\"}]}"
+    }, {
+      "id" : 1088,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.5",
+      "createdOn" : "2017-10-23T11:56:17Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1090,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.5",
+      "createdOn" : "2017-10-23T11:56:17Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"cors-policy\"}"
+    }, {
+      "id" : 1092,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.5",
+      "createdOn" : "2017-10-23T11:56:17Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"keycloak-oauth-policy\"}"
+    }, {
+      "id" : 1094,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.5",
+      "createdOn" : "2017-10-23T11:56:17Z",
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"log-headers-policy\"}"
+    }, {
+      "id" : 1095,
+      "who" : "jheinnic",
+      "organizationId" : "JCH",
+      "entityType" : "Api",
+      "entityId" : "echo",
+      "entityVersion" : "1.5",
+      "createdOn" : "2017-10-23T11:56:20Z",
+      "what" : "Publish"
+    } ]
+  } ]
+}

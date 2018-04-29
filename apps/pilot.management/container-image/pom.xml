@@ -7,7 +7,7 @@
 		<relativePath>../parent</relativePath>
 	</parent>
 	<artifactId>pilot.management-container-image</artifactId>
-	<name>Pilot Management command model</name>
+	<name>Pilot Management Docker image</name>
 	<description>Container image for Pilot Management microservice</description>
 	<packaging>pom</packaging>
 

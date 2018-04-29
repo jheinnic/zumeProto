@@ -35,6 +35,8 @@
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<maven.javadoc.skip>true</maven.javadoc.skip>
 
+		<dockerfile.extension-version>1.3.5</dockerfile.extension-version>
+		<os-maven.extension-version>1.5.0.Final</os-maven.extension-version>
 
 		<assertj.plugin-version>2.1.0</assertj.plugin-version>
 		<build-helper.plugin-version>1.10</build-helper.plugin-version>
@@ -51,7 +53,6 @@
 		<maven-exec.plugin-version>1.4.0</maven-exec.plugin-version>
 		<maven-resources.plugin-version>3.0.2</maven-resources.plugin-version>
 		<maven-surefire.plugin-version>2.20.1</maven-surefire.plugin-version>
-		<os-maven.plugin-version>1.5.0.Final</os-maven.plugin-version>
 		<protobuf-maven.plugin-version>0.5.1</protobuf-maven.plugin-version>
 		<properties.plugin-version>1.0.0</properties.plugin-version>
 		<sql.plugin-version>3.0.0-SNAPSHOT</sql.plugin-version>
@@ -62,8 +63,8 @@
 
 
 		<!-- Secondary dependencies specific to frontend-maven-plugin -->
-		<frontend-node.version>v6.10.2</frontend-node.version>
-		<frontend-npm.version>3.10.10</frontend-npm.version>
+		<frontend-node.version>v8.9.3</frontend-node.version>
+		<frontend-npm.version>5.6.0</frontend-npm.version>
 
 
 		<apache-commons-io.version>2.5</apache-commons-io.version>
@@ -184,7 +185,7 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>${maven-dependency.plugin-version}</version>
-					<executions>
+					<!--executions>
 						<execution>
 							<id>unpack-api-spec</id>
 							<phase>initialize</phase>
@@ -201,13 +202,13 @@
 								<includes>*.proto</includes>
 								<classifier>api-spec</classifier>
 								<type>zip</type>
-								<!-- <scope>test</scope> <artifactItems> <artifactItem> <groupId>${project.parent.groupId}</groupId> 
+								--><!--scope>test</scope> <artifactItems> <artifactItem> <groupId>${project.parent.groupId}</groupId> 
 									<artifactId>${zumepizza.service-name}-api-spec</artifactId> <version>${project.parent.version}</version> 
 									<type>pom</type> <classifier>api-spec</classifier> <overWrite>true</overWrite> 
-									</artifactItem> </artifactItems> -->
+									</artifactItem> </artifactItems--><!--
 							</configuration>
 						</execution>
-					</executions>
+					</executions-->
 				</plugin>
 
 				<plugin>
@@ -468,15 +469,19 @@
 						<protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
 						<protoSourceRoot>${project.basedir}/src/main/protobuf</protoSourceRoot>
 						<protoTestSourceRoot>${project.basedir}/src/test/protobuf</protoTestSourceRoot>
-						<writeDescriptorSet>true</writeDescriptorSet>
-						<attachDescriptorSet>true</attachDescriptorSet>
 						<attachProtoSources>true</attachProtoSources>
 						<clearOutputDirectory>true</clearOutputDirectory>
-						<descriptorSetClassifier>api-spec</descriptorSetClassifier>
+						<checkStaleness>true</checkStaleness>
+						<hashDependentPaths>true</hashDependentPaths>
+						<temporaryProtoFileDirectory>${project.build.directory}/protoc-dependencies</temporaryProtoFileDirectory>
+						<writeDescriptorSet>true</writeDescriptorSet>
+						<attachDescriptorSet>true</attachDescriptorSet>
+						<descriptorSetClassifier>protobin</descriptorSetClassifier>
 						<includeDependenciesInDescriptorSet>true</includeDependenciesInDescriptorSet>
 						<includeSourceInfoInDescriptorSet>true</includeSourceInfoInDescriptorSet>
-						<temporaryProtoFileDirectory>${project.build.directory}/protoc-dependencies</temporaryProtoFileDirectory>
-						<additionalProtoPathElements>${project.build.directory}/protoc-dependencies</additionalProtoPathElements>
+                        <excludes>
+                            <exclude>target/*</exclude>
+                        </excludes>
 						<detail>true</detail>
 					</configuration>
 					<extensions>true</extensions>
@@ -484,7 +489,9 @@
 						<execution>
 							<goals>
 								<goal>compile</goal>
+								<goal>test-compile</goal>
 								<goal>compile-custom</goal>
+								<goal>test-compile-custom</goal>
 							</goals>
 						</execution>
 					</executions>
@@ -582,7 +589,6 @@
 									</pluginExecutionFilter>
 									<action>
 										<execute />
-										<!--ignore -->
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -611,19 +617,25 @@
 										<ignore />
 									</action>
 								</pluginExecution>
+                                <!--
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-toolchains-plugin</artifactId>
-										<versionRange>[1.0,)</versionRange>
+										<groupId>org.xolstice.maven.plugins</groupId>
+										<artifactId>protobuf-maven-plugin</artifactId>
+										<versionRange>[0.5.1,)</versionRange>
+										<extensions>true</extensions>
 										<goals>
-											<goal>toolchain</goal>
+											<goal>compile</goal>
+											<goal>custom-compile</goal>
+											<goal>test-compile</goal>
+											<goal>test-custom-compile</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<execute />
 									</action>
 								</pluginExecution>
+                                -->
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
@@ -663,12 +675,12 @@
 			<extension>
 				<groupId>kr.motd.maven</groupId>
 				<artifactId>os-maven-plugin</artifactId>
-				<version>${os-maven.plugin-version}</version>
+				<version>${os-maven.extension-version}</version>
 			</extension>
 			<extension>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-extension</artifactId>
-				<version>${dockerfile.plugin-version}</version>
+				<version>${dockerfile.extension-version}</version>
 			</extension>
 		</extensions>
 	</build>
@@ -2406,9 +2418,9 @@
 					<artifactId>common-utils</artifactId>
 					<version>${project.parent.version}</version>
 				</dependency>
-				<!-- <dependency> <groupId>name.jchein.demo.zumepizza.microservices</groupId> 
+				<dependency> <groupId>name.jchein.demo.zumepizza.microservices</groupId> 
 					<artifactId>common-grpc</artifactId> <version>${project.parent.version}</version> 
-					</dependency> -->
+					</dependency>
 				<dependency>
 					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
 					<artifactId>${zumepizza.service-name}-grpc-spec</artifactId>
@@ -2512,14 +2524,14 @@
 						<artifactId>maven-dependency-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>unpack</id>
+								<id>copy</id>
 								<phase>package</phase>
-								<goals><goal>unpack</goal></goals>
+								<goals><goal>copy</goal></goals>
 								<configuration>
 									<artifactItems>
 										<artifactItem>
 											<groupId>${project.groupId}</groupId> 
-											<artifactId>${project.artifactId}</artifactId>
+											<artifactId>${zumepizza.service-name}-service</artifactId>
 											<version>${project.version}</version> 
 										</artifactItem>
 									</artifactItems>
@@ -2535,7 +2547,7 @@
 
 					<!-- Build Docker image -->
 					<plugin>
-						<groupId>comspotify</groupId>
+						<groupId>com.spotify</groupId>
 						<artifactId>dockerfile-maven-plugin</artifactId>
 						<executions>
 							<execution>
@@ -2545,7 +2557,7 @@
 									<goal>push</goal>
 								</goals>
 								<configuration>
-									<repository>jheinnic/microptf-${zumepizza.service-name}</repository>
+									<repository>jheinnic/${zumepizza.service-name}</repository>
 									<tag>${project.version}</tag>
 								</configuration>
 							</execution>
@@ -2702,7 +2714,7 @@
 		</profile>
 
 		<profile>
-			<id>spring-autoconfig</id>
+			<id>spring-autoconfigure</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 				<file>

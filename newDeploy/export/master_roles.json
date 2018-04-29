@@ -1,0 +1,33 @@
+[ {
+  "id" : "dcd764e0-12fb-4b06-b223-ed506c159ecc",
+  "name" : "uma_authorization",
+  "description" : "${role_uma_authorization}",
+  "scopeParamRequired" : false,
+  "composite" : false,
+  "clientRole" : false,
+  "containerId" : "master"
+}, {
+  "id" : "2a823dcd-6c10-48f2-9abd-14ae747c183c",
+  "name" : "offline_access",
+  "description" : "${role_offline-access}",
+  "scopeParamRequired" : true,
+  "composite" : false,
+  "clientRole" : false,
+  "containerId" : "master"
+}, {
+  "id" : "15da5978-2711-49eb-8a82-112b602cecb1",
+  "name" : "admin",
+  "description" : "${role_admin}",
+  "scopeParamRequired" : false,
+  "composite" : true,
+  "clientRole" : false,
+  "containerId" : "master"
+}, {
+  "id" : "a3841989-448e-4357-88c4-327a766b7d2a",
+  "name" : "create-realm",
+  "description" : "${role_create-realm}",
+  "scopeParamRequired" : false,
+  "composite" : false,
+  "clientRole" : false,
+  "containerId" : "master"
+} ]

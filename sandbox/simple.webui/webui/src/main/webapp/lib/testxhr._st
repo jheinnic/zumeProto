@@ -1,0 +1,3 @@
+import { detectXHRSupport } from 'grpc-web-client/transports/xhr';
+
+console.log(detectXHRSupport());

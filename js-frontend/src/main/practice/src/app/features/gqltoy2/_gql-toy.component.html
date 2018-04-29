@@ -1,0 +1,40 @@
+<div fxLayout="column" fxLayoutAlign="stretch center">
+<mat-card fxFlex="1 0 auto">
+  <mat-card-title>
+    <h1>Hello World</h1>
+  </mat-card-title>
+  <mat-card-content fxLayout="row">
+    <mat-card fxFlex="2 1 50%">
+      <mat-card-title-group>
+      <mat-card-title>
+        <h2>Add new</h2>
+      </mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+        <input type="text" placeholder="First name" #firstName />
+        <input type="text" placeholder="Last name" [(ngModel)]="lastName" />
+      </mat-card-content>
+      <mat-card-actions>
+        <input type="submit" value="Add user" (click)="newUser(firstName.value)" />
+      </mat-card-actions>
+    </mat-card>
+      <mat-card fxFlex="3 1 50%">
+      <mat-card-title-group>
+        <mat-card-title>
+          <h2>List</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <input type="search" placeholder="Type name..." [formControl]="nameControl" />
+        </mat-card-subtitle>
+      </mat-card-title-group>
+      <mat-card-content>
+        <ul>
+          <li *ngFor="let user of users | async">
+            {{user.firstName}} {{user.lastName}}
+          </li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
+</div>

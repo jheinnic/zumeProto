@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 
 import io.grpc.Channel;
-import name.jchein.demo.zumepizza.grpc.proto.delivery.routing.DeliveryRoutingGrpc;
+import name.jchein.demo.zumepizza.services.delivery.routing.grpc.proto.DeliveryRoutingGrpc;
 import net.devh.springboot.autoconfigure.grpc.client.GrpcClient;
 
 
@@ -16,13 +16,7 @@ import net.devh.springboot.autoconfigure.grpc.client.GrpcClient;
 @ComponentScan
 public class DeliveryRoutingGrpcUnitTestConfiguration
 {
-//	@Bean
-//	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-//	IUUIDExtension uuidExtension() {
-//		return new UUIDExtension();
-//	}
-	
-	@GrpcClient("deliveryRouting")
+	@GrpcClient("delivery.routing")
 	Channel deliveryRoutingChannel;
 	
 	@Bean

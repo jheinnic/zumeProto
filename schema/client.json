@@ -1,0 +1,53 @@
+{
+    "id": "f22c05a3-732b-4841-8965-d15f107b3319",
+    "clientId": "portfolio-app",
+    "name": "Portfolio Project",
+    "description": "Portfolio Project WebApp Client",
+    "rootUrl": "http://portfolio.dev.jchein.name:8081",
+    "adminUrl": "http://portfolio.dev.jchein.name:8081/uid/v1/webhooks",
+    "baseUrl": "http://portfolio.dev.jchein.name:8081/uid/v1",
+    "surrogateAuthRequired": false,
+    "enabled": true,
+    "clientAuthenticatorType": "client-secret",
+    "secret": "b4f4c39d-9d60-4cd4-86c8-13417ae82675",
+    "redirectUris": [
+        "/uid/v1/moos/*",
+        "/uid/v1/bars/*",
+        "/uid/v1/user",
+        "/uid/v1/foos/*",
+        "/uid/v1/mips/*"
+    ],
+    "webOrigins": [
+        "+"
+    ],
+    "notBefore": 1504329505,
+    "bearerOnly": false,
+    "consentRequired": false,
+    "standardFlowEnabled": true,
+    "implicitFlowEnabled": false,
+    "directAccessGrantsEnabled": false,
+    "serviceAccountsEnabled": false,
+    "publicClient": true,
+    "frontchannelLogout": false,
+    "protocol": "openid-connect",
+    "attributes": {
+        "saml.assertion.signature": "false",
+        "request.object.signature.alg": "RS256",
+        "user.info.response.signature.alg": "RS256",
+        "saml.force.post.binding": "false",
+        "saml.multivalued.roles": "false",
+        "saml.encrypt": "false",
+        "saml.server.signature": "false",
+        "saml.server.signature.keyinfo.ext": "false",
+        "saml_force_name_id_format": "false",
+        "saml.client.signature": "false",
+        "saml.authnstatement": "false",
+        "saml.onetimeuse.condition": "false"
+    },
+    "fullScopeAllowed": false,
+    "nodeReRegistrationTimeout": -1,
+    "clientTemplate": "in-house-web",
+    "useTemplateConfig": false,
+    "useTemplateScope": true,
+    "useTemplateMappers": true
+}

@@ -2,6 +2,7 @@ package name.jchein.demo.zumepizza.services.delivery.routing.command;
 
 import lombok.Builder;
 import lombok.Value;
+import name.jchein.common.validation.constraints.UUIDString;
 
 import java.util.function.Consumer;
 
@@ -9,7 +10,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.ScriptAssert;
-import name.jchein.common.validation.constraints.UUIDString;
 
 @Value
 @Builder
@@ -17,7 +17,7 @@ import name.jchein.common.validation.constraints.UUIDString;
     @ScriptAssert(lang = "javascript", script = "if (_this.shape === PointMapShape.square) { return _this.paintHeight === _this.paintWidth }"),
     @ScriptAssert(lang = "javascript", script = "if (_this.shape !== PointMapShape.square) { return _this.paintHeight !== _this.paintWidth }")
 })
-public class RequestPaintPolicy implements PaintPolicyCommand {
+public class RequestPaintPolicy implements ServiceDayCommand {
     @NotNull
     @UUIDString
     String uuid;
@@ -43,7 +43,7 @@ public class RequestPaintPolicy implements PaintPolicyCommand {
     @NotNull
     PointMapShape shape;
 
-	public static PaintPolicyCommand build(Consumer<RequestPaintPolicyBuilder> director) {
+	public static ServiceDayCommand build(Consumer<RequestPaintPolicyBuilder> director) {
 		RequestPaintPolicyBuilder bldr = RequestPaintPolicy.builder();
 		director.accept(bldr);
 		return bldr.build();

@@ -1,5 +1,8 @@
 package name.jchein.common.validation.constraints.param;
 
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -9,15 +12,11 @@ import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.core.annotation.AliasFor;
-
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 /**
- * Equivalent of {@link NotBlank} that includes a param attribute for the benefit of message interpolation.
+ * Equivalent of {@link Email} that includes a param attribute for the benefit of message interpolation.
  *
  * @author John Heinnickel
  */

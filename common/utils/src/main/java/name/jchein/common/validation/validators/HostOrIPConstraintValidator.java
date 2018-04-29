@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
 import name.jchein.common.validation.constraints.ResolvesToIP;
 
 public class HostOrIPConstraintValidator implements ConstraintValidator<ResolvesToIP, String> {

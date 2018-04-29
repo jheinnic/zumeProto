@@ -1,0 +1,15 @@
+src/app/core/core.module.ts
+src/app/core/feature/authz/core-authz.effects.ts
+src/app/core/feature/identity/core-identity.effects.ts
+src/app/core/identity/keycloak-registry.service.ts
+src/app/core/identity/keycloak-session.resolver.ts
+src/app/core/identity/login-departure.guard.ts
+src/app/core/layout/app-root.component.ts
+src/app/core/layout/error-modal.component.ts
+src/app/core/layout/masking-overlay.component.ts
+src/app/core/layout/return-from-login.component.ts
+src/app/core/logging/my-console-listener-config.service.ts
+src/app/core/logging/my-custom-log-listener.service.ts
+src/app/features/gqltoy/feature/domain/gqltoy-domain.effects.ts
+src/app/features/gqltoy2/feature/domain/gqltoy-domain.effects.ts
+src/app/shared/layout-util/layout.component.ts

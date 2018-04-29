@@ -1,0 +1,33 @@
+/**
+ * Created by jheinnic on 3/12/17.
+ */
+// 
+// export function Value(target: any) {
+//     let retVal = function(...args: any[]) {
+//         function construct(constructor: Function, base?: any, delta?: Partial<any>): any {
+//             let c: any = function () {
+//                 return Object.assign({} as any, this as any, base || { } as any, delta || { } as any);
+//             };
+// 
+//             c.prototype = constructor.prototype;
+//             return (new c() as any);
+//         }
+// 
+//         //return function(...args: any[]) {
+//             return construct(target.constructor, args[0], args[1]);
+//         //}
+//     }
+// 
+//     // copy prototype so instanceof operator still works
+//     retVal.prototype = target.prototype;
+// 
+//     // return new constructor (will override original)
+//     return retVal;
+// }
+// 
+// @Value
+// export class FooBar{
+//     id: string;
+//     list: number[];
+//     why: boolean;
+// }

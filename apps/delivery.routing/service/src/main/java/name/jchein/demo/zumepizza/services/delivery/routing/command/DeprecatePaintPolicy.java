@@ -2,13 +2,15 @@ package name.jchein.demo.zumepizza.services.delivery.routing.command;
 
 import lombok.Builder;
 import lombok.Value;
-import javax.validation.constraints.NotNull;
 import name.jchein.common.validation.constraints.UUIDString;
+
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 @Value
 @Builder
-public class DeprecatePaintPolicy implements PaintPolicyCommand {
+public class DeprecatePaintPolicy implements ServiceDayCommand {
 	@NotNull
 	@UUIDString
 	String uuid;

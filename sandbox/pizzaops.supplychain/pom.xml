@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>name.jchein.demo.zumepizza.microservices</groupId>
+  <artifactId>pizzaops.supplychain</artifactId>
+  <version>0.0.1-bootstrap-SNAPSHOT</version>
+  <name>Pilot Management Service Module List</name>
+  <description>This POM enumerates modules needed to build delivery routing microservice, but is not itself an aritfact of that project.  It exists only to enable selective partial builds.</description>
+  <packaging>pom</packaging>
+  <modules>
+    <module>parent</module>
+    <module>grpc-spec</module>
+    <module>event-model</module>
+    <module>service</module>
+    <module>container-image</module>
+    <module>ts-client</module>
+  </modules>
+</project>

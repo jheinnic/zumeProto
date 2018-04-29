@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>name.jchein.demo.zumepizza</groupId>
+		<artifactId>microservices</artifactId>
+		<version>0.0.1-bootstrap-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<groupId>name.jchein.demo.zumepizza.archetypes</groupId>
+	<artifactId>archetypes-parent</artifactId>
+	<name>Zume Pizza Demo Project Maven Archetypes</name>
+	<description>Zume Pizza Demo Project Maven Archetypes</description>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>command-side</module>
+		<module>query-side</module>
+		<module>service-gateway</module>
+	</modules>
+
+	<properties>
+		<maven-archetype.plugin-version>3.0.1</maven-archetype.plugin-version>
+	</properties>
+
+	<build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.archetype</groupId>
+				<artifactId>archetype-packaging</artifactId>
+				<version>${maven-archetype.plugin-version}</version>
+			</extension>
+		</extensions>
+					
+		<pluginManagement>
+			<plugins> 
+				<plugin>
+					<artifactId>maven-archetype-plugin</artifactId>
+					<version>${maven-archetype.plugin-version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

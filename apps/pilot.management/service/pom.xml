@@ -12,6 +12,11 @@
 	<name>Pilot Management microservice application</name>
 	<description>Executable jar artifact that launches an instance of Pilot Management microservice</description>
 	<packaging>jar</packaging>
+
 	<dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
 	</dependencies>
 </project>

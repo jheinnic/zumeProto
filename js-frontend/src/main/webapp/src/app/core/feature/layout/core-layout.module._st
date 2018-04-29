@@ -1,0 +1,40 @@
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
+import {MaterialModule} from '../../shared/material.module';
+import {ActivityLayoutComponent} from './activity-layout.component';
+import {NavItemComponent} from './nav-item.component';
+import {SidenavComponent} from './sidenav.component';
+import {ToolbarComponent} from './toolbar.component';
+import {MenubarComponent} from './menubar.component';
+import {MenuItemComponent} from './menu-item.component';
+import {MenuComponent} from './menu.component';
+
+import {reducers, initialState} from './reducers';
+
+export const COMPONENTS = [
+  ActivityLayoutComponent,
+  NavItemComponent,
+  SidenavComponent,
+  ToolbarComponent,
+  MenubarComponent,
+  MenuItemComponent,
+  MenuComponent,
+];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialModule,
+    StoreModule.forFeature('books', reducers, {initialState} ),
+    EffectsModule.forFeature([])
+  ],
+  declarations: COMPONENTS,
+  exports: COMPONENTS,
+})
+
+export class ActivityLayoutModule {
+}

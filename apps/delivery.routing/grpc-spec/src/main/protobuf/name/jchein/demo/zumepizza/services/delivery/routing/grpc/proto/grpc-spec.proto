@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "DeliveryRoutingProto";
+option java_package = "name.jchein.demo.zumepizza.services.delivery.routing.grpc.proto";
+// option objc_class_prefix = "RSRG";
+
+import "name/jchein/portfolio/common/grpc/action/actions.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+import "google/type/date.proto";
+
+
+// Delivery Routing service definition.
+service DeliveryRouting {
+	rpc createServiceDay (CreateServiceDayRequest) returns (BasicReply) {
+	}
+	rpc schedulePilot (SchedulePilotRequest) returns (BasicReply) {
+	}
+	rpc clockInPilot (ClockInPilotRequest) returns (BasicReply) {
+	}
+	rpc clockOutPilot (ClockInPilotRequest) returns (BasicReply) {
+	}
+}
+
+// Request messages contain command properties.
+message CreateServiceDayRequest {
+	string id = 1;
+	google.type.Date serviceDate = 2;
+}
+
+message SchedulePilotRequest {
+	string id = 1;
+	string pilotId = 2;
+	int32 supplyPennies = 3;
+	int32 deliverPennies = 4;
+	int32 shuttlePennies = 5;
+	google.protobuf.Timestamp scheduledClockIn = 6;
+	google.protobuf.Timestamp scheduledClockOut = 7;
+	string scheduledStation = 8;
+}
+
+message ClockInPilotRequest {
+	string id = 1;
+	string pilotId = 2;
+	google.protobuf.Timestamp clockInTime = 3;
+	string clockInStation = 4;
+}
+
+message ClockOutPilotRequest {
+	string id = 1;
+	string pilotId = 2;
+	google.protobuf.Timestamp clockInTime = 3;
+	string clockOutStation = 4;
+}
+
+message RegisterAvailableVehicle {
+	string id = 1;
+	string vehicleId = 2;
+	string parkedStation = 3;
+}

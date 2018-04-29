@@ -1,0 +1,31 @@
+[ {
+  "alias" : "terms_and_conditions",
+  "name" : "Terms and Conditions",
+  "enabled" : false,
+  "defaultAction" : false,
+  "config" : { }
+}, {
+  "alias" : "VERIFY_EMAIL",
+  "name" : "Verify Email",
+  "enabled" : true,
+  "defaultAction" : true,
+  "config" : { }
+}, {
+  "alias" : "UPDATE_PROFILE",
+  "name" : "Update Profile",
+  "enabled" : true,
+  "defaultAction" : false,
+  "config" : { }
+}, {
+  "alias" : "UPDATE_PASSWORD",
+  "name" : "Update Password",
+  "enabled" : true,
+  "defaultAction" : false,
+  "config" : { }
+}, {
+  "alias" : "CONFIGURE_TOTP",
+  "name" : "Configure OTP",
+  "enabled" : true,
+  "defaultAction" : false,
+  "config" : { }
+} ]

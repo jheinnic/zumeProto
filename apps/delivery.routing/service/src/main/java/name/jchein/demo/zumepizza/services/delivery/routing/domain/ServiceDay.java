@@ -19,7 +19,7 @@ import static io.eventuate.EventUtil.events;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 import name.jchein.demo.zumepizza.services.delivery.routing.command.AcceptPaintPolicy;
 import name.jchein.demo.zumepizza.services.delivery.routing.command.DeprecatePaintPolicy;
-import name.jchein.demo.zumepizza.services.delivery.routing.command.PaintPolicyCommand;
+import name.jchein.demo.zumepizza.services.delivery.routing.command.ServiceDayCommand;
 import name.jchein.demo.zumepizza.services.delivery.routing.command.RejectPaintPolicy;
 import name.jchein.demo.zumepizza.services.delivery.routing.command.RenamePaintPolicy;
 import name.jchein.demo.zumepizza.services.delivery.routing.command.RequestPaintPolicy;
@@ -33,7 +33,7 @@ import name.jchein.demo.zumepizza.services.delivery.routing.event.PointMapShape;
 
 @ValidateOnExecution(type = ExecutableType.NON_GETTER_METHODS)
 public class ServiceDay
-extends ReflectiveMutableCommandProcessingAggregate<PaintPolicy, PaintPolicyCommand>
+extends ReflectiveMutableCommandProcessingAggregate<ServiceDay, ServiceDayCommand>
 {
 	private static final List<Event> EMPTY_LIST = Collections.emptyList();
 

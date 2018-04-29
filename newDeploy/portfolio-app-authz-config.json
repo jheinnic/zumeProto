@@ -1,0 +1,57 @@
+{
+  "allowRemoteResourceManagement": false,
+  "policyEnforcementMode": "ENFORCING",
+  "resources": [
+    {
+      "name": "Manifest Ingestion Task Resource",
+      "uri": "/markets/mone/manifest-ingest-tasks/{manifest-ingest-task-uuid}",
+      "type": "urn:mone:portfolio-app:resources:manifest-task-ingest"
+    }
+  ],
+  "policies": [
+    {
+      "name": "fromClientSapo",
+      "type": "client",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "clients": "[\"sapo\"]"
+      }
+    },
+    {
+      "name": "hasRealmIdentity",
+      "description": "A policy that grants access only for users within this realm",
+      "type": "js",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
+      }
+    },
+    {
+      "name": "hasRealmOwnerRole",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"owner\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "Default Permission",
+      "description": "A permission that applies to the default resource type",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "defaultResourceType": "urn:portfolio-app:resources:default",
+        "applyPolicies": "[\"hasRealmIdentity\"]"
+      }
+    }
+  ],
+  "scopes": [
+    {
+      "name": "resource_owner"
+    }
+  ]
+}

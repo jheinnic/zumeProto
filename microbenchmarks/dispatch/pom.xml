@@ -1,0 +1,34 @@
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>name.jchein.demo.zumepizza</groupId>
+        <artifactId>microbenchmarks</artifactId>
+        <version>0.0.1-bootstrap-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+    <groupId>name.jchein.portfolio.microbenchmarks</groupId>
+    <artifactId>dispatch</artifactId>
+    <name>dispatch</name>
+    <description />
+
+    <dependencies>
+        <dependency>
+            <groupId>name.jchein.demo.zumepizza.microservices</groupId>
+            <artifactId>resolution.registry-event-model</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>name.jchein.demo.zumepizza.microservices</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.eventuate.client.java</groupId>
+            <artifactId>eventuate-client-java</artifactId>
+        </dependency>
+    </dependencies>
+</project>

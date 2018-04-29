@@ -1,0 +1,127 @@
+{
+  "allowRemoteResourceManagement": false,
+  "policyEnforcementMode": "ENFORCING",
+  "resources": [
+    {
+      "name": "Default Resource",
+      "uri": "/*",
+      "type": "urn:portfolio-service:resources:default"
+    },
+    {
+      "name": "Products",
+      "uri": "/products",
+      "type": "urn:portfolio:resources:products"
+    },
+    {
+      "name": "Foodies",
+      "uri": "/foodies",
+      "type": "urn:portfolio-app:resources:foodies",
+      "scopes": [
+        {
+          "name": "what"
+        }
+      ]
+    },
+    {
+      "name": "Moodies",
+      "uri": "/moodies",
+      "type": "urn:portfolio-service:resources:moodies",
+      "scopes": [
+        {
+          "name": "itis"
+        }
+      ]
+    },
+    {
+      "name": "Goodies",
+      "uri": "/goodies",
+      "type": "urn:portfolio-app:resources:goodies",
+      "scopes": [
+        {
+          "name": "what"
+        },
+        {
+          "name": "itis"
+        }
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "name": "Default Policy",
+      "description": "A policy that grants access only for users within this realm",
+      "type": "js",
+      "logic": "POSITIVE",
+      "decisionStrategy": "AFFIRMATIVE",
+      "config": {
+        "code": "// by default, grants any permission associated with this policy\n$evaluation.grant();\n"
+      }
+    },
+    {
+      "name": "hasUserRealmRole",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"user\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "hasBuyerRealmRole",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "roles": "[{\"id\":\"buyer\",\"required\":false}]"
+      }
+    },
+    {
+      "name": "Buyer Products",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"Products\"]",
+        "applyPolicies": "[\"hasBuyerRealmRole\",\"hasUserRealmRole\"]"
+      }
+    },
+    {
+      "name": "MayWhat",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"Foodies\"]",
+        "applyPolicies": "[\"hasUserRealmRole\"]"
+      }
+    },
+    {
+      "name": "Izit",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"Moodies\"]",
+        "applyPolicies": "[\"hasUserRealmRole\"]"
+      }
+    },
+    {
+      "name": "WhatGood",
+      "type": "resource",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS",
+      "config": {
+        "resources": "[\"Goodies\"]",
+        "applyPolicies": "[\"hasUserRealmRole\"]"
+      }
+    }
+  ],
+  "scopes": [
+    {
+      "name": "what"
+    },
+    {
+      "name": "itis"
+    }
+  ]
+}

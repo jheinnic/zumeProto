@@ -3,7 +3,7 @@
   <groupId>name.jchein.demo.zumepizza.microservices</groupId>
   <artifactId>pilot.management</artifactId>
   <version>0.0.1-bootstrap-SNAPSHOT</version>
-  <name>Delivery Routing Service Module List</name>
+  <name>Pilot Management Service Module List</name>
   <description>This POM enumerates modules needed to build delivery routing microservice, but is not itself an aritfact of that project.  It exists only to enable selective partial builds.</description>
   <packaging>pom</packaging>
   

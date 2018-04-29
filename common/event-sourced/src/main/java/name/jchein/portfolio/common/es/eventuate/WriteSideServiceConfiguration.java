@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 
 import io.eventuate.javaclient.driver.EventuateDriverConfiguration;
-import io.eventuate.javaclient.spring.EnableEventHandlers;
-import io.eventuate.local.java.jdbckafkastore.EventuateLocalConfiguration;
+import name.jchein.common.identity.EnableUUIDGenerator;
 
 
 @Configuration
+@EnableUUIDGenerator
 @Import({EventuateDriverConfiguration.class})
 public class WriteSideServiceConfiguration
 {
