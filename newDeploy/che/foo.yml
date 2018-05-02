@@ -1,0 +1,365 @@
+version: "3.6"
+
+services:
+  zookeeper:
+    image: eventuateio/eventuateio-local-zookeeper:0.18.0.RELEASE
+    domainname: dev.jchein.name
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+    networks:
+      - portfolio
+  
+  kafka:
+    image: eventuateio/eventuateio-local-kafka:0.18.0.RELEASE
+    domainname: dev.jchein.name
+    hostname: kafka
+    links:
+      - zookeeper
+    ports:
+      - 9092:9092
+    networks:
+      - portfolio
+    environment:
+      - ADVERTISED_HOST_NAME=${DOCKER_HOST_IP}
+      - KAFKA_HEAP_OPTS=-Xmx512m -Xms512m
+      - ZOOKEEPER_SERVERS=zookeeper:2181
+
+  postgres:
+    image: eventuateio/eventuateio-local-postgres:0.18.0.RELEASE
+    domainname: dev.jchein.name
+    hostname: postgres
+    ports:
+      - 25432:5432
+    networks:
+      - portfolio
+    volumes:
+      - postgres-data:/var/lib/postgresql/data:delegated
+    environment:
+      - POSTGRES_USER=zumepizza
+      - POSTGRES_PASSWORD=zumepizza
+      - POSTGRES_DB=eventuate
+  
+  cdcservice:
+    image: eventuateio/eventuateio-local-new-cdc-service:0.18.0.RELEASE
+    domainname: dev.jchein.name
+    hostname: cdc-svc
+    links:
+      - postgres
+      - kafka
+      - zookeeper
+    ports:
+      - 8099:8080
+    networks:
+      - portfolio
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/eventuate
+      - SPRING_DATASOURCE_USERNAME=zumepizza
+      - SPRING_DATASOURCE_PASSWORD=zumepizza
+      - SPRING_DATASOURCE_TEST_ON_BORROW=true
+      - SPRING_DATASOURCE_VALIDATION_QUERY="SELECT 1"
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING=zookeeper:2181
+      - EVENTUATELOCAL_CDC_DB_USER_NAME=zumepizza
+      - EVENTUATELOCAL_CDC_DB_PASSWORD=zumepizza
+      - EVENTUATELOCAL_CDC_MAX_EVENTS_PER_POLLING=1000
+      - EVENTUATELOCAL_CDC_MAX_ATTEMPTS_FOR_POLLING=100
+      - EVENTUATELOCAL_CDC_POLLING_INTERVAL_IN_MILLISECONDS=500
+      - EVENTUATELOCAL_CDC_POLLING_RETRY_INTERVAL_IN_MILLISECONDS=500
+      - EVENTUATE_DATABASE_SCHEMA=eventuate
+      - SPRING_PROFILES_ACTIVE=EventuatePolling
+
+  keycloak:
+    build: ./keycloak
+    image: jheinnic/keycloak-postgres:3.3.0.CR2-3
+    domainname: dev.jchein.name
+    hostname: keycloak
+    links:
+      - keycloak-db:postgres
+      # - smtp:mailout
+      - minio1:minio1
+      - minio2:minio2
+      - minio3:minio3
+      - minio4:minio4
+    ports:
+      - 8080:8080
+      - 8443:8443
+      - 9990:9990
+      - 9993:9993
+    networks:
+      - portfolio
+    environment:
+      DB_VENDOR: POSTGRES
+      POSTGRES_DATABASE: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password 
+      POSTGRES_PORT_5432_TCP_ADDR: keycloak-db
+      POSTGRES_PORT_5432_TCP_PORT: 5432
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: portfolio
+      KEYCLOAK_LOGLEVEL: INFO
+  
+  keycloak-db:
+    image: postgres:9.6.5-alpine
+    domainname: dev.jchein.name
+    hostname: keycloakdb
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+      POSTGRES_ROOT_PASSWORD: root_password
+    networks:
+      - portfolio
+    volumes:
+      - keycloakdb:/var/lib/postgresql/data:delegated
+
+  # https://neo4j.com/docs/operations-manual/current/installation/docker/
+  gallery-views-db:
+    build: ./neo4j-graphql
+    image: jheinnic/neo4j-graphql:0.0.1
+    domainname: dev.jchein.name
+    hostname: gallery-views-db
+    ports:
+      - 27473:7473
+      - 27474:7474
+      - 27687:7687
+    environment:
+      - NEO4J_AUTH=neo4j/portfolio
+      - NEO4J_dbms_memory_pagecache_size=512M
+      - NEO4J_dbms_memory_heap_maxSize=512M
+      - NEO4J_dbms_txLog_rotation_retentionPolicy=100k txs
+      - NEO4J_dbms_allowFormatMigration=true
+      - NEO4J_dbms_unmanaged__extension__classes=org.neo4j.graphql=/graphql
+    networks:
+      - portfolio
+    volumes:
+      - gallery-views-data:/data:delegated
+      - gallery-views-logs:/logs:delegated
+
+#   smtp:
+#     image: namshi/smtp
+#     domainname: dev.jchein.name
+#     hostname: mail
+#     ports:
+#       - 2525:25
+#     networks:
+#       - portfolio
+#     environment:
+#       SKEY_PATH: a
+#       SCERTIFICATE_PATH: a
+#       MAILNAME: mail.dev.jchein.name
+#       PORT: 25
+
+  mongodb:
+    image: mongo:3.0.4
+    domainname: dev.jchein.name
+    hostname: mongodb
+    command: mongod --smallfiles
+    ports:
+      - 27017:27017
+    networks:
+      - portfolio
+
+  minio1:
+    image: minio/minio:RELEASE.2017-09-29T19-16-56Z
+    domainname: dev.jchein.name
+    hostname: minio1
+    ports:
+      - 9401:9000
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    networks:
+      - portfolio
+    volumes:
+      - minio-data1:/data:delegated
+    command: server http://minio1/data http://minio2/data http://minio3/data http://minio4/data
+
+  minio2:
+    image: minio/minio:RELEASE.2017-09-29T19-16-56Z
+    domainname: dev.jchein.name
+    hostname: minio2
+    ports:
+      - 9402:9000
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    networks:
+      - portfolio
+    volumes:
+      - minio-data2:/data:delegated
+    command: server http://minio1/data http://minio2/data http://minio3/data http://minio4/data
+
+  minio3:
+    image: minio/minio:RELEASE.2017-09-29T19-16-56Z
+    domainname: dev.jchein.name
+    hostname: minio3
+    ports:
+      - 9403:9000
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    networks:
+      - portfolio
+    volumes:
+      - minio-data3:/data:delegated
+    command: server http://minio1/data http://minio2/data http://minio3/data http://minio4/data
+
+  minio4:
+    image: minio/minio:RELEASE.2017-09-29T19-16-56Z
+    domainname: dev.jchein.name
+    hostname: minio4
+    ports:
+      - 9404:9000
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    networks:
+      - portfolio
+    volumes:
+      - minio-data4:/data:delegated
+    command: server http://minio1/data http://minio2/data http://minio3/data http://minio4/data
+
+
+  edge.potato:
+    image: jheinnic/edge.potato:0.0.1-bootstrap-SNAPSHOT
+    domainname: dev.jchein.name
+    hostname: edge-potato
+    links:
+      - postgres
+      - kafka
+      - zookeeper
+    ports:
+      - 4546:4545
+    networks:
+      - portfolio
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/eventuate
+      - SPRING_DATASOURCE_USERNAME=zumepizza
+      - SPRING_DATASOURCE_PASSWORD=zumepizza
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING=zookeeper:2181
+      - EVENTUATELOCAL_CDC_DB_USER_NAME=zumepizza
+      - EVENTUATELOCAL_CDC_DB_PASSWORD=zumepizza
+      - EVENTUATE_DATABASE_SCHEMA=eventuate
+      - SPRING_PROFILES_ACTIVE=EventuatePolling
+
+  hr.procmgr:
+    image: jheinnic/hr.procmgr:0.0.1-bootstrap-SNAPSHOT
+    domainname: dev.jchein.name
+    hostname: hr-procmgr
+    links:
+      - postgres
+      - kafka
+      - zookeeper
+    ports:
+      - 4545:4545
+    networks:
+      - portfolio
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/eventuate
+      - SPRING_DATASOURCE_USERNAME=zumepizza
+      - SPRING_DATASOURCE_PASSWORD=zumepizza
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING=zookeeper:2181
+      - EVENTUATELOCAL_CDC_DB_USER_NAME=zumepizza
+      - EVENTUATELOCAL_CDC_DB_PASSWORD=zumepizza
+      - EVENTUATE_DATABASE_SCHEMA=eventuate
+      - SPRING_PROFILES_ACTIVE=EventuatePolling
+
+  # https://neo4j.com/docs/operations-manual/current/installation/docker/
+  gallery-views-db:
+    build: ./neo4j-graphql
+    image: jheinnic/neo4j-graphql:0.0.1
+    domainname: dev.jchein.name
+    hostname: gallery-views-db
+    ports:
+      - 27473:7473
+      - 27474:7474
+      - 27687:7687
+    environment:
+      - NEO4J_AUTH=neo4j/portfolio
+      - NEO4J_dbms_memory_pagecache_size=512M
+      - NEO4J_dbms_memory_heap_maxSize=512M
+      - NEO4J_dbms_txLog_rotation_retentionPolicy=100k txs
+      - NEO4J_dbms_allowFormatMigration=true
+      - NEO4J_dbms_unmanaged__extension__classes=org.neo4j.graphql=/graphql
+    networks:
+      - portfolio
+    volumes:
+      - gallery-views-data:/data:delegated
+      - gallery-views-logs:/logs:delegated
+
+  # TODO: Volume?
+  mongodb:
+    image: mongo:3.0.4
+    domainname: dev.jchein.name
+    hostname: mongodb
+    ports:
+      - 27017:27017
+    networks:
+      - portfolio
+    command: mongod --smallfiles
+
+  js-frontend:
+    build: ../js-frontend/
+    domainname: dev.jchein.name
+    hostname: webui
+    links:
+      - keycloak
+    ports:
+      - 8888:8888
+    networks:
+      - portfolio
+    environment:
+      NODE_VERSION: v8.9.3
+      
+  apiman:
+    build: ./apiman
+    image: jheinnic/apiman:1.3.1.Final
+    domainname: dev.jchein.name
+    hostname: api-gw
+    links:
+      - keycloak:keycloak
+      - minio1:minio1
+      - minio2:minio2
+      - minio3:minio3
+      - minio4:minio4
+    ports:
+      - 19300:19300
+      - 9290:9290
+      - 9293:9293
+      - 8280:8280
+      - 8243:8243
+    networks:
+      - portfolio
+    volumes:
+      - apiman-data:/opt/jboss/wildfly/standalone/data:delegated
+  
+volumes:
+  apiman-data:
+  postgres-data:
+  keycloakdb:
+  gallery-views-data:
+  gallery-views-logs:
+  minio-data1:
+  minio-data2:
+  minio-data3:
+  minio-data4:
+  gallery-views-data:
+  gallery-views-logs:
+
+networks:
+  portfolio: 
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
