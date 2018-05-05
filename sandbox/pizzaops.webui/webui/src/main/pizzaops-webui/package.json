@@ -1,6 +1,6 @@
 {
   "name": "pizzaops-webui",
-  "version": "0.0.1-bootstrap-SNAPSHOT",
+  "version": "0.0.1-bootstrap.SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
