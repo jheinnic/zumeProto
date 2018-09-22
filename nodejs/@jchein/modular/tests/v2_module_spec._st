@@ -1,0 +1,87 @@
+/// <reference path="../node_modules/mocha-typescript/globals.d.ts" />
+
+/**
+ * Created by jheinnic on 4/29/17.
+ */
+
+// import "reflect-metadata";
+// global['Reflect'] = Reflect;
+
+import {container as mochaContext, suite, test, only, skip, slow, timeout} from "mocha-typescript";
+import {expect} from "chai";
+import {Container} from "inversify";
+import * as mocha from "mocha";
+
+const describe = suite;
+const it = test;
+
+@suite("DIRegistry Module tests:") // , slow(1500), timeout(3000))
+class ModuleSpec {
+    @mochaContext
+    mocha: mocha.IBeforeAndAfterContext | mocha.IHookCallbackContext | mocha.ITestCallbackContext | mocha.ISuiteCallbackContext;
+
+    constructor() {
+        describe("ddd2", () => {
+                it("fff2", (done) => {
+                    done("fdf2");
+                });
+            })
+        }
+    }
+
+    private mocha: mocha.IBeforeAndAfterContext & mocha.IHookCallbackContext;
+    private container: Container;
+
+    static before() {
+        // Before the describe block.
+        console.log("Foo");
+        return false;
+    }
+
+    before(done) {
+        // refresh container and container
+        // this.container = new Container();
+        console.log("Bar");
+        done("Fail");
+    }
+
+
+    @test("should work for asyncic controller methods")
+    method1(done) {
+        // @injectable()
+        // class TestController {
+        //     public getTest() {
+        //         return new Promise(((resolve) => {
+        //             setTimeout(resolve, 100, "GET");
+        //         }));
+        //     }
+        // }
+        // container.bind<interfaces.Controller>(TYPE.Controller).to(TestController).whenTargetNamed("TestController");
+        //
+        // server = new InversifyExpressServer(container);
+        // request(server.build())
+        //     .get("/")
+        //     .expect(200, "GET", done);
+        this.container.createChild();
+        done();
+    }
+
+    @test("should work for async controller methods that fails")
+    method2(done) {
+        // @injectable()
+        // class TestControllerTwo {
+        //     public getTest() {
+        //         return new Promise(((resolve, reject) => {
+        //             setTimeout(reject, 100, "GET");
+        //         }));
+        //     }
+        // }
+
+        done("fail");
+    }
+
+// }
+}
+
+
+

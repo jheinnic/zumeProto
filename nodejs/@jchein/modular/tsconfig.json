@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "lib": [ "es6", "esnext", "dom" ],
+    "typeRoots": [ "node_modules/@types" ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": true,
+    "allowJs": false,
+    "noEmit": false,
+    "noEmitOnError": false,
+    "noEmitHelpers": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "noErrorTruncation": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noImplicitReturns": true,
+    "noImplicitUseStrict": false,
+    "allowUnreachableCode": false,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "lib/**/*.ts",
+    "spec/**/*.ts"
+  ],
+  "exclude": [
+    "scripts/**/*.ts",
+    "scripts/scrap/**/*.ts",
+    "tests/**/*.ts",
+    "dist/**/*.ts",
+    "distTest/**/*.ts",
+    "node_modules/**/*.ts",
+    "foo/**/*.ts"
+  ],
+  "compileOnSave": true,
+  "buildOnSave": true
+}

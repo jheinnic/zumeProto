@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "outDir": "dist",
+    "module": "commonjs",
+    "noEmit": false,
+    "allowJs": false,
+    "sourceMap": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitUseStrict": false,
+    "preserveConstEnums": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "importHelpers": true,
+    "noEmitHelpers": true,
+    "noEmitOnError": false,
+    "typeRoots": [ "node_modules/@types" ],
+    "lib": [ "ES6", "ES2015.Symbol", "ES2015.Iterable", "DOM" ]
+  },
+  "compileOnSave": true,
+  "buildOnSave": true,
+  "include": [
+    "scripts/**/*.ts",
+    "tests/**/*.ts"
+  ],
+  "exclude": [
+    "scripts/scrap/**/*.ts",
+    "node_modules/**/*.ts",
+    "foo/**/*.ts"
+  ]
+}

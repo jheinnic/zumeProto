@@ -3,29 +3,31 @@ version: "3.6"
 services:
   keycloak:
     build: ./keycloak
-    image: jheinnic/keycloak:3.3.0.Final
+    image: jheinnic/keycloak:4.0.0.Beta2
     restart: unless-stopped
     domainname: dev.jchein.name
     hostname: keycloak
     links:
-      - keycloak-db:postgres
+      # - keycloak-db:postgres
       # - smtp:mailout
       - minio1:minio1
       - minio2:minio2
       - minio3:minio3
       - minio4:minio4
     ports:
-      - 8080:8080
-      - 8443:8443
-      - 9990:9990
-      - 9993:9993
+      - 28080:8080
+      - 28443:8443
+      - 29990:9990
+      - 29993:9993
     networks:
-      - portfolio
+      - keycloak-network
     environment:
       DB_VENDOR: POSTGRES
-      POSTGRES_DATABASE: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: password 
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password 
+      DB_ADDR: keycloak-db
+      DB_PORT: 5432
       POSTGRES_PORT_5432_TCP_ADDR: keycloak-db
       POSTGRES_PORT_5432_TCP_PORT: 5432
       KEYCLOAK_USER: admin
@@ -36,16 +38,17 @@ services:
     image: postgres:9.6.5-alpine
     restart: unless-stopped
     domainname: dev.jchein.name
-    hostname: keycloakdb
+    hostname: keycloak-db
     ports:
       - 5432:5432
     environment:
+      DB_ADDR: keycloak-db
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
       POSTGRES_ROOT_PASSWORD: root_password
     networks:
-      - portfolio
+      - keycloak-network
     volumes:
       - keycloakdb:/var/lib/postgresql/data:delegated
 

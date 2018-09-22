@@ -16,8 +16,6 @@
     <xsl:template match="//ut:subsystem/ut:server[@name='default-server']/ut:host">
         <ut:host name="default-host" alias="portfolio.dev.jchein.name">
             <ut:location name="/" handler="welcome-content"/>
-            <ut:filter-ref name="server-header"/>
-            <ut:filter-ref name="x-powered-by-header"/>
             <ut:http-invoker security-realm="ApplicationRealm"/>
         </ut:host>
     </xsl:template>

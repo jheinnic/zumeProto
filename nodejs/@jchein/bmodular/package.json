@@ -1,0 +1,41 @@
+{
+  "name": "@jchein/bmodular",
+  "version": "0.0.1-4",
+  "description": "Assorted utility types for TypeScript and Inversify  Mixin demonstrations and utilities",
+  "scripts": {
+    "build": "npm run build:ts",
+    "build:ts": "tsc -p tsconfig.json",
+    "what": "echo `git log | head -1 | awk '{print $2}'`",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- lib/index.ts"
+  },
+  "main": "dist/index",
+  "author": "John Heinnickel <jheinnic@hotmail.com>",
+  "bugs": {
+    "url": "https://github.com/jheinnic/bstock-ts-utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jheinnic/bstock-ts-utils.git"
+  },
+  "files": [
+    "dist/**/*",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">=6.9.2"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "fluent-interface-builder": "^2.0.1",
+    "immutable": "^3.8.1",
+    "node-jq": "^1.1.0",
+    "tslib": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^6",
+    "nodemon": "^1.11.0",
+    "ts-node": "^3.0.2",
+    "typescript": "^2.2.2"
+  }
+}

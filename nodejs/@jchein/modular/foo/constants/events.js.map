@@ -1,0 +1,1 @@
+{"version":3,"file":"events.js","sourceRoot":"","sources":["../../scripts/constants/events.ts"],"names":[],"mappings":";;AAOa,QAAA,MAAM,GAA2B;IAC1C,4GAA4G;IAC5G,SAAS,EAAE,WAAW;IACtB,YAAY,EAAE,cAAc;IAE5B,iGAAiG;IACjG,cAAc,EAAE,gBAAgB;IAEhC,6FAA6F;IAC7F,WAAW,EAAE,aAAa;IAC1B,WAAW,EAAE,aAAa;CAC7B,CAAA;AAED,kBAAe,cAAM,CAAC"}

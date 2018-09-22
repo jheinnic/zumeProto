@@ -1,0 +1,55 @@
+/**
+ * Created by jheinnic on 4/29/17.
+ */
+import {InjectionToken} from "@bstock/metajs/dist";
+import {IModuleProvider} from "../module/IModuleProvider";
+import {ContainerModule} from "inversify";
+import {KeyAsValue} from "@bstock/ts-utils/dist";
+import {Constructor} from "reflect-helper/util";
+import {MixinDITypes} from "../module/index";
+
+
+export {DITag} from "../injection/DITag";
+export {DIType} from "../injection/DIType";
+export {Application} from "./Application";
+export {IApplication} from "./IApplication";
+
+export type DITypeLabel = /*"IModuleProvider" |*/ "ContainerModule";
+
+export const DITypes: IDITypes = {
+    ContainerModule: new InjectionToken<ContainerModule>("ContainerModule"),
+    // IModuleProvider: new InjectionToken<IModuleProvider>("IModuleProvider")
+};
+
+
+export interface IDITypes { // extends Record<DITypeLabel, InjectionToken<any>> {
+    readonly ContainerModule: InjectionToken<ContainerModule>;
+}
+
+export function aMixinDITypes<T extends Constructor<{}>>(Base: T): (T & Constructor<IDITypes>)
+{
+    return class extends Base implements IDITypes {
+        readonly ContainerModule: InjectionToken<ContainerModule> = DITypes.ContainerModule;
+
+        constructor(...args: any[]) {
+            super(args);
+        }
+    };
+}
+
+
+export type DITagLabels = "moduleId";
+
+export const DITags: KeyAsValue<DITagLabels> = {
+    "moduleId": "moduleId"
+};
+
+
+export class MyTypes {
+
+};
+export const _AllMyTypes1 = MyTypes;
+export const _AllMyTypes2 = MixinDITypes(MyTypes);
+export const _AllMyTypes3 = aMixinDITypes(_AllMyTypes2);
+export class AllMyTypes extends _AllMyTypes3 { };
+

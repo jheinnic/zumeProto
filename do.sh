@@ -1,0 +1,3 @@
+#!/bin/sh
+
+vi sandbox/hr.procmgr/service/src/test/java/fixtures/ExampleGrpcUnitTestConfiguration.java sandbox/pizzaops.delivery/service/src/test/java/fixtures/ExampleGrpcUnitTestConfiguration.java sandbox/pizzaops.fleet/service/src/test/java/fixtures/ExampleGrpcUnitTestConfiguration.java sandbox/pizzaops.process/service/src/test/java/fixtures/ExampleGrpcUnitTestConfiguration.java sandbox/pizzaops.staffing/service/src/test/java/fixtures/ExampleGrpcUnitTestConfiguration.java sandbox/pizzaops.supplychain/service/src/test/java/fixtures/ExampleGrpcUnitTestConfiguration.java sandbox/reporting.dashboards/service/src/test/java/fixtures/ExampleGrpcUnitTestConfiguration.java sandbox/reporting.forecasts/service/src/test/java/fixtures/ExampleGrpcUnitTestConfiguration.java

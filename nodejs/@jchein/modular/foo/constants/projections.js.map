@@ -1,0 +1,1 @@
+{"version":3,"file":"projections.js","sourceRoot":"","sources":["../../scripts/constants/projections.ts"],"names":[],"mappings":";;AAOa,QAAA,WAAW,GAA6B;IACjD,GAAG,EAAE,MAAM,CAAC,KAAK,CAAC;IAClB,OAAO,EAAE,MAAM,CAAC,SAAS,CAAC;IAC1B,OAAO,EAAE,MAAM,CAAC,SAAS,CAAC;IAC1B,WAAW,EAAE,MAAM,CAAC,aAAa,CAAC;CACrC,CAAA;AAED,kBAAe,mBAAW,CAAC"}

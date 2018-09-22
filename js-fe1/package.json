@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "express": "^4.15.4",
+    "minio": "^3.1.3"
+  }
+}

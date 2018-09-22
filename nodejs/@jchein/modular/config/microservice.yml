@@ -1,0 +1,7 @@
+default:
+  name: bids
+  version: 1.0.0
+  mountPath: /v1/bids
+  content:
+    pathToControllers: ./controllers
+    pathToMonitors: ./monitors

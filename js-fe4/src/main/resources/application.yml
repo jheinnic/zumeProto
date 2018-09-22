@@ -1,0 +1,45 @@
+server:
+  port: 8084
+  context-path: /ui
+  servlet-path: /
+  session:
+    cookie:
+      http-only: true
+      name: UISESSION
+  tomcat:
+    accesslog:
+      enabled: true
+      rename-on-rotate: true
+    redirect-context-root: true
+    uri-encoding: UTF-8
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      clientId: SampleClientId
+      clientSecret: secret
+      accessTokenUri: http://localhost:8083/auth/oauth/token
+      userAuthorizationUri: http://localhost:8083/auth/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:8083/auth/user/me
+  user:
+    username: user
+    password: abc123
+spring:
+  main:
+    log-startup-info: false
+    web-environment: true
+    banner-mode: "OFF"
+  thymeleaf:
+    cache: false
+local:
+  management:
+    port: 1102
+  server:
+    port: 8084
+logging:
+  pattern:
+    level: user:%X{user} %5p
+  config: classpath:logback-spring.xml
+  file: target/demo.log

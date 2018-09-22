@@ -8,7 +8,7 @@ option java_package = "name.jchein.demo.zumepizza.services.simple.webui.grpc.pro
 
 // Placeholder service definition.
 service Placeholder {
-	rpc do (Message) returns (Message) { }
+	rpc doIt (Message) returns (Message) { }
 }
 
 message Message {

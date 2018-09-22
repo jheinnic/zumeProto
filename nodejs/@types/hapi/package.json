@@ -1,0 +1,41 @@
+{
+    "name": "@types/hapi",
+    "version": "16.1.12-01",
+    "description": "TypeScript definitions for hapi",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Jason Swearingen",
+            "url": "https://github.com/jasonswearingen",
+            "githubUsername": "jasonswearingen"
+        },
+        {
+            "name": "AJP",
+            "url": "https://github.com/AJamesPhillips",
+            "githubUsername": "AJamesPhillips"
+        }
+    ],
+    "main": "",
+    "repository": {
+        "type": "git",
+        "url": "https://www.github.com/jheinnic/b_eventuate.git"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/boom": "*",
+        "@types/joi": "*",
+        "@types/catbox": "*",
+        "@types/mimos": "*",
+        "@types/podium": "*",
+        "@types/shot": "*",
+        "@types/node": "*"
+    },
+    "files": [
+        "index.d.ts",
+        "definitions",
+        "tsconfig.json",
+        "tslint.json"
+    ],
+    "invalidTypesPublisherContentHash": "invalid",
+    "typeScriptVersion": "2.4"
+}

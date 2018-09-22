@@ -79,10 +79,12 @@
 			<artifactId>hr.procmgr-grpc-spec</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+<!--
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>edge.potato-grpc-spec</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+-->
 	</dependencies>
 </project>

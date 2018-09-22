@@ -1,0 +1,12 @@
+default:
+  #
+  # Data Sources
+  #
+  snapshots:
+    type: mongo
+    host: localhost
+    port: 27017
+    database: svc_auctions-dev
+  eventstore:
+    type: kafka
+    host: localhost

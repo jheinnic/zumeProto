@@ -1,0 +1,25 @@
+2017/07/30-12:52:32.710 44803 Reusing MANIFEST /Users/jheinnic/Library/Application Support/Google/Chrome/Default/Storage/ext/fhbjgbiflinjbdggehcddcbncdddomop/def/IndexedDB/chrome-extension_fhbjgbiflinjbdggehcddcbncdddomop_0.indexeddb.leveldb/MANIFEST-000001
+2017/07/30-12:52:32.710 44803 Recovering log #46
+2017/07/30-12:52:33.437 44803 Reusing old log /Users/jheinnic/Library/Application Support/Google/Chrome/Default/Storage/ext/fhbjgbiflinjbdggehcddcbncdddomop/def/IndexedDB/chrome-extension_fhbjgbiflinjbdggehcddcbncdddomop_0.indexeddb.leveldb/000046.log 
+2017/07/30-12:52:46.403 160519 Compacting 3@0 + 1@1 files
+2017/07/30-12:52:47.563 160519 Generated table #49@0: 478 keys, 542970 bytes
+2017/07/30-12:52:47.563 160519 Compacted 3@0 + 1@1 files => 542970 bytes
+2017/07/30-12:52:47.700 160519 compacted to: files[ 0 1 2 0 0 0 0 ]
+2017/07/30-12:52:47.721 160519 Delete type=2 #41
+2017/07/30-12:52:47.756 160519 Delete type=2 #43
+2017/07/30-12:52:47.757 160519 Delete type=2 #45
+2017/07/30-12:52:47.846 160519 Delete type=2 #47
+2017/07/30-12:54:36.634 160519 Compacting 1@1 + 2@2 files
+2017/07/30-12:54:37.256 160519 Generated table #50@1: 522 keys, 2105019 bytes
+2017/07/30-12:54:37.338 160519 Generated table #51@1: 401 keys, 718692 bytes
+2017/07/30-12:54:37.338 160519 Compacted 1@1 + 2@2 files => 2823711 bytes
+2017/07/30-12:54:37.677 160519 compacted to: files[ 0 0 2 0 0 0 0 ]
+2017/07/30-12:54:37.678 160519 Delete type=2 #30
+2017/07/30-12:54:37.716 160519 Delete type=2 #31
+2017/07/30-12:54:37.819 160519 Delete type=2 #49
+2017/07/30-12:55:20.781 160519 Level-0 table #53: started
+2017/07/30-12:55:21.110 160519 Level-0 table #53: 4171412 bytes OK
+2017/07/30-12:55:21.204 160519 Delete type=0 #46
+2017/07/30-12:58:28.274 160519 Level-0 table #55: started
+2017/07/30-12:58:28.615 160519 Level-0 table #55: 4414551 bytes OK
+2017/07/30-12:58:28.814 160519 Delete type=0 #52

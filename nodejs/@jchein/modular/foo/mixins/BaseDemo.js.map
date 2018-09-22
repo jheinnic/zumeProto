@@ -1,0 +1,1 @@
+{"version":3,"file":"BaseDemo.js","sourceRoot":"","sources":["../../scripts/mixins/BaseDemo.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,iCAAiC;AAEjC;IAGI,YAAY,GAAW,EAAE,IAAY;QACjC,IAAI,CAAC,GAAG,GAAG,GAAG,CAAC;IACnB,CAAC;IAED,IAAI,EAAE;QACF,MAAM,CAAC,IAAI,CAAC,GAAG,CAAC;IACpB,CAAC;CACJ;AACD,wCAAwC;AAExC,2CAA2C;AAE3C,mBAAmB;AACnB,qBAAqB;AACrB,uBAAuB;AACvB,iBAAiB;AACjB,WAAW"}

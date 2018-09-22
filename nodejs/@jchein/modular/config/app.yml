@@ -1,0 +1,100 @@
+default:
+  #
+  # Basic
+  #
+  server:
+    netbind:
+      host: 127.0.0.1
+      port: 8081
+      prefix: ""
+    log:
+      level: warning
+      path: my-log-file.log
+    scale:
+      strategy: raft
+    messaging:
+      publish: tcp://127.0.0.1:7777
+      subscribe: tcp://127.0.0.1:5555
+  #
+  # Microservice
+  #
+  microservice:
+    scale:
+       strategy: raft
+       followers:
+         - 10.0.0.1
+         - 10.0.0.2
+       leader: 10.0.0.3
+    server:
+      name: v1/bids
+      dependencies: my/other/service/to/monitor/v1
+  #
+  # Zookeeper
+  #
+  zookeeper:
+    connectionString: localhost:2181
+    basePath: /services
+    retry:
+      wait: 1250
+      count: 5
+    connectionTimeout: 60000
+    sessionTimeout: 300000
+  #
+  # Data Sources
+  #
+  datasources:
+    snapshots:
+       type: mongo
+       host: localhost
+       port: 27017
+       database: svc_auctions-dev
+    eventstore:
+       type: kafka
+       host: localhost
+  #
+  # Models
+  #
+  models:
+    v1:
+      bid:
+        properties:
+          - id
+          - userId
+          - active
+        relations:
+          - {
+            name: bid,
+            type: resource
+            }
+        actions:
+          - list
+          - get
+          - create
+          - update
+          - remove
+          - count
+      user:
+        properties:
+          - id
+          - name
+        relations:
+          - {
+            name: user,
+            type: resource
+            }
+          - {
+            name: bids,
+            type: collection
+            }
+        actions:
+          - get
+
+development:
+  log:
+    level: trace
+    timeFormat: "YYYY-MM-DD HH:mm:ss"
+    messageFormat: "%time | %logger::%level - %msg"
+
+production:
+  zookeeper:
+    connectionString: master.mesos:2181

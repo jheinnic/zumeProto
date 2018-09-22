@@ -1,0 +1,27 @@
+default:
+  #
+  # Basic
+  #
+  uuid: 32e26c90-1817-11e7-a207-7fb7db536921
+  netbind:
+    host: 127.0.0.1
+    port: 8083
+    prefix: ""
+  log:
+    level: debug
+    path: my-log-file.log
+  messaging:
+    publish: tcp://127.0.0.1:5555
+    subscribe: tcp://127.0.0.1:5555
+  sharding:
+    leaderElection: bids
+  options:
+    enableBodyParsing: true
+    enableCompression: false
+    enableCaching: false
+    enableDiscovery: true
+    enableValidation: true
+    correlationHeaderName: X-CorrelationID
+  content:
+    pathToControllers: ./controllers
+    pathToMonitors: ./monitors

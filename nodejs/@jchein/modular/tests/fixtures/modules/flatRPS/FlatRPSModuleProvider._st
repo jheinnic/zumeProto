@@ -1,0 +1,19 @@
+/**
+ * Created by jheinnic on 4/30/17.
+ */
+
+import {BModule} from "../../../../scripts"; // /di/registry/BModule";
+import {IModuleProvider} from "../../../../scripts";
+import {ModuleId} from "../../../../scripts"; ///di/module/ModuleId";
+import {ContainerModule} from "inversify";
+
+@BModule(
+    new ModuleId("tests/fixtures/modules/flatRPS"),
+)
+export class FlatRPSModuleProvider implements IModuleProvider {
+    moduleId: ModuleId;
+
+    provide(): ContainerModule {
+
+    }
+}

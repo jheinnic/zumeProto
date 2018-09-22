@@ -1,0 +1,25 @@
+{
+    "name": "@types/through2-reduce",
+    "version": "1.1.1",
+    "description": "TypeScript definitions for through2-reduce",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "John Heinnickel",
+            "url": "https://github.com/jheinnic"
+        }
+    ],
+    "main": "",
+    "repository": {
+        "type": "git",
+        "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/through2": "*",
+        "@types/node": "*"
+    },
+    "peerDependencies": {},
+    "typesPublisherContentHash": "00f414f4ee1ddfc2ff02a2f9b3c317dfed51fbbf0f376549c93df02d2d2bdfad",
+    "typeScriptVersion": "2.4"
+}

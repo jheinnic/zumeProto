@@ -1,0 +1,3237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+	<artifactId>parent</artifactId>
+	<packaging>pom</packaging>
+	<name>Event Sourcing Demo Parent POM File</name>
+	<description>Parent POM file for modules of a Java Event Sourcing Demo Project</description>
+
+	<parent>
+		<groupId>name.jchein.demo.zumepizza</groupId>
+		<artifactId>microservices</artifactId>
+		<relativePath>..</relativePath>
+		<version>0.0.1-bootstrap-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<!-- You'll find zumepizza.service-name defined in parent pom files one 
+			tier down, in the parent sub-directory of each microservice's sub-directory 
+			under /apps/. -->
+		<swagger.namespace>name.jchein.demo.zumepizza.services.${zumepizza.service-name}</swagger.namespace>
+
+		<generated-sources-path>${project.build.directory}/generated-sources</generated-sources-path>
+		<generated-sources-java-path>java</generated-sources-java-path>
+		<!-- <generated-resources-java-path>src/main/resources</generated-resources-java-path> -->
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<useReleaseProfile>false</useReleaseProfile>
+
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+		<maven.javadoc.skip>true</maven.javadoc.skip>
+
+		<dockerfile.extension-version>1.3.5</dockerfile.extension-version>
+		<os-maven.extension-version>1.5.0.Final</os-maven.extension-version>
+
+		<assertj.plugin-version>2.1.0</assertj.plugin-version>
+		<build-helper.plugin-version>1.10</build-helper.plugin-version>
+		<frontend.plugin-version>1.3</frontend.plugin-version>
+		<dockerfile.plugin-version>1.3.5</dockerfile.plugin-version>
+		<gauge.plugin-version>1.2.1</gauge.plugin-version>
+		<lombok.plugin-version>1.16.20.0</lombok.plugin-version>
+		<m2e-lifecycle.plugin-version>1.0.0</m2e-lifecycle.plugin-version>
+		<maven-assembly.plugin-version>3.1.0</maven-assembly.plugin-version>
+		<maven-clean.plugin-version>2.5</maven-clean.plugin-version>
+		<maven-eclipse.plugin-version>2.10</maven-eclipse.plugin-version>
+		<maven-compiler.plugin-version>3.7.0</maven-compiler.plugin-version>
+		<maven-dependency.plugin-version>3.0.2</maven-dependency.plugin-version>
+		<maven-exec.plugin-version>1.4.0</maven-exec.plugin-version>
+		<maven-resources.plugin-version>3.0.2</maven-resources.plugin-version>
+		<maven-surefire.plugin-version>2.20.1</maven-surefire.plugin-version>
+		<protobuf-maven.plugin-version>0.5.1</protobuf-maven.plugin-version>
+		<properties.plugin-version>1.0.0</properties.plugin-version>
+		<sql.plugin-version>3.0.0-SNAPSHOT</sql.plugin-version>
+		<swagger-codegen.plugin-version>2.2.3</swagger-codegen.plugin-version>
+		<viatra.plugin-version>1.6.2</viatra.plugin-version>
+		<xtend.plugin-version>2.13.0</xtend.plugin-version>
+		<xtext.plugin-version>2.13.0</xtext.plugin-version>
+
+
+		<!-- Secondary dependencies specific to frontend-maven-plugin -->
+		<frontend-node.version>v6.10.2</frontend-node.version>
+		<frontend-npm.version>3.10.10</frontend-npm.version>
+
+
+		<apache-commons-io.version>2.5</apache-commons-io.version>
+		<apache-commons-lang.version>2.6</apache-commons-lang.version>
+		<apache-httpclient.version>4.5.3</apache-httpclient.version>
+		<apache-sis.version>0.8</apache-sis.version>
+		<asm.version>(5.0.1,6.0]</asm.version>
+		<assertj.version>3.9.0</assertj.version>
+		<assertj-guava.version>3.1.0</assertj-guava.version>
+		<!--atl.version>3.8.0-20170518.201452-22</atl.version -->
+		<atl.version>3.8.0-SNAPSHOT</atl.version>
+		<eventuate-client.version>0.20.1.RELEASE</eventuate-client.version>
+		<eventuate-local.version>0.18.0.RELEASE</eventuate-local.version>
+		<gauge.version>0.6.4</gauge.version>
+		<gdal.version>2.2.0</gdal.version>
+		<geojson-jackson.version>1.8</geojson-jackson.version>
+		<google-grpc-common.version>1.8.0</google-grpc-common.version>
+		<grpc-spring-boot.version>2.2.0</grpc-spring-boot.version>
+		<!--gson.version>2.8.1</gson.version -->
+		<guava.version>18.0</guava.version>
+		<hamcrest.version>1.3</hamcrest.version>
+		<hashids.version>1.0.3</hashids.version>
+		<hazelcast.version>3.8.4</hazelcast.version>
+		<!-- <hibernate-validator.version>5.4.1.Final</hibernate-validator.version> -->
+		<io-grpc.version>1.10.1</io-grpc.version>
+		<jackson.version>2.8.9</jackson.version>
+		<!-- <javax-cdi.version>1.2</javax-cdi.version> <javax-el.version>2.2.5</javax-el.version> 
+			<javax-servlet.version>3.1.0</javax-servlet.version> <javax-validation.version>1.1.0.Final</javax-validation.version> -->
+		<javax-measure.version>1.0</javax-measure.version>
+		<javax-ws-rs.version>2.0.1</javax-ws-rs.version>
+		<jgrapht.version>1.1.0</jgrapht.version>
+		<jsr363-core.version>1.0.9</jsr363-core.version>
+		<jsr363-ri.version>1.0.3</jsr363-ri.version>
+		<jsr363-lib.version>1.0.2</jsr363-lib.version>
+		<jts-jackson.version>2.4</jts-jackson.version>
+		<junit.version>4.12</junit.version>
+		<jwt.version>0.8.0-SNAPSHOT</jwt.version>
+		<lombok.version>1.16.20</lombok.version>
+		<!-- <jersey-client.version>2.25.1</jersey-client.version> <joda-time.version>2.9.9</joda-time.version> 
+			<logback.version>1.2.3</logback.version -->
+		<migbase64.version>2.2</migbase64.version>
+		<minio-client.version>3.0.6</minio-client.version>
+		<mit-openid-client.version>1.3.1</mit-openid-client.version>
+		<okhttp.version>2.7.5</okhttp.version>
+		<openroutes-api.version>4.4.0</openroutes-api.version>
+		<optaplanner.version>7.7.0.Final</optaplanner.version>
+		<protege-editor.version>5.2.0</protege-editor.version>
+		<protege-mapping.version>1.6</protege-mapping.version>
+		<protobuf-java.version>3.5.1</protobuf-java.version>
+		<protoc.version>3.5.1-1</protoc.version>
+		<rxjava.version>1.3.5</rxjava.version>
+		<jenetics.version>4.1.0</jenetics.version>
+		<scala-lib.version>2.12.2</scala-lib.version>
+		<!--slf4j.version>1.7.25</slf4j.version -->
+		<springfox-version>2.4.0</springfox-version>
+		<spring.version>4.3.10.RELEASE</spring.version>
+		<spring-boot.version>1.5.10.RELEASE</spring-boot.version>
+		<spring-boot-grpc.version>1.4.0.RELEASE</spring-boot-grpc.version>
+		<spring-cloud-aws.version>1.2.4.RELEASE</spring-cloud-aws.version>
+		<spring-cloud-consul.version>1.3.3.RELEASE</spring-cloud-consul.version>
+		<spring-cloud-zookeeper.version>1.1.2.RELEASE</spring-cloud-zookeeper.version>
+		<spring-integration.version>4.3.10.RELEASE</spring-integration.version>
+		<spring-security.version>4.2.3.RELEASE</spring-security.version>
+		<spring-oauth2-client.version>5.0.0.M3</spring-oauth2-client.version>
+		<statefulj.version>3.0</statefulj.version>
+		<systems-uom.version>0.7.2</systems-uom.version>
+		<swagger.version>1.5.15</swagger.version>
+		<!-- <tomcat-embedded.version>8.5.16</tomcat-embedded.version> -->
+		<uuid-generator.version>3.1.4</uuid-generator.version>
+		<viatra.version>1.6.2</viatra.version>
+		<xtend-contrib.version>1.1.0</xtend-contrib.version>
+
+		<core-resources.version>3.12.0</core-resources.version>
+		<eclipse-text.version>3.6.100</eclipse-text.version>
+		<emf.version>2.12.0</emf.version>
+		<emf-codegen.version>2.11.0</emf-codegen.version>
+		<xtext.version>2.13.0</xtext.version>
+		<ecore-xtext.version>1.2.0</ecore-xtext.version>
+		<ecore-xcore.version>1.3.1</ecore-xcore.version>
+		<ecore-xcore-lib.version>1.1.100</ecore-xcore-lib.version>
+		<emf-mwe2-launch.version>2.8.3</emf-mwe2-launch.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>properties-maven-plugin</artifactId>
+					<version>${properties.plugin-version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>${maven-eclipse.plugin-version}</version>
+					<configuration>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.assertj</groupId>
+					<artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+					<version>${assertj.plugin-version}</version>
+					<configuration>
+						<packages></packages>
+						<classes></classes>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven-assembly.plugin-version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven-dependency.plugin-version}</version>
+					<executions>
+						<execution>
+							<id>unpack-api-spec</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>unpack-dependencies</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}/proto-sources</outputDirectory>
+								<stripVersion>true</stripVersion>
+								<includeArtifactIds>${zumepizza.service-name}-api-spec</includeArtifactIds>
+								<includeGroupIds>${project.groupId}</includeGroupIds>
+								<excludeTransitive>true</excludeTransitive>
+								<excludeTypes>pom</excludeTypes>
+								<includes>*.proto</includes>
+								<classifier>api-spec</classifier>
+								<type>zip</type>
+								<!-- <scope>test</scope> <artifactItems> <artifactItem> <groupId>${project.parent.groupId}</groupId> 
+									<artifactId>${zumepizza.service-name}-api-spec</artifactId> <version>${project.parent.version}</version> 
+									<type>pom</type> <classifier>api-spec</classifier> <overWrite>true</overWrite> 
+									</artifactItem> </artifactItems> -->
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-codegen-maven-plugin</artifactId>
+					<version>${swagger-codegen.plugin-version}</version>
+					<configuration>
+						<inputSpec>${project.build.directory}/swagger-sources/swagger/api.yaml</inputSpec>
+						<configOptions>
+							<sourceFolder>${generated-sources-java-path}</sourceFolder>
+						</configOptions>
+						<addCompileSourceRoot>true</addCompileSourceRoot>
+						<output>${generated-sources-path}/swagger</output>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${build-helper.plugin-version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok-maven-plugin</artifactId>
+					<version>${lombok.plugin-version}</version>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>delombok</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.xtend</groupId>
+					<artifactId>xtend-maven-plugin</artifactId>
+					<version>${xtend.plugin-version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+								<goal>testCompile</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${generated-sources-path}/xtend-gen/main/${generated-sources-java-path}</outputDirectory>
+								<testOutputDirectory>${generated-sources-path}/xtend-gen/test/${generated-sources-java-path}</testOutputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- Generates the Ecore genmodel via MWE2 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>${maven-exec.plugin-version}</version>
+					<executions>
+						<execution>
+							<id>mwe2Launcher</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>java</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<mainclass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainclass>
+						<arguments>
+							<argument>${project.basedir}/workflow/generateGenModel.mwe2</argument>
+							<argument>-p</argument>
+							<argument>rootPath=${project.basedir}/..</argument>
+						</arguments>
+						<classpathscope>compile</classpathscope>
+						<includeplugindependencies>true</includeplugindependencies>
+						<cleanupdaemonthreads>false</cleanupdaemonthreads>
+						<!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.eclipse.emf</groupId>
+							<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+							<version>${emf-mwe2-launch.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.platform</groupId>
+							<artifactId>org.eclipse.text</artifactId>
+							<version>${eclipse-text.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.platform</groupId>
+							<artifactId>org.eclipse.core.resources</artifactId>
+							<version>${core-resources.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.emf</groupId>
+							<artifactId>org.eclipse.emf.common</artifactId>
+							<version>${emf.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.emf</groupId>
+							<artifactId>org.eclipse.emf.ecore</artifactId>
+							<version>${emf.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.emf</groupId>
+							<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+							<version>${emf.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.emf</groupId>
+							<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+							<version>${emf.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.emf</groupId>
+							<artifactId>org.eclipse.emf.codegen</artifactId>
+							<version>${emf-codegen.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.emf</groupId>
+							<artifactId>org.eclipse.emf.ecore.xcore</artifactId>
+							<version>${ecore-xcore.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.emf</groupId>
+							<artifactId>org.eclipse.emf.ecore.xcore.lib</artifactId>
+							<version>${ecore-xcore-lib.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.emf</groupId>
+							<artifactId>org.eclipse.emf.codegen.ecore.xtext</artifactId>
+							<version>${ecore-xtext.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.xtext</groupId>
+							<artifactId>org.eclipse.xtext.ecore</artifactId>
+							<version>${xtext.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.xtext</groupId>
+							<artifactId>org.eclipse.xtext.xbase</artifactId>
+							<version>${xtext.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.eclipse.xtend</groupId>
+							<artifactId>org.eclipse.xtend.core</artifactId>
+							<version>${xtext.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<!-- Generates the Xtend and Xcore models -->
+				<plugin>
+					<groupId>org.eclipse.xtext</groupId>
+					<artifactId>xtext-maven-plugin</artifactId>
+					<version>${xtext.plugin-version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.viatra</groupId>
+					<artifactId>viatra-maven-plugin</artifactId>
+					<version>${viatra.plugin-version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${maven-clean.plugin-version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler.plugin-version}</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire.plugin-version}</version>
+					<configuration>
+						<skipTests>true</skipTests>
+						<systemProperties>
+							<property>
+								<name>loggerPath</name>
+								<value>conf/log4j.properties</value>
+							</property>
+						</systemProperties>
+						<argLine>-Xms512m -Xmx1536m</argLine>
+						<parallel>methods</parallel>
+						<threadCount>10</threadCount>
+						<forkMode>pertest</forkMode>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>sql-maven-plugin</artifactId>
+					<version>${sql.plugin-version}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>com.thoughtworks.gauge.maven</groupId>
+					<artifactId>gauge-maven-plugin</artifactId>
+					<version>${gauge.plugin-version}</version>
+					<executions>
+						<execution>
+							<phase>test</phase>
+							<configuration>
+								<specsDir>specs</specsDir>
+							</configuration>
+							<goals>
+								<goal>execute</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+							<configuration>
+								<excludeDevtools>true</excludeDevtools>
+								<addResources>true</addResources>
+								<mainClass>${start-class}</mainClass>
+							</configuration>
+						</execution>
+					</executions>
+					<configuration>
+						<mainClass>${start-class}</mainClass>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.xolstice.maven.plugins</groupId>
+					<artifactId>protobuf-maven-plugin</artifactId>
+					<version>${protobuf-maven.plugin-version}</version>
+					<!-- <configuration> <protoSourceRoot>${project.build.directory}/proto-sources</protoSourceRoot> 
+						<outputDirectory>${generated-sources-path}/proto/${generated-sources-java-path}</outputDirectory> 
+						<protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact> 
+						<pluginId>grpc-java</pluginId> <pluginArtifact>io.grpc:protoc-gen-grpc-java:${io-grpc.version}:exe:${os.detected.classifier}</pluginArtifact> 
+						</configuration> -->
+					<configuration>
+						<pluginId>grpc-java</pluginId>
+						<pluginArtifact>io.grpc:protoc-gen-grpc-java:${io-grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+						<protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
+						<protoSourceRoot>${project.basedir}/src/main/protobuf</protoSourceRoot>
+						<protoTestSourceRoot>${project.basedir}/src/test/protobuf</protoTestSourceRoot>
+						<attachProtoSources>true</attachProtoSources>
+						<clearOutputDirectory>true</clearOutputDirectory>
+						<checkStaleness>true</checkStaleness>
+						<hashDependentPaths>false</hashDependentPaths>
+						<temporaryProtoFileDirectory>${project.build.directory}/protoc-dependencies</temporaryProtoFileDirectory>
+						<writeDescriptorSet>true</writeDescriptorSet>
+						<attachDescriptorSet>true</attachDescriptorSet>
+						<descriptorSetClassifier>protobin</descriptorSetClassifier>
+						<includeDependenciesInDescriptorSet>true</includeDependenciesInDescriptorSet>
+						<includeSourceInfoInDescriptorSet>true</includeSourceInfoInDescriptorSet>
+						<detail>true</detail>
+					</configuration>
+					<extensions>true</extensions>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+								<goal>test-compile</goal>
+								<goal>compile-custom</goal>
+								<goal>test-compile-custom</goal>
+							</goals>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>com.google.api.grpc</groupId>
+							<artifactId>proto-google-common-protos</artifactId>
+							<version>${google-grpc-common.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>com.google.api.grpc</groupId>
+							<artifactId>grpc-google-common-protos</artifactId>
+							<version>${google-grpc-common.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<plugin>
+					<groupId>com.github.eirslett</groupId>
+					<artifactId>frontend-maven-plugin</artifactId>
+					<version>${frontend.plugin-version}</version>
+					<configuration>
+						<nodeVersion>${frontend-node.version}</nodeVersion>
+						<npmVersion>${frontend-npm.version}</npmVersion>
+						<workingDirectory>${project.basedir}/src/main/webapp</workingDirectory>
+					</configuration>
+					<executions>
+						<execution>
+							<id>install node and npm</id>
+							<goals>
+								<goal>install-node-and-npm</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>npm install</id>
+							<goals>
+								<goal>npm</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>npm run build</id>
+							<goals>
+								<goal>npm</goal>
+							</goals>
+							<configuration>
+								<arguments>run build</arguments>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>com.spotify</groupId>
+					<artifactId>dockerfile-maven-plugin</artifactId>
+					<version>${dockerfile.plugin-version}</version>
+					<!--
+					<executions>
+						<execution>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+					-->
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>${m2e-lifecycle.plugin-version}</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>io.swagger</groupId>
+										<artifactId>swagger-codegen-maven-plugin</artifactId>
+										<versionRange>[${swagger-codegen.plugin-version},)</versionRange>
+										<goals>
+											<goal>generate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>sql-maven-plugin</artifactId>
+										<versionRange>[3.0.0-SNAPSHOT,)</versionRange>
+										<goals>
+											<goal>execute</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.eclipse.viatra</groupId>
+										<artifactId>viatra-maven-plugin</artifactId>
+										<versionRange>[${viatra.plugin-version},)</versionRange>
+										<goals>
+											<goal>generate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>exec-maven-plugin</artifactId>
+										<versionRange>[1.2.1,)</versionRange>
+										<goals>
+											<goal>java</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.xolstice.maven.plugins</groupId>
+										<artifactId>protobuf-maven-plugin</artifactId>
+										<versionRange>[0.5.1,)</versionRange>
+										<extensions>true</extensions>
+										<goals>
+											<goal>compile</goal>
+											<goal>custom-compile</goal>
+											<goal>test-compile</goal>
+											<goal>test-custom-compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<delimiters>
+						<delimiter>@</delimiter>
+					</delimiters>
+					<useDefaultDelimiters>false</useDefaultDelimiters>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/binary-resources</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
+		<extensions>
+			<extension>
+				<groupId>kr.motd.maven</groupId>
+				<artifactId>os-maven-plugin</artifactId>
+				<version>${os-maven.extension-version}</version>
+			</extension>
+			<extension>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-extension</artifactId>
+				<version>${dockerfile.extension-version}</version>
+			</extension>
+		</extensions>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson</groupId>
+				<artifactId>jackson-bom</artifactId>
+				<version>${jackson.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+
+			<!-- Jackson GIS Extensions -->
+			<dependency>
+				<groupId>de.grundid.opendatalab</groupId>
+				<artifactId>geojson-jackson</artifactId>
+				<version>${geojson-jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bedatadriven</groupId>
+				<artifactId>jackson-datatype-jts</artifactId>
+				<version>${jts-jackson.version}</version>
+			</dependency>
+
+			<!-- Locationtech JTS -->
+			<dependency>
+				<groupId>org.locationtech.jts</groupId>
+				<artifactId>jts-core</artifactId>
+				<version>1.15.0</version>
+			</dependency>
+			
+			<!-- Drools -->
+			<dependency>
+				<groupId>org.kie</groupId>
+				<artifactId>kie-ci</artifactId>
+				<version>${optaplanner.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.drools</groupId>
+				<artifactId>drools-decisiontables</artifactId>
+				<version>${optaplanner.version}</version>
+			</dependency>
+
+
+			<!-- Openroutes 4.4.0 API -->
+			<dependency>
+				<groupId>org.openroutes</groupId>
+				<artifactId>ors-java-client</artifactId>
+				<version>${openroutes-api.version}</version>
+			</dependency>
+
+			<!-- Eventuate -->
+			<dependency>
+				<groupId>io.eventuate.client.java</groupId>
+				<artifactId>eventuate-client-java</artifactId>
+				<version>${eventuate-client.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.eventuate.client.java</groupId>
+				<artifactId>eventuate-client-java-spring</artifactId>
+				<version>${eventuate-client.version}</version>
+			</dependency>
+
+			<!-- Eventuate -->
+			<dependency>
+				<groupId>io.eventuate.local.java</groupId>
+				<artifactId>eventuate-local-java-jdbc</artifactId>
+				<version>${eventuate-local.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.eventuate.local.java</groupId>
+				<artifactId>eventuate-local-java-embedded-cdc</artifactId>
+				<version>${eventuate-local.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.eventuate.local.java</groupId>
+				<artifactId>eventuate-local-java-embedded-cdc-autoconfigure</artifactId>
+				<version>${eventuate-local.version}</version>
+			</dependency>
+
+			<!-- Eventuate Testing -->
+			<dependency>
+				<groupId>io.eventuate.client.java</groupId>
+				<artifactId>eventuate-client-java-jdbc</artifactId>
+				<version>${eventuate-client.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Embedded Tomcat -->
+			<!-- <dependency> <groupId>org.apache.tomcat.embed</groupId> <artifactId>tomcat-embed-core</artifactId> 
+				<version>${tomcat-embedded.version}</version> </dependency> <dependency> 
+				<groupId>org.apache.tomcat.embed</groupId> <artifactId>tomcat-embed-el</artifactId> 
+				<version>${tomcat-embedded.version}</version> </dependency> <dependency> 
+				<groupId>org.apache.tomcat.embed</groupId> <artifactId>tomcat-embed-websocket</artifactId> 
+				<version>${tomcat-embedded.version}</version> </dependency> -->
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-oauth2-client</artifactId>
+				<version>${spring-oauth2-client.version}</version>
+			</dependency>
+
+			<!-- Spring Cloud -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-aws-context</artifactId>
+				<version>${spring-cloud-aws.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-consul-dependencies</artifactId>
+				<version>${spring-cloud-consul.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+				<version>${spring-cloud-zookeeper.version}</version>
+			</dependency>
+
+			<!-- Spring GRPC -->
+			<dependency>
+				<groupId>net.devh</groupId>
+				<artifactId>grpc-spring-boot-starter</artifactId>
+				<version>${spring-boot-grpc.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>net.devh</groupId>
+				<artifactId>grpc-client-spring-boot-starter</artifactId>
+				<version>${spring-boot-grpc.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>net.devh</groupId>
+				<artifactId>grpc-server-spring-boot-starter</artifactId>
+				<version>${spring-boot-grpc.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.lognet</groupId>
+				<artifactId>grpc-spring-boot-starter</artifactId>
+				<version>${grpc-spring-boot.version}</version>
+			</dependency>
+
+			<!-- GRPC -->
+			<dependency>
+				<groupId>io.grpc</groupId>
+				<artifactId>grpc-core</artifactId>
+				<version>${io-grpc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.grpc</groupId>
+				<artifactId>grpc-stub</artifactId>
+				<version>${io-grpc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.grpc</groupId>
+				<artifactId>grpc-protobuf</artifactId>
+				<version>${io-grpc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.grpc</groupId>
+				<artifactId>grpc-netty</artifactId>
+				<version>${io-grpc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.grpc</groupId>
+				<artifactId>grpc-auth</artifactId>
+				<version>${io-grpc.version}</version>
+			</dependency>
+
+			<!-- Google gRPC Commons -->
+			<dependency>
+				<groupId>com.google.api.grpc</groupId>
+				<artifactId>grpc-google-common-protos</artifactId>
+				<version>${google-grpc-common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.api.grpc</groupId>
+				<artifactId>proto-google-common-protos</artifactId>
+				<version>${google-grpc-common.version}</version>
+			</dependency>
+
+			<!-- Protobuf Java Library -->
+			<dependency>
+				<groupId>com.google.protobuf</groupId>
+				<artifactId>protobuf-java</artifactId>
+				<version>${protobuf-java.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.protobuf</groupId>
+				<artifactId>protobuf-java-util</artifactId>
+				<version>${protobuf-java.version}</version>
+			</dependency>
+
+			<!-- Apache Components -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>fluent-hc</artifactId>
+				<version>${apache-httpclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${apache-commons-lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${apache-commons-io.version}</version>
+			</dependency>
+
+			<!-- OpenID Connect Client -->
+			<dependency>
+				<groupId>org.mitre</groupId>
+				<artifactId>openid-connect-client</artifactId>
+				<version>${mit-openid-client.version}</version>
+			</dependency>
+
+			<!-- Xtend -->
+			<dependency>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>org.eclipse.xtend.lib</artifactId>
+				<version>${xtext.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.oehme.xtend</groupId>
+				<artifactId>xtend-contrib</artifactId>
+				<version>${xtend-contrib.version}</version>
+			</dependency>
+
+			<!-- ECore -->
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.common</artifactId>
+				<version>${emf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.ecore</artifactId>
+				<version>${emf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+				<version>${emf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+				<version>${emf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.codegen</artifactId>
+				<version>${emf-codegen.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.codegen.ecore.xtext</artifactId>
+				<version>${ecore-xtext.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.ecore.xcore</artifactId>
+				<version>${ecore-xcore.version}</version>
+			</dependency>
+
+			<!-- Eclipse EMF XCore and XText -->
+			<dependency>
+				<groupId>org.eclipse.emf</groupId>
+				<artifactId>org.eclipse.emf.ecore.xcore.lib</artifactId>
+				<version>${ecore-xcore-lib.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.xtext</groupId>
+				<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+				<version>${xtext.version}</version>
+			</dependency>
+
+			<!-- ATL -->
+			<dependency>
+				<groupId>org.eclipse.m2m.atl</groupId>
+				<artifactId>org.eclipse.m2m.atl.common</artifactId>
+				<version>${atl.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.m2m.atl</groupId>
+				<artifactId>org.eclipse.m2m.atl.emftvm</artifactId>
+				<version>${atl.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.m2m.atl</groupId>
+				<artifactId>org.eclipse.m2m.atl.emftvm.trace</artifactId>
+				<version>${atl.version}</version>
+			</dependency>
+
+			<!-- Objectweb ASM for ATL -->
+			<dependency>
+				<groupId>org.ow2.asm</groupId>
+				<artifactId>asm</artifactId>
+				<version>${asm.version}</version>
+			</dependency>
+
+			<!-- VIATRA -->
+			<dependency>
+				<groupId>org.eclipse.viatra</groupId>
+				<artifactId>viatra-query-runtime</artifactId>
+				<version>${viatra.version}</version>
+			</dependency>
+
+			<!-- requires many more dependencies - only use if required -->
+			<!-- <dependency> <groupId>org.eclipse.viatra</groupId> <artifactId>viatra-query-language</artifactId> 
+				<version>${viatra.version}</version> </dependency> -->
+
+			<!-- JavaRx 1.x -->
+			<dependency>
+				<groupId>io.reactivex</groupId>
+				<artifactId>rxjava</artifactId>
+				<version>${rxjava.version}</version>
+			</dependency>
+
+			<!-- JGraphT -->
+			<dependency>
+				<groupId>org.jgrapht</groupId>
+				<artifactId>jgrapht-core</artifactId>
+				<version>${jgrapht.version}</version>
+			</dependency>
+
+			<!-- Project Lombok -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- Optaplanner -->
+			<dependency>
+				<groupId>org.optaplanner</groupId>
+				<artifactId>optaplanner-bom</artifactId>
+				<type>pom</type>
+				<version>${optaplanner.version}</version>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- StatefulJ -->
+			<dependency>
+				<groupId>org.statefulj</groupId>
+				<artifactId>statefulj-fsm</artifactId>
+				<version>${statefulj.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.statefulj.framework</groupId>
+				<artifactId>statefulj-framework-core</artifactId>
+				<version>${statefulj.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.hashids/hashids -->
+			<dependency>
+				<groupId>org.hashids</groupId>
+				<artifactId>hashids</artifactId>
+				<version>${hashids.version}</version>
+			</dependency>
+
+			<!-- SpringFox Swagger -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${springfox.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${springfox.version}</version>
+			</dependency>
+
+			<!-- Guava -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<!-- Hazelcast Distributed Memory Grid -->
+			<dependency>
+				<groupId>com.hazelcast</groupId>
+				<artifactId>hazelcast-spring</artifactId>
+				<version>${hazelcast.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hazelcast</groupId>
+				<artifactId>hazelcast</artifactId>
+				<version>${hazelcast.version}</version>
+			</dependency>
+
+			<!-- Java JWT -->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>${jwt.version}</version>
+			</dependency>
+
+			<!-- Jackson UUID Generator -->
+			<dependency>
+				<groupId>com.fasterxml.uuid</groupId>
+				<artifactId>java-uuid-generator</artifactId>
+				<version>${uuid-generator.version}</version>
+			</dependency>
+
+			<!-- Jackson JSON Serializer -->
+			<!-- Joda Time -->
+			<!-- <dependency> <groupId>joda-time</groupId> <artifactId>joda-time</artifactId> 
+				<version>${joda-time.version}</version> </dependency> -->
+
+			<!-- GDAL Bindings -->
+			<dependency>
+				<groupId>org.gdal</groupId>
+				<artifactId>gdal</artifactId>
+				<version>${gdal.version}</version>
+			</dependency>
+
+			<!-- Apache Spatial -->
+			<dependency>
+				<groupId>org.apache.sis.core</groupId>
+				<artifactId>sis-utility</artifactId>
+				<version>${apache-sis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sis.core</groupId>
+				<artifactId>sis-referencing</artifactId>
+				<version>${apache-sis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sis.core</groupId>
+				<artifactId>sis-feature</artifactId>
+				<version>${apache-sis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sis.core</groupId>
+				<artifactId>sis-metadata</artifactId>
+				<version>${apache-sis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sis.storage</groupId>
+				<artifactId>sis-storage</artifactId>
+				<version>${apache-sis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sis.storage</groupId>
+				<artifactId>sis-gdal</artifactId>
+				<version>${apache-sis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sis.storage</groupId>
+				<artifactId>sis-xmlstore</artifactId>
+				<version>${apache-sis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sis.storage</groupId>
+				<artifactId>sis-shapefile</artifactId>
+				<version>${apache-sis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.sis.non-free</groupId>
+				<artifactId>sis-epsg</artifactId>
+				<version>${apache-sis.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<!-- Jenetics -->
+			<dependency>
+				<groupId>io.jenetics</groupId>
+				<artifactId>jenetics</artifactId>
+				<version>${jenetics.version}</version>
+			</dependency>
+
+			<!-- JSR 363: Units of Measurement API -->
+			<dependency>
+				<groupId>javax.measure</groupId>
+				<artifactId>unit-api</artifactId>
+				<version>${javax-measure.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>tec.uom</groupId>
+				<artifactId>uom-se</artifactId>
+				<version>${jsr363-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>tec.uom.lib</groupId>
+				<artifactId>uom-lib-common</artifactId>
+				<version>${jsr363-lib.version}</version>
+			</dependency>
+
+			<!-- Systems Of Measure -->
+			<dependency>
+				<groupId>tec.units</groupId>
+				<artifactId>unit-ri</artifactId>
+				<version>${jsr363-ri.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>tec.units</groupId>
+				<artifactId>indriya</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>systems.uom</groupId>
+				<artifactId>systems-common-java8</artifactId>
+				<version>${systems-uom.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>systems.uom</groupId>
+				<artifactId>systems-ucum-java8</artifactId>
+				<version>${systems-uom.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>systems.uom</groupId>
+				<artifactId>systems-unicode-java8</artifactId>
+				<version>${systems-uom.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>systems.uom</groupId>
+				<artifactId>systems-quantity</artifactId>
+				<version>${systems-uom.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/tec.uom.domain/uom-cloud -->
+			<dependency>
+				<groupId>tec.uom.domain</groupId>
+				<artifactId>uom-cloud</artifactId>
+				<version>0.9</version>
+				<type>pom</type>
+			</dependency>
+
+			<!-- JSR 344: Money and Currency -->
+			<dependency>
+				<groupId>org.javamoney</groupId>
+				<artifactId>moneta</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.money</groupId>
+				<artifactId>money-api</artifactId>
+				<version>1.0.1</version>
+			</dependency>
+
+			<!-- Scala -->
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-library</artifactId>
+				<version>${scala-lib.version}</version>
+			</dependency>
+
+			<!-- Protege -->
+			<dependency>
+				<groupId>edu.stanford.protege</groupId>
+				<artifactId>protege-editor-owl</artifactId>
+				<version>${protege-editor.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>edu.stanford.protege</groupId>
+				<artifactId>mapping-master</artifactId>
+				<version>${protege-mapping.version}</version>
+			</dependency>
+
+			<!-- Minio S3-compatible storage client -->
+			<dependency>
+				<groupId>io.minio</groupId>
+				<artifactId>minio</artifactId>
+				<version>${minio-client.version}</version>
+			</dependency>
+
+			<!-- JavaX Restful Web Services API -->
+			<dependency>
+				<groupId>javax.ws.rs</groupId>
+				<artifactId>javax.ws.rs-api</artifactId>
+				<version>${javax-ws-rs.version}</version>
+			</dependency>
+
+			<!-- Swagger -->
+			<dependency>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-annotations</artifactId>
+				<version>${swagger.version}</version>
+			</dependency>
+
+			<!-- OK HTTP Client -->
+			<dependency>
+				<groupId>com.squareup.okhttp</groupId>
+				<artifactId>okhttp</artifactId>
+				<version>${okhttp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.squareup.okhttp</groupId>
+				<artifactId>logging-interceptor</artifactId>
+				<version>${okhttp.version}</version>
+			</dependency>
+
+			<!-- Jersey HTTP Client -->
+			<!-- <dependency> <groupId>org.glassfish.jersey.core</groupId> <artifactId>jersey-client</artifactId> 
+				<version>${jersey-client.version}</version> </dependency> <dependency> <groupId>org.glassfish.jersey.media</groupId> 
+				<artifactId>jersey-media-multipart</artifactId> <version>${jersey-client.version}</version> 
+				</dependency> <dependency> <groupId>org.glassfish.jersey.media</groupId> 
+				<artifactId>jersey-media-json-jackson</artifactId> <version>${jersey-client.version}</version> 
+				</dependency> -->
+
+			<!-- Google GSON -->
+			<!-- <dependency> <groupId>com.google.code.gson</groupId> <artifactId>gson</artifactId> 
+				<version>${gson.version}</version> </dependency> -->
+
+			<!-- Base64 encoding that works in both JVM and Android -->
+			<dependency>
+				<groupId>com.brsanthu</groupId>
+				<artifactId>migbase64</artifactId>
+				<version>${migbase64.version}</version>
+			</dependency>
+
+			<!-- Thoughtworks Gauge Testing Framework -->
+			<dependency>
+				<groupId>com.thoughtworks.gauge</groupId>
+				<artifactId>gauge-java</artifactId>
+				<version>${gauge.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<scope>test</scope>
+				<version>${junit.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>${assertj.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-guava</artifactId>
+				<version>${assertj-guava.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
+		<repository>
+			<id>ATL</id>
+			<url>https://repo.eclipse.org/content/groups/atl</url>
+		</repository>
+		<repository>
+			<id>VIATRA</id>
+			<url>https://repo.eclipse.org/content/groups/viatra2</url>
+		</repository>
+		<repository>
+			<id>Eclipse</id>
+			<url>https://repo.eclipse.org/content/groups/releases</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>Eclipse</id>
+			<url>https://repo.eclipse.org/content/groups/releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<profiles>
+		<profile>
+			<id>not-api-spec</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<missing>${basedir}/src/main/resources/swagger/api.yaml</missing>
+					<exists>${basedir}/src/main/java</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<!-- LogBack dependencies -->
+				<dependency>
+					<groupId>ch.qos.logback</groupId>
+					<artifactId>logback-classic</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>with-assembly</id>
+			<activation>
+				<file>
+					<exists>${basedir}/src/main/assembly/api-spec.xml</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<!--inherited>false</inherited -->
+						<executions>
+							<execution>
+								<id>api-spec</id>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<configuration>
+									<finalName>${project.artifactId}-${project.version}</finalName>
+									<attach>true</attach>
+									<descriptors>
+										<descriptor>${project.basedir}/src/main/assembly/api-spec.xml</descriptor>
+									</descriptors>
+									<tarLongFileMode>gnu</tarLongFileMode>
+									<appendAssemblyId>true</appendAssemblyId>
+									<archiverConfig>
+										<defaultDirectoryMode>0755</defaultDirectoryMode>
+									</archiverConfig>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>lombok</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-lombok</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok</artifactId>
+					<version>${lombok.version}</version>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>delombok</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/src/main/lombok</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.projectlombok</groupId>
+						<artifactId>lombok-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok</artifactId>
+					<version>${lombok.version}</version>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>xtend</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-xtend</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>clean</phase>
+								<goals>
+									<goal>clean</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>${generated-sources-path}/xtend-gen/main/${generated-sources-java-path}</directory>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.xtend</groupId>
+						<artifactId>xtend-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.xtend</groupId>
+					<artifactId>org.eclipse.xtend.lib</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.github.oehme.xtend</groupId>
+					<artifactId>xtend-contrib</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>xcore</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-xcore</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>clean</phase>
+								<goals>
+									<goal>clean</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>target/generated/xcore-gen/main/java</directory>
+								</fileset>
+								<fileset>
+									<directory>src/main/xtend-gen</directory>
+								</fileset>
+								<fileset>
+									<directory>target/generated/xcore-gen/test/java</directory>
+								</fileset>
+								<fileset>
+									<directory>src/test/xtend-gen</directory>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>xtext-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<languages>
+										<language>
+											<setup>org.eclipse.xtext.ecore.EcoreSupport</setup>
+										</language>
+										<language>
+											<setup>org.eclipse.emf.codegen.ecore.xtext.GenModelSupport</setup>
+										</language>
+										<language>
+											<setup>org.eclipse.xtend.core.XtendStandaloneSetup</setup>
+											<outputConfigurations>
+												<outputConfiguration>
+													<outputDirectory>xtend-gen</outputDirectory>
+												</outputConfiguration>
+											</outputConfigurations>
+										</language>
+										<language>
+											<setup>org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup</setup>
+											<outputConfigurations>
+												<outputConfiguration>
+													<outputDirectory>${basedir}/target/generated/xcore-gen/main/java</outputDirectory>
+												</outputConfiguration>
+											</outputConfigurations>
+										</language>
+									</languages>
+									<!-- This should be in sync with build-helper-maven-plugin//sources, 
+										except for /model directory -->
+									<sourceRoots>
+										<!-- Note that we include the /model path here although it's not 
+											part of the source directories in Eclipse or Maven -->
+										<root>${basedir}/src/main/model</root>
+									</sourceRoots>
+									<!-- This does not work currently, as we can see by the missing 
+										lambda in generated code for GreetingsHelper.compileAllGreetings(). It does 
+										work, however, for xtend-maven-plugin. (see https://github.com/eclipse/xtext-maven/issues/11) -->
+									<javaSourceVersion>1.8</javaSourceVersion>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.text</artifactId>
+								<version>${eclipse-text.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.platform</groupId>
+								<artifactId>org.eclipse.core.resources</artifactId>
+								<version>${core-resources.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.common</artifactId>
+								<version>${emf.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.ecore</artifactId>
+								<version>${emf.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+								<version>${emf.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+								<version>${emf.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.codegen</artifactId>
+								<version>${emf-codegen.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.ecore.xcore</artifactId>
+								<version>${ecore-xcore.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.ecore.xcore.lib</artifactId>
+								<version>${ecore-xcore-lib.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.codegen.ecore.xtext</artifactId>
+								<version>${ecore-xtext.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.xtext</groupId>
+								<artifactId>org.eclipse.xtext.ecore</artifactId>
+								<version>${xtext.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.xtext</groupId>
+								<artifactId>org.eclipse.xtext.xbase</artifactId>
+								<version>${xtext.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.xtend</groupId>
+								<artifactId>org.eclipse.xtend.core</artifactId>
+								<version>${xtext.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.xtend</groupId>
+								<artifactId>org.eclipse.xtend.lib</artifactId>
+								<version>${xtext.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>com.github.oehme.xtend</groupId>
+								<artifactId>xtend-contrib</artifactId>
+								<version>${xtend-contrib.version}</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+
+					<!-- Adds the generated sources to the compiler input -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>add-source</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>${basedir}/src/main/xtend-gen</source>
+										<source>${basedir}/target/generated/xcore-gen/main/java</source>
+										<source>${basedir}/src/main/model</source>
+									</sources>
+									<testSources>
+										<testSource>${basedir}/src/test/xtend-gen</testSource>
+										<testSource>${basedir}/target/generated/xcore-gen/test/java</testSource>
+									</testSources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.common</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.ecore</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.ecore.xcore.lib</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.xtext</groupId>
+					<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.xtend</groupId>
+					<artifactId>org.eclipse.xtend.lib</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.github.oehme.xtend</groupId>
+					<artifactId>xtend-contrib</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>viatra</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-viatra</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>clean</phase>
+								<goals>
+									<goal>clean</goal>
+								</goals>
+								<configuration>
+									<filesets>
+										<fileset>
+											<!-- Generated code folder -->
+											<directory>${generated-sources-path}/viatra/${generated-sources-java-path}</directory>
+											<includes>
+												<include>**/*</include>
+											</includes>
+										</fileset>
+									</filesets>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.viatra</groupId>
+						<artifactId>viatra-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<outputDirectory>${generated-sources-path}/viatra/${generated-sources-java-path}</outputDirectory>
+							<metamodels>
+								<metamodel>
+									<!-- Java class for the EMF EPackage - use this if generated EMF 
+										code is in the classpath -->
+									<!--packageClass>school.SchoolPackage</packageClass -->
+									<packageClass>name.jchein.demo.zumepizza.micros.resolution.registry.command.CommandPackage</packageClass>
+									<!-- genmodel file used for generating the EMF model classes - use 
+										this if EMF model is in the same project -->
+									<!--genmodelUri>../model/policy.xcore</genmodelUri -->
+								</metamodel>
+							</metamodels>
+							<uriMappings>
+								<uriMapping>
+									<sourceUri>platform:/resource/school/model/school.ecore</sourceUri>
+									<targetUri>file:/${project.basedir}/school/model/school.ecore</targetUri>
+								</uriMapping>
+								<uriMapping>
+									<sourceUri>platform:/resource/school/model/school.genmodel</sourceUri>
+									<targetUri>file:/${project.basedir}/school/model/school.genmodel</targetUri>
+								</uriMapping>
+							</uriMappings>
+							<!-- Since 1.5, you can use the project dependencies instead of specific 
+								Maven dependencies - optional -->
+							<useProjectDependencies>true</useProjectDependencies>
+						</configuration>
+						<dependencies>
+							<!-- Dependency required for the school project (that contains the 
+								generated EPackage), unless you set useProjectDependencies -->
+							<!-- <dependency> <groupId>org.eclipse.viatra.query</groupId> <artifactId>school</artifactId> 
+								<version>1.2.0</version> </dependency> -->
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.viatra</groupId>
+					<artifactId>viatra-query-runtime</artifactId>
+				</dependency>
+
+				<!--dependency> <groupId>org.eclipse.viatra</groupId> <artifactId>viatra-maven-plugin</artifactId> 
+					</dependency -->
+
+				<!-- requires many more dependencies - only use if required -->
+				<!-- <dependency> <groupId>org.eclipse.viatra</groupId> <artifactId>viatra-query-language</artifactId> 
+					<version>${viatra.version}</version> </dependency> -->
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>atl</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-atl</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.m2m.atl</groupId>
+					<artifactId>org.eclipse.m2m.atl.common</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.m2m.atl</groupId>
+					<artifactId>org.eclipse.m2m.atl.emftvm</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.m2m.atl</groupId>
+					<artifactId>org.eclipse.m2m.atl.emftvm.trace</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.common</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.ecore</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.ow2.asm</groupId>
+					<artifactId>asm</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>use-optaplanner</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-optaplanner</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<!-- Optaplanner -->
+				<dependency>
+					<groupId>org.optaplanner</groupId>
+					<artifactId>optaplanner-core</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.optaplanner</groupId>
+					<artifactId>optaplanner-benchmark</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.optaplanner</groupId>
+					<artifactId>optaplanner-persistence-common</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.optaplanner</groupId>
+					<artifactId>optaplanner-persistence-jackson</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.optaplanner</groupId>
+					<artifactId>optaplanner-persistence-jpa</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.optaplanner</groupId>
+					<artifactId>optaplanner-persistence-xstream</artifactId>
+				</dependency>
+
+				<!-- GDAL Bindings -->
+				<dependency>
+					<groupId>org.gdal</groupId>
+					<artifactId>gdal</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>use-apache-sis</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-sis</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<!-- Apache Spatial -->
+				<dependency>
+					<groupId>org.apache.sis.core</groupId>
+					<artifactId>sis-utility</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.sis.core</groupId>
+					<artifactId>sis-referencing</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.sis.core</groupId>
+					<artifactId>sis-feature</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.sis.core</groupId>
+					<artifactId>sis-metadata</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.sis.storage</groupId>
+					<artifactId>sis-storage</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.sis.storage</groupId>
+					<artifactId>sis-gdal</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.sis.storage</groupId>
+					<artifactId>sis-xmlstore</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.sis.storage</groupId>
+					<artifactId>sis-shapefile</artifactId>
+				</dependency>
+				<!-- <dependency> <groupId>org.apache.sis.non-free</groupId> <artifactId>sis-epsg</artifactId> 
+					<scope>runtime</scope> </dependency> -->
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>unit-tests</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/src/test/java</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>event-model</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-event-model</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>common-utils</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+
+				<dependency>
+					<groupId>io.eventuate.client.java</groupId>
+					<artifactId>eventuate-client-java</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+<!--
+		<profile>
+			<id>command-model</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-command-model</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>common-utils</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+
+				<dependency>
+					<groupId>io.eventuate.client.java</groupId>
+					<artifactId>eventuate-client-java-spring</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile> <id>domain-model</id> <activation> <activeByDefault>false</activeByDefault> 
+			<file> <exists>${basedir}/.zumepizza-domain-model</exists> </file> </activation> 
+			<build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> 
+			</plugin> </plugins> </build> <dependencies> <dependency> <groupId>name.jchein.demo.zumepizza.microservices</groupId> 
+			<artifactId>common-utils</artifactId> <version>${project.parent.version}</version> 
+			</dependency> <dependency> <groupId>name.jchein.demo.zumepizza.microservices</groupId> 
+			<artifactId>${zumepizza.service-name}-command-model</artifactId> <version>${project.parent.version}</version> 
+			</dependency> <dependency> <groupId>name.jchein.demo.zumepizza.microservices</groupId> 
+			<artifactId>${zumepizza.service-name}-event-model</artifactId> <version>${project.parent.version}</version> 
+			</dependency> </dependencies> </profile> -->
+
+		<profile>
+			<id>view-model</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-view-model</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>common-utils</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>view-model-jooq</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-view-model/jooq</exists>
+				</file>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>sql-maven-plugin</artifactId>
+						<dependencies>
+							<dependency>
+								<groupId>${jooq.driver.group-id}</groupId>
+								<artifactId>${jooq.driver.artifact-id}</artifactId>
+								<version>${jooq.driver.version}</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>schema-for-codegen</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<driver>${jooq.driver.class-name}</driver>
+									<url>${jooq.driver.url}</url>
+									<user>${jooq.driver.username}</user>
+									<password>${jooq.driver.password}</password>
+									<autocommit>true</autocommit>
+									<srcFiles>
+										<srcFile>${project.basedir}/src/main/sql/initialize-database.sql</srcFile>
+									</srcFiles>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.jooq</groupId>
+						<artifactId>jooq-codegen-maven</artifactId>
+						<executions>
+							<execution>
+								<phase>initialize</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>${jooq.driver.group-id}</groupId>
+								<artifactId>${jooq.driver.artifact-id}</artifactId>
+								<version>${jooq.driver.version}</version>
+							</dependency>
+						</dependencies>
+						<configuration>
+							<jdbc>
+								<driver>${jooq.driver.class-name}</driver>
+								<url>${jooq.driver.url}</url>
+								<user>${jooq.driver.username}</user>
+								<password>${jooq.driver.password}</password>
+							</jdbc>
+							<generator>
+								<database>
+									<name>${jooq.generator.class-name}</name>
+									<includes>.*</includes>
+									<excludes></excludes>
+									<inputSchema>${zumepizza.schema-name}</inputSchema>
+								</database>
+								<target>
+									<packageName>name.jchein.demo.zumepizza.services.${zumepizza.service-name}.jooq</packageName>
+									<directory>${generated-sources-path}/jooq/${generated-sources-java-path}</directory>
+								</target>
+							</generator>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<!-- TODO for eclipse/m2e users: install the m2e connector 'buildhelper' 
+								by selecting 'Discover new m2e connectors' while hovering over the follwoing 
+								execution tag -->
+							<execution>
+								<id>add-generated-source</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>${generated-sources-path}/jooq/${generated-sources-java-path}</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<!-- Spring -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-jooq</artifactId>
+				</dependency>
+
+				<dependency>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>commons-dbcp2</artifactId>
+				</dependency>
+
+				<dependency>
+					<groupId>${jooq.driver.group-id}</groupId>
+					<artifactId>${jooq.driver.artifact-id}</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>view-model-jooq-mysql</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-view-model/jooq/mysql</exists>
+				</file>
+			</activation>
+
+			<properties>
+				<jooq.driver.group-id>mysql</jooq.driver.group-id>
+				<jooq.driver.artifact-id>mysql-connector-java</jooq.driver.artifact-id>
+				<jooq.driver.version>${mysql.version}</jooq.driver.version>
+				<jooq.driver.class-name>com.mysql.jdbc.Driver</jooq.driver.class-name>
+				<jooq.driver.url>jdbc:mysql://127.0.0.1/${jooq.generator.schema-name}</jooq.driver.url>
+				<jooq.driver.username>zumepizza</jooq.driver.username>
+				<jooq.driver.password>zumepizza</jooq.driver.password>
+				<jooq.generator.schema-name>${zumepizza.schema-name}</jooq.generator.schema-name>
+				<jooq.generator.class-name>org.jooq.util.mysql.MySQLDatabase</jooq.generator.class-name>
+			</properties>
+		</profile>
+
+
+		<profile>
+			<id>view-model-jpa</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-view-model/jpa</exists>
+				</file>
+			</activation>
+
+			<dependencies>
+				<!-- Spring -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-data-jpa</artifactId>
+				</dependency>
+
+				<!-- Connection Pooling -->
+				<dependency>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>commons-dbcp2</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+
+		<profile>
+			<id>view-model-mongodb</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-view-model/mongodb</exists>
+				</file>
+			</activation>
+
+			<dependencies>
+				<!-- Spring Boot Data -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-data-mongodb</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>command-side-module</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-eventuate/write-side</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>common-utils</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>common-event-sourced</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>${zumepizza.service-name}-event-model</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+
+				<!-- Eventuate -->
+				<dependency>
+					<groupId>io.eventuate.client.java</groupId>
+					<artifactId>eventuate-client-java-spring</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>io.eventuate.local.java</groupId>
+					<artifactId>eventuate-local-java-jdbc</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>io.eventuate.local.java</groupId>
+					<artifactId>eventuate-local-java-embedded-cdc-autoconfigure</artifactId>
+				</dependency>
+
+				<!-- Spring -->
+				<dependency>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</dependency>
+
+				<!-- Eventuate Testing -->
+				<dependency>
+					<groupId>io.eventuate.client.java</groupId>
+					<artifactId>eventuate-client-java-jdbc</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>query-side-module</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-eventuate/read-side</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>${zumepizza.service-name}-view-model</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>grpc-api-spec</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-grpc/spec</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.xolstice.maven.plugins</groupId>
+						<artifactId>protobuf-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>${project.parent.groupId}</groupId>
+					<artifactId>common-grpc</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+
+				<!-- Protobuf -->
+				<dependency>
+					<groupId>com.google.protobuf</groupId>
+					<artifactId>protobuf-java</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.google.protobuf</groupId>
+					<artifactId>protobuf-java-util</artifactId>
+				</dependency>
+
+				<!-- GRPC Protobuf -->
+				<dependency>
+					<groupId>com.google.api.grpc</groupId>
+					<artifactId>grpc-google-common-protos</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.google.api.grpc</groupId>
+					<artifactId>proto-google-common-protos</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>io.grpc</groupId>
+					<artifactId>grpc-protobuf</artifactId>
+				</dependency>
+
+				<!-- GRPC -->
+				<dependency>
+					<groupId>io.grpc</groupId>
+					<artifactId>grpc-stub</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>io.grpc</groupId>
+					<artifactId>grpc-netty</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>io.grpc</groupId>
+					<artifactId>grpc-auth</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>grpc-api-backend</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-grpc/backend</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>common-utils</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+				<!-- <dependency> <groupId>name.jchein.demo.zumepizza.microservices</groupId> 
+					<artifactId>common-grpc</artifactId> <version>${project.parent.version}</version> 
+					</dependency> -->
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>${zumepizza.service-name}-grpc-spec</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+
+				<!-- Spring GRPC -->
+				<dependency>
+					<groupId>net.devh</groupId>
+					<artifactId>grpc-server-spring-boot-starter</artifactId>
+					<type>pom</type>
+				</dependency>
+				<!-- <dependency> <groupId>org.lognet</groupId> <artifactId>grpc-spring-boot-starter</artifactId> 
+					</dependency> -->
+
+				<!-- GRPC -->
+				<!-- <dependency> <groupId>io.grpc</groupId> <artifactId>grpc-stub</artifactId> 
+					</dependency> <dependency> <groupId>io.grpc</groupId> <artifactId>grpc-protobuf</artifactId> 
+					</dependency> <dependency> <groupId>io.grpc</groupId> <artifactId>grpc-netty</artifactId> 
+					</dependency> <dependency> <groupId>com.google.api.grpc</groupId> <artifactId>grpc-google-common-protos</artifactId> 
+					</dependency> -->
+
+				<!-- JavaRx 1.x -->
+				<dependency>
+					<groupId>io.reactivex</groupId>
+					<artifactId>rxjava</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>grpc-api-client</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-grpc/client</exists>
+				</file>
+			</activation>
+			<!-- <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+				<artifactId>maven-dependency-plugin</artifactId> </plugin> <plugin> <groupId>org.xolstice.maven.plugins</groupId> 
+				<artifactId>protobuf-maven-plugin</artifactId> <dependencies> <dependency> 
+				<groupId>${project.parent.groupId}</groupId> <artifactId>common-grpc</artifactId> 
+				<version>${project.parent.version}</version> </dependency> </dependencies> 
+				</plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>build-helper-maven-plugin</artifactId> 
+				<executions> <execution> <id>add-generated-source</id> <phase>initialize</phase> 
+				<goals> <goal>add-source</goal> </goals> <configuration> <sources> <source>${generated-sources-path}/protobuf/java</source> 
+				<source>${generated-sources-path}/protobuf/grpc-java</source> </sources> 
+				</configuration> </execution> </executions> </plugin> </plugins> </build> -->
+			<dependencies>
+				<dependency>
+					<groupId>${project.parent.groupId}</groupId>
+					<artifactId>common-utils</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>${project.parent.groupId}</groupId>
+					<artifactId>common-grpc</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>${zumepizza.service-name}-grpc-spec</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+
+				<!-- Spring GRPC -->
+				<dependency>
+					<groupId>net.devh</groupId>
+					<artifactId>grpc-client-spring-boot-starter</artifactId>
+					<type>pom</type>
+				</dependency>
+
+				<!-- TODO: Are the following client, server, or transitive dependencies?? -->
+				<!-- GRPC -->
+				<!-- <dependency> <groupId>io.grpc</groupId> <artifactId>grpc-stub</artifactId> 
+					</dependency> <dependency> <groupId>io.grpc</groupId> <artifactId>grpc-protobuf</artifactId> 
+					</dependency> <dependency> <groupId>io.grpc</groupId> <artifactId>grpc-netty</artifactId> 
+					</dependency> <dependency> <groupId>com.google.api.grpc</groupId> <artifactId>grpc-google-common-protos</artifactId> 
+					</dependency> -->
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>docker-image</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/Dockerfile</exists>
+				</file>
+			</activation>
+			<build>
+				<finalName>${zumepizza.service-name}</finalName>
+				<plugins>
+					<!-- Set up JAR manifest -->
+					<!-- <plugin> <artifactId>maven-jar-plugin</artifactId> <configuration> 
+						<archive> <manifest> -->
+					<!-- <addClasspath>true</addClasspath> <classpathPrefix>lib/</classpathPrefix> -->
+					<!-- <addClasspath>false</addClasspath> <mainClass>name.jchein.demo.zumepizza.services.${zumepizza.service-name}.LaunchMicroservice</mainClass> 
+						</manifest> </archive> </configuration> </plugin> -->
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>unpack</id>
+								<phase>package</phase>
+								<goals><goal>unpack</goal></goals>
+								<configuration>
+									<artifactItems>
+										<artifactItem>
+											<groupId>${project.groupId}</groupId> 
+											<artifactId>${project.artifactId}</artifactId>
+											<version>${project.version}</version> 
+										</artifactItem>
+									</artifactItems>
+								</configuration>
+							</execution>
+						</executions> 
+					<!-- Not copying dependencies into target/lib b/c spring-boot bundles dependencies -->
+					<!-- <execution> <phase>initialize</phase> <goals> <goal>copy-dependencies</goal> 
+						</goals> <configuration> <overWriteReleases>false</overWriteReleases> <includeScope>runtime</includeScope> 
+						<outputDirectory>${project.build.directory}/lib</outputDirectory> </configuration> 
+						</execution> -->
+					</plugin>
+
+					<!-- Build Docker image -->
+					<plugin>
+						<groupId>comspotify</groupId>
+						<artifactId>dockerfile-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default</id>
+								<goals>
+									<goal>build</goal>
+									<goal>push</goal>
+								</goals>
+								<configuration>
+									<repository>jheinnic/microptf-${zumepizza.service-name}</repository>
+									<tag>${project.version}</tag>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- <plugin> <artifactId>maven-failsafe-plugin</artifactId> <executions> 
+						<execution> <goals> <goal>integration-test</goal> <goal>verify</goal> </goals> 
+						</execution> </executions> </plugin> -->
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>use-spring</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-spring</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<!-- Spring -->
+				<dependency>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</dependency>
+
+				<!-- Spring test support -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-test</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-test</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>spring-microservice</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-spring/microservice</exists>
+				</file>
+			</activation>
+			<properties>
+				<start-class>name.jchein.demo.zumepizza.services.${zumepizza.service-name}.LaunchMicroservice</start-class>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+					<!--plugin>
+						<groupId>com.spotify</groupId>
+						<artifactId>dockerfile-maven-plugin</artifactId>
+					</plugin-->
+				</plugins>
+			</build>
+			<dependencies>
+				<!-- Spring Boot -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>spring-discovery</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-spring/discovery</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<!-- Spring Cloud Consul Discovery -->
+				<dependency>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>spring-cloud-starter-consul-all</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>spring-web</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-spring/web</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>common-web</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+
+				<!-- Spring -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-security</artifactId>
+				</dependency>
+
+				<!-- Embedded Tomcat -->
+				<dependency>
+					<groupId>org.apache.tomcat.embed</groupId>
+					<artifactId>tomcat-embed-core</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.tomcat.embed</groupId>
+					<artifactId>tomcat-embed-el</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>spring-actuator</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-spring/actuator</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-actuator</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-actuator-autoconfigure</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>spring-autoconfig</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-spring/autoconfigure</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<!-- Spring -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-autoconfigure</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>spring-configuration-processor</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-spring/config-props</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<!-- Spring developer support -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-configuration-processor</artifactId>
+					<scope>compile</scope>
+					<optional>true</optional>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>spring-devtools</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-spring/devtools</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<!-- Spring developer support -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+					<scope>runtime</scope>
+					<optional>true</optional>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>spring-validation</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-spring/validation</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<!-- Spring -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-validation</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>uom</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-use-uom</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>javax.measure</groupId>
+					<artifactId>unit-api</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>tec.uom</groupId>
+					<artifactId>uom-se</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>tec.uom.lib</groupId>
+					<artifactId>uom-lib-common</artifactId>
+				</dependency>
+				<!-- <dependency> <groupId>tec.units</groupId> <artifactId>unit-ri</artifactId> 
+					</dependency> <dependency> <groupId>tec.units</groupId> <artifactId>indriya</artifactId> 
+					</dependency> -->
+				<dependency>
+					<groupId>systems.uom</groupId>
+					<artifactId>systems-common-java8</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>systems.uom</groupId>
+					<artifactId>systems-ucum-java8</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>systems.uom</groupId>
+					<artifactId>systems-unicode-java8</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>systems.uom</groupId>
+					<artifactId>systems-quantity</artifactId>
+				</dependency>
+				<!-- https://mvnrepository.com/artifact/tec.uom.domain/uom-cloud -->
+				<dependency>
+					<groupId>tec.uom.domain</groupId>
+					<artifactId>uom-cloud</artifactId>
+					<type>pom</type>
+				</dependency>
+				<dependency>
+					<groupId>org.javamoney</groupId>
+					<artifactId>moneta</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>javax.money</groupId>
+					<artifactId>money-api</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>hazelcast-module</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/src/main/resources/spring-hazelcast.xml</exists>
+				</file>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>com.hazelcast</groupId>
+					<artifactId>hazelcast-spring</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.hazelcast</groupId>
+					<artifactId>hazelcast</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>assertj</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-testing/assertj</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.assertj</groupId>
+						<artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.assertj</groupId>
+					<artifactId>assertj-core</artifactId>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.assertj</groupId>
+					<artifactId>assertj-guava</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>e2e-tests</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-testing/e2e</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-swagger-backend</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>generate-swagger-java-server</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>spring</language>
+									<library>spring-boot</library>
+									<templateDirectory>${project.basedir}/src/main/swagger/templates</templateDirectory>
+									<modelPackage>${swagger.namespace}.dto</modelPackage>
+									<apiPackage>${swagger.namespace}.api</apiPackage>
+									<invokerPackage>${swagger.namespace}.invoker</invokerPackage>
+									<configPackage>${swagger.namespace}.swagger</configPackage>
+									<basePackage>${swagger.namespace}.swagger</basePackage>
+									<configOptions>
+										<basePackage>${swagger.namespace}.swagger</basePackage>
+										<configPackage>${swagger.namespace}.swagger</configPackage>
+										<serializableModel>true</serializableModel>
+										<!-- NOTE: There is a bug in the codegen templates that prevents 
+											explicitly setting the response wrapper when the useTags option is also set 
+											true. Fortunately, the default of CompletableFuture is just fine for the 
+											moment, but HystrixCommand would be nice to have down the road... The bug 
+											manifests as a fully qualified class name in the code with a requird dot-separator 
+											omitted between package name and class name parts... <responseWrapper>CompletableFuture</responseWrapper> 
+											<responseWrapper>HystrixCommand</responseWrapper> <responseWrapper>ListenableFuture</responseWrapper> 
+											<responseWrapper>DeferredResult</responseWrapper> <responseWrapper>RxObservable</responseWrapper> 
+											<responseWrapper>RxSingle</responseWrapper> -->
+										<!-- <responseWrapper>CompletableFuture</responseWrapper> <responseWrapper>java.util.concurrent.CompletableFuture</responseWrapper> -->
+										<responseWrapper>ListenableFuture</responseWrapper>
+										<interfaceOnly>false</interfaceOnly>
+										<delegatePattern>true</delegatePattern>
+										<implicitHeaders>true</implicitHeaders>
+										<singleContentType>true</singleContentType>
+										<useBeanValidation>true</useBeanValidation>
+										<useOptional>false</useOptional>
+										<useTags>true</useTags>
+										<java8>false</java8>
+										<async>true</async>
+									</configOptions>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<!-- TODO for eclipse/m2e users: install the m2e connector 'buildhelper' 
+								by selecting 'Discover new m2e connectors' while hovering over the follwoing 
+								execution tag -->
+							<execution>
+								<id>add-generated-source</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>${generated-sources-path}/swagger/${generated-sources-java-path}</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.xtend</groupId>
+						<artifactId>xtend-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>common-utils</artifactId>
+					<version>${project.parent.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>${zumepizza.service-name}-api-spec</artifactId>
+					<version>${project.parent.version}</version>
+					<classifier>api-spec</classifier>
+					<type>zip</type>
+				</dependency>
+
+				<!-- XTend -->
+				<dependency>
+					<groupId>org.eclipse.xtend</groupId>
+					<artifactId>org.eclipse.xtend.lib</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.github.oehme.xtend</groupId>
+					<artifactId>xtend-contrib</artifactId>
+				</dependency>
+
+				<!-- Spring -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</dependency>
+
+				<!-- SpringFox Swagger -->
+				<dependency>
+					<groupId>io.springfox</groupId>
+					<artifactId>springfox-swagger2</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>io.springfox</groupId>
+					<artifactId>springfox-swagger-ui</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>swagger-api-client</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-swagger-client</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>generate-swagger-javaclient</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>java</language>
+									<library>jersey2</library>
+									<modelPackage>${swagger.namespace}.dto</modelPackage>
+									<invokerPackage>${swagger.namespace}.invoker</invokerPackage>
+									<apiPackage>${swagger.namespace}.client</apiPackage>
+									<generateApiTests>false</generateApiTests>
+									<generateModelTests>false</generateModelTests>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<!-- TODO for eclipse/m2e users: install the m2e connector 'buildhelper' 
+								by selecting 'Discover new m2e connectors' while hovering over the follwoing 
+								execution tag -->
+							<execution>
+								<id>add-generated-source</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>${generated-sources-path}/swagger/${generated-sources-java-path}</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>${zumepizza.service-name}-api-spec</artifactId>
+					<version>${project.parent.version}</version>
+					<classifier>api-spec</classifier>
+					<type>zip</type>
+				</dependency>
+
+				<!-- Swagger -->
+				<dependency>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-annotations</artifactId>
+				</dependency>
+
+				<!-- Jersey HTTP Client -->
+				<dependency>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId>jersey-client</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-multipart</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>jersey-media-json-jackson</artifactId>
+				</dependency>
+
+				<!-- Jackson JSON Parsing -->
+				<dependency>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-core</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-annotations</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.fasterxml.jackson.datatype</groupId>
+					<artifactId>jackson-datatype-joda</artifactId>
+				</dependency>
+
+				<!-- Migbase Base64 -->
+				<dependency>
+					<groupId>com.brsanthu</groupId>
+					<artifactId>migbase64</artifactId>
+				</dependency>
+
+				<!-- Joda Time -->
+				<dependency>
+					<groupId>joda-time</groupId>
+					<artifactId>joda-time</artifactId>
+				</dependency>
+
+				<!-- JavaX WS RS API -->
+				<dependency>
+					<groupId>javax.ws.rs</groupId>
+					<artifactId>javax.ws.rs-api</artifactId>
+					<scope>provided</scope>
+				</dependency>
+
+				<!-- Bean Validation API support -->
+				<dependency>
+					<groupId>javax.validation</groupId>
+					<artifactId>validation-api</artifactId>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>swagger-api-typescript</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>${basedir}/.zumepizza-swagger-typescript</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>generate-swagger-javaclient</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<language>typescript-angular2</language>
+									<modelPackage>${swagger.namespace}.dto</modelPackage>
+									<invokerPackage>${swagger.namespace}.invoker</invokerPackage>
+									<apiPackage>${swagger.namespace}.client</apiPackage>
+									<generateApiTests>false</generateApiTests>
+									<generateModelTests>false</generateModelTests>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>name.jchein.demo.zumepizza.microservices</groupId>
+					<artifactId>${zumepizza.service-name}-api-spec</artifactId>
+					<version>${project.parent.version}</version>
+					<classifier>api-spec</classifier>
+					<type>zip</type>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+</project>

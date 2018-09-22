@@ -1,0 +1,37 @@
+default:
+  #
+  # Models
+  #
+  v1:
+    bid:
+      properties:
+        - id
+        - userId
+        - active
+      relations:
+        - {
+          name: bid,
+          type: resource
+          }
+      actions:
+        - list
+        - get
+        - create
+        - update
+        - remove
+        - count
+    user:
+      properties:
+        - id
+        - name
+      relations:
+        - {
+          name: user,
+          type: resource
+          }
+        - {
+          name: bids,
+          type: collection
+          }
+      actions:
+        - get

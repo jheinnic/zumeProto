@@ -1,4 +1,4 @@
-FROM jboss/keycloak:3.3.0.Final
+FROM jboss/keycloak:4.0.0.Beta2
 
 # Make theme customizations available for use
 ADD themes/jchptf /opt/jboss/keycloak/themes/jchptf/
