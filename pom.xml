@@ -116,12 +116,12 @@
 		<module>sandbox/reporting.forecasts/container-image</module>
 		<module>sandbox/simple.webui/parent</module>
 		<module>sandbox/simple.webui/webui</module>
+		<module>js-frontend</module>
 		<!--
 		<module>sandbox/apps/apollo.proto</module>
 		<module>sandbox/apps/stt.player/parent</module>
 		<module>sandbox/apps/stt.player/graphql-idl</module>
 		<module>sandbox/apps/stt.player/service</module>
-		<module>sandbox/js-frontend</module>
 		<module>sandbox/acceptance</module>
 		<module>sandbox/microbenchmarks</module>
 		-->
