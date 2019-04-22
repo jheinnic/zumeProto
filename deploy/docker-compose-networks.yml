@@ -5,5 +5,29 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.20.0.0/16
-  keycloak-network:
+        - subnet: 172.35.1.0/24
+  app-backnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.35.128.0/24
+  apigw-backnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.35.160.32/27
+  keycloak-backnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.35.160.64/27
+  chain-backnet:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.35.160.96/27
+  consul-backnet:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.35.160.128/27

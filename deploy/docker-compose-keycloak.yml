@@ -3,24 +3,21 @@ version: "3.6"
 services:
   keycloak:
     build: ./keycloak
-    image: jheinnic/keycloak:4.0.0.Beta2
+    image: jheinnic/keycloak:4.8.3.Final
     restart: unless-stopped
     domainname: dev.jchein.name
     hostname: keycloak
     links:
-      # - keycloak-db:postgres
-      # - smtp:mailout
-      - minio1:minio1
-      - minio2:minio2
-      - minio3:minio3
-      - minio4:minio4
+      - keycloak-db:postgres
     ports:
       - 28080:8080
       - 28443:8443
       - 29990:9990
       - 29993:9993
     networks:
-      - keycloak-network
+      - portfolio
+      - app-backnet
+      - keycloak-backnet
     environment:
       DB_VENDOR: POSTGRES
       DB_DATABASE: keycloak
@@ -41,66 +38,16 @@ services:
     hostname: keycloak-db
     ports:
       - 5432:5432
+    networks:
+      - keycloak-backnet
+    volumes:
+      - keycloakdb:/var/lib/postgresql/data:delegated
     environment:
       DB_ADDR: keycloak-db
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
       POSTGRES_ROOT_PASSWORD: root_password
-    networks:
-      - keycloak-network
-    volumes:
-      - keycloakdb:/var/lib/postgresql/data:delegated
-
-  # https://neo4j.com/docs/operations-manual/current/installation/docker/
-  gallery-views-db:
-    build: ./neo4j-graphql
-    image: jheinnic/neo4j-graphql:0.0.1
-    restart: unless-stopped
-    domainname: dev.jchein.name
-    hostname: gallery-views-db
-    ports:
-      - 27473:7473
-      - 27474:7474
-      - 27687:7687
-    environment:
-      - NEO4J_AUTH=neo4j/portfolio
-      - NEO4J_dbms_memory_pagecache_size=512M
-      - NEO4J_dbms_memory_heap_maxSize=512M
-      - NEO4J_dbms_txLog_rotation_retentionPolicy=100k txs
-      - NEO4J_dbms_allowFormatMigration=true
-      - NEO4J_dbms_unmanaged__extension__classes=org.neo4j.graphql=/graphql
-    networks:
-      - portfolio
-    volumes:
-      - gallery-views-data:/data:delegated
-      - gallery-views-logs:/logs:delegated
-
-#   smtp:
-#     image: namshi/smtp
-#     domainname: dev.jchein.name
-#     hostname: mail
-#     ports:
-#       - 2525:25
-#     networks:
-#       - portfolio
-#     environment:
-#       SKEY_PATH: a
-#       SCERTIFICATE_PATH: a
-#       MAILNAME: mail.dev.jchein.name
-#       PORT: 25
-
-  mongodb:
-    image: mongo:3.0.4
-    domainname: dev.jchein.name
-    hostname: mongodb
-    command: mongod --smallfiles
-    ports:
-      - 27017:27017
-    networks:
-      - portfolio
 
 volumes:
   keycloakdb:
-  gallery-views-data:
-  gallery-views-logs:

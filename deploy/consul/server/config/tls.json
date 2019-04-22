@@ -1,0 +1,7 @@
+{
+    "verify_incoming": true,
+    "verify_outgoing": true,
+    "ca_file": "tls/ca.pem",
+    "cert_file": "tls/cert.pem",
+    "key_file": "tls/key.pem"
+}

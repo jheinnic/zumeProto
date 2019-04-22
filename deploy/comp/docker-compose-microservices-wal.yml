@@ -1,0 +1,67 @@
+version: "3.6"
+
+services:
+  hr.procmgr:
+    image: jheinnic/hr.procmgr:0.0.1-bootstrap-SNAPSHOT
+    restart: unless-stopped
+    domainname: dev.jchein.name
+    hostname: hr-procmgr
+    links:
+      - postgres
+      - kafka
+      - zookeeper
+    ports:
+      - 4545:4545
+    networks:
+      - portfolio
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/eventuate
+      - SPRING_DATASOURCE_USERNAME=zumepizza
+      - SPRING_DATASOURCE_PASSWORD=zumepizza
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_PROFILES_ACTIVE=PostgresWal
+      - EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING=zookeeper:2181
+      - EVENTUATELOCAL_CDC_DB_USER_NAME=zumepizza
+      - EVENTUATELOCAL_CDC_DB_PASSWORD=zumepizza
+      - EVENTUATE_DATABASE_SCHEMA=eventuate
+
+  # https://neo4j.com/docs/operations-manual/current/installation/docker/
+  gallery-views-db:
+    build: ./neo4j-graphql
+    image: jheinnic/neo4j-graphql:0.0.1
+    restart: unless-stopped
+    domainname: dev.jchein.name
+    hostname: gallery-views-db
+    ports:
+      - 27473:7473
+      - 27474:7474
+      - 27687:7687
+    environment:
+      - NEO4J_AUTH=neo4j/portfolio
+      - NEO4J_dbms_memory_pagecache_size=512M
+      - NEO4J_dbms_memory_heap_maxSize=512M
+      - NEO4J_dbms_txLog_rotation_retentionPolicy=100k txs
+      - NEO4J_dbms_allowFormatMigration=true
+      - NEO4J_dbms_unmanaged__extension__classes=org.neo4j.graphql=/graphql
+    networks:
+      - portfolio
+    volumes:
+      - gallery-views-data:/data:delegated
+      - gallery-views-logs:/logs:delegated
+
+  # TODO: Volume?
+  mongodb:
+    image: mongo:3.0.4
+    restart: unless-stopped
+    domainname: dev.jchein.name
+    hostname: mongodb
+    ports:
+      - 27017:27017
+    networks:
+      - portfolio
+    command: mongod --smallfiles
+
+volumes:
+  gallery-views-data:
+  gallery-views-logs:

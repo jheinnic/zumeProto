@@ -1,0 +1,4 @@
+{
+   "check_update_interval": "2m",
+   "enable_local_script_checks": true
+}

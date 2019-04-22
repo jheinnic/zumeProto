@@ -1,0 +1,18 @@
+{
+   "acl": {
+      "enabled": true,
+      "policy_ttl": "1m",
+      "token_ttl": "1m",
+      "default_policy": "allow",
+      "down_policy": "async-cache",
+      "enable_key_list": true,
+      "enable_token_replication": false,
+      "tokens": {
+         "master": "",
+         "default": "",
+         "agent": "",
+         "agent_master": "",
+         "replication": ""
+      }
+   }
+}

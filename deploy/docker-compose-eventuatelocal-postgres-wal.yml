@@ -2,7 +2,7 @@ version: "3.6"
 
 services:
   postgres:
-    image: eventuateio/eventuateio-local-postgres:0.18.0.RELEASE
+    image: eventuateio/eventuateio-local-postgres:0.30.0.M8
     restart: unless-stopped
     domainname: dev.jchein.name
     hostname: postgres
@@ -13,12 +13,12 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data:delegated
     environment:
-      - POSTGRES_USER=zumepizza
-      - POSTGRES_PASSWORD=zumepizza
+      - POSTGRES_USER=portfolio
+      - POSTGRES_PASSWORD=portfolio
       - POSTGRES_DB=eventuate
   
   cdcservice:
-    image: eventuateio/eventuateio-local-new-cdc-service:0.18.0.RELEASE
+    image: eventuateio/eventuateio-local-new-cdc-service:0.30.0.M8
     restart: unless-stopped
     domainname: dev.jchein.name
     hostname: cdc-svc
@@ -32,15 +32,15 @@ services:
       - portfolio
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/eventuate
-      - SPRING_DATASOURCE_USERNAME=zumepizza
-      - SPRING_DATASOURCE_PASSWORD=zumepizza
+      - SPRING_DATASOURCE_USERNAME=portfolio
+      - SPRING_DATASOURCE_PASSWORD=portfolio
       - SPRING_DATASOURCE_TEST_ON_BORROW=true
       - SPRING_DATASOURCE_VALIDATION_QUERY="SELECT 1"
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
       - EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING=zookeeper:2181
-      - EVENTUATELOCAL_CDC_DB_USER_NAME=zumepizza
-      - EVENTUATELOCAL_CDC_DB_PASSWORD=zumepizza
+      - EVENTUATELOCAL_CDC_DB_USER_NAME=portfolio
+      - EVENTUATELOCAL_CDC_DB_PASSWORD=portfolio
       - SPRING_PROFILES_ACTIVE=PostgresWal
 
 volumes:

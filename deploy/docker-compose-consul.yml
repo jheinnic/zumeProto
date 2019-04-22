@@ -1,24 +1,74 @@
 version: "3.6"
 
+x-consul-server:
+  &x-consul-server
+  build:
+    context: ./consul/server
+  image: jheinnic/consul-server:1.4.2_0
+  restart: unless-stopped
+  domainname: dev.jchein.name
+  networks:
+    - portfolio
+  environment:
+    CONSUL_LOCAL_CONFIG: "{ \"datacenter\": \"home\", \"server\": true, \"bind\": \"{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}\", \"data_dir\": \"/consul/data\", \"enable_debug\": false, \"autopilot\": { \"cleanup_dead_servers\": true, \"last_contact_threshold\": \"250ms\", \"max_trailing_logs\": 50, \"server_stabilization_time\": \"15s\" }, \"bootstrap_expect\": 3, \"check_update_interval\": \"2m\", \"retry_join\": [ \"consul-server\" ] }"
+    CONSUL_BIND_INTERFACE: eth0
+  command: consul agent --config-dir config --retry-join consul-server-01 --retry-join consul-server-02 --retry-join consul-server-03 --bootstrap-expect 3
+
+x-consul-agent:
+  &x-consul-agent
+  image: consul:1.4.2
+  restart: unless-stopped
+  domainname: dev.jchein.name
+  networks:
+    - portfolio
+  environment:
+    CONSUL_LOCAL_CONFIG: "{ \"datacenter\": \"home\", \"bind\": \"{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}\", \"data_dir\": \"/consul/data\", \"enable_debug\": false, \"enable_local_script_checks\": true, \"autopilot\": { \"cleanup_dead_servers\": true, \"last_contact_threshold\": \"250ms\", \"max_trailing_logs\": 50, \"server_stabilization_time\": \"15s\" }, \"bootstrap_expect\": 3, \"check_update_interval\": \"2m\", \"retry_join\": [ \"consul-server\" ] }"
+    CONSUL_BIND_INTERFACE: eth0
+
 services:
-  consul-server:
-    image: consul:1.0.7
-    restart: unless-stopped
-    domainname: dev.jchein.name
-    hostname: consul-server
+  consul-server-01:
+    <<: *x-consul-server
+    hostname: consul-server-01
     ports:
       - 8300:8300/tcp
       - 8301:8301
       - 8302:8302
       - 8500:8500/tcp
+      - 8501:8501/tcp
+      - 8502:8502/tcp
       - 8600:8600
-    networks:
-      - portfolio
     volumes:
       - consul-server-data:/consul/data:delegated
-    environment:
-      CONSUL_LOCAL_CONFIG: "{ \"datacenter\": \"home\", \"server\": true, \"enable_debug\": true, \"autopilot\": { \"cleanup_dead_servers\": true, \"last_contact_threshold\": \"250ms\", \"max_trailing_logs\": 50, \"server_stabilization_time\": \"15s\" }, \"bootstrap_expect\": 0, \"check_update_interval\": \"2m\", \"retry_join\": [ \"consul-server\" ] }"
-      CONSUL_BIND_INTERFACE: eth0
+
+  consul-server-02:
+    <<: *x-consul-server
+    hostname: consul-server-02
+    ports:
+      - 8310:8300/tcp
+      - 8311:8301
+      - 8312:8302
+      - 8510:8500/tcp
+      - 8511:8501/tcp
+      - 8512:8502/tcp
+      - 8610:8600
+    volumes:
+      - consul-server-data-02:/consul/data:delegated
+
+  consul-server-03:
+    <<: *x-consul-server
+    hostname: consul-server-03
+    ports:
+      - 8320:8300/tcp
+      - 8321:8301
+      - 8322:8302
+      - 8520:8500/tcp
+      - 8521:8501/tcp
+      - 8522:8502/tcp
+      - 8620:8600
+    volumes:
+      - consul-server-data-03:/consul/data:delegated
 
 volumes:
   consul-server-data:
+  consul-server-data-02:
+  consul-server-data-03:

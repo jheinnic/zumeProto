@@ -1,0 +1,14 @@
+{
+   "client_addr": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}",
+   "addresses" {
+       "dns": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}",
+       "grpc": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}",
+       "http": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}",
+       "https": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}",
+   },
+   "bind_addr": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}",
+   "advertise_addr": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}",
+   "advertise_addr_wan": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}",
+   "serf_lan": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}",
+   "serf_wan": "{{ GetDefaultInterfaces | sort \"type\" | include \"type\" \"IP\" | limit 1 | attr \"address\" }}"
+}

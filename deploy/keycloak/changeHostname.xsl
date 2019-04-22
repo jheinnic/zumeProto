@@ -2,8 +2,8 @@
 
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:srv="urn:jboss:domain:5.0"
-                xmlns:ut="urn:jboss:domain:undertow:4.0">
+                xmlns:srv="urn:jboss:domain:8.0"
+                xmlns:ut="urn:jboss:domain:undertow:7.0">
 
     <xsl:output method="xml" indent="yes"/>
 

@@ -27,7 +27,7 @@ services:
     networks:
       - portfolio
     environment:
-      NODE_VERSION: v8.9.3
+      - NODE_VERSION=v10.13.0
       
   apiman:
     build: ./apiman

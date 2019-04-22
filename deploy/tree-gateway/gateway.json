@@ -1,0 +1,60 @@
+{
+  "underProxy": false,
+  "protocol": {
+    "http": {
+      "listenPort": 8000
+    }
+  },
+  "admin": {
+    "protocol": {
+      "http": {
+        "listenPort": 8001
+      }
+    },
+    "accessLogger": {
+      "msg": "HTTP {{req.method}} - {{res.statusCode}} - {{req.url}} ({{res.responseTime}}ms)",
+      "console": {
+        "timestamp": true,
+        "colorize": true
+      },
+      "file": {
+        "timestamp": true,
+        "json": false,
+        "prettyPrint": true,
+        "outputDir": "./logs"
+      }
+    },
+    "userService": {
+      "jwtSecret": "71fffabe-dabe-4ec6-b60c-8397cc9c88a4"
+    },
+    "apiDocs": {
+      "path": "api-docs"
+    }
+  },
+  "logger": {
+    "level": "info",
+    "console": {
+      "colorize": true
+    },
+    "file": {
+      "timestamp": true,
+      "outputDir": "./logs",
+      "json": false,
+      "prettyPrint": true
+    }
+  },
+  "accessLogger": {
+    "msg": "HTTP {{req.method}} - {{res.statusCode}} - {{req.url}} ({{res.responseTime}}ms)",
+    "console": {
+      "timestamp": true,
+      "colorize": true
+    },
+    "file": {
+      "timestamp": true,
+      "json": false,
+      "prettyPrint": true,
+      "outputDir": "./logs"
+    }
+  },
+  "healthcheck": "/healthcheck"
+}
